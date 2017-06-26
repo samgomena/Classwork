@@ -1,7 +1,4 @@
-## Repo to house all/most of the class
+## Repo to house most of my classwork moving forward.
 
 
-----------
-
-
-#### Oh and also some stuff from other classes I'm taking
+##### Plan to retroactively add previously taken classes as well
