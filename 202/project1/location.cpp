@@ -40,7 +40,7 @@ bool City::is_on_fire() {
     return on_fire;
 }
 
-void is_on_fire(bool fire_bool) {
+void City::is_on_fire(bool fire_bool) {
     on_fire = fire_bool;
 }
 

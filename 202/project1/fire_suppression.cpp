@@ -1,15 +1,7 @@
 #include "fire_suppression.h"
+#include "utils.h"
 
-// TODO: put in utils
-const bool DEBUG = true;
-void NOTICE() {
-    cout << "NOTICE: ";
-}
-void WARN() {
-    cout << "WARNING: ";
-}
-
-FireSuppression::FireSuppression() {}
+FireSuppression::FireSuppression() : MAX_FIRE_FIGHTERS(generate_random(5, 20)), MAX_WATER_AVAILABLE(generate_random(1000, 1000000)){}
 FireSuppression::~FireSuppression() {}
 void FireSuppression::suppress(int suppression) {}
 void FireSuppression::report() {

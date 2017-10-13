@@ -1,3 +1,7 @@
+#include "utils.h"
+#include "fire_manager.h"
+
+
 Fire::Fire() {
     if(DEBUG) {
         NOTICE();
@@ -24,7 +28,7 @@ void Fire::update_size(float new_size) {
     size = new_size;
 }
 
-void update_severity(int new_severity) {
+void Fire::update_severity(int new_severity) {
     severity = new_severity;
 }
 

@@ -5,6 +5,9 @@
  */
 
 #include <iostream>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>
+
 
 using namespace std;
 

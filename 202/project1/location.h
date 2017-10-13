@@ -26,9 +26,9 @@ class Location {
         
     private:
         // 1,000,000
-        const int MAX_POP_SIZE = 1000000;
+        const static int MAX_POP_SIZE = 1000000;
         // 20,000
-        const int MIN_POP_SIZE = 20000;
+        const static int MIN_POP_SIZE = 20000;
 };
 
 class City : public Location {
@@ -36,6 +36,7 @@ class City : public Location {
         City();
         ~City();
         City(const City &);
+        City(bool);
     protected:
         bool on_fire;
         bool is_on_fire();
