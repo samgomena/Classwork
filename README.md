@@ -1,4 +1,4 @@
 ## Repo to house my classwork.
 
-#### TODO
-##### Retroactively add previously taken classes.
+#### TODOs:
+##### Retroactively add previously taken classes (maybe?).
