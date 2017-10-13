@@ -1,4 +1,4 @@
-## Repo to house most of my classwork moving forward.
+## Repo to house my classwork.
 
-
-##### Plan to retroactively add previously taken classes as well
+#### TODO
+##### Retroactively add previously taken classes.
