@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>32</y>
+      <w>168</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>Location: class
+--
+# population_size: int
+# area: float
+# setting: int
+# id: const static int
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>512</x>
+      <y>32</y>
+      <w>168</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Fire: class
+--
+# size: int
+# severity: int
+--
++ start(): void
++ get_size(): int
++ get_severity(): int
+# update_size(): void
+# update_severity(): void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>200</x>
+      <y>208</y>
+      <w>168</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>City: class
+--
++ manager: Manager
+- on_fire: bool
+--
+is_on_fire(): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>320</y>
+      <w>240</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Fire_Suppression: class
+--
+# is_water_available: bool
+# max_water: int
+# fire_fighters_available: int
+- effectivness: int
+--
++ virtual suppress(area_type: int): void
++ virtual report(area_type: int): void
+# determine_effectivness(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>504</y>
+      <w>224</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Areal: class
+--
+--
++ suppress(area_type: int): void
++ report(area_type: int): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>248</x>
+      <y>504</y>
+      <w>224</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Structural: class
+--
+--
++ suppress(area_type: int): void
++ report(area_type: int): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>496</x>
+      <y>504</y>
+      <w>224</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Wild: class
+--
+--
++ suppress(area_type: int): void
++ report(area_type: int): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>400</x>
+      <y>184</y>
+      <w>376</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Manager: class
+--
+# suppression *: Fire_Suppression
+# suppression_tools: DLL
+--
++ display(): void
++ get_suppression(): char *
+# determine_suppression_type(area_size: int, population: int): void
+# add_suppression(suppression *&amp;: Fire_suppression): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>192</y>
+      <w>168</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>L_Node: class
+--
++ city: City
+- next: L_Node
+--
++ next(): *&amp;
++ next(new_next *): void </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>808</x>
+      <y>168</y>
+      <w>200</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>D_Node: class
+--
+- suppression: Fire_Suppression *
+- next *: D_Node
+- prev *: D_Node
+--
++ get_next(): *&amp;
++ get_prev(): *&amp;
++ set_next(new_next *): void 
++ set_prev(new_next *): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>32</y>
+      <w>168</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>LLL: class
+--
+- head *: L_Node
+--
++ add(node *&amp;: L_Node): bool
++ displa(): void
++ delete_all(): bool
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>808</x>
+      <y>32</y>
+      <w>168</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>DLL: class
+--
+- head *: D_Node 
+--
++ insert(node: D_Node): bool
++ displa(): void
++ delete_all(): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>272</x>
+      <y>136</y>
+      <w>24</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>592</x>
+      <y>144</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>344</x>
+      <y>432</y>
+      <w>24</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>104</x>
+      <y>432</y>
+      <w>264</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>310.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>344</x>
+      <y>432</y>
+      <w>272</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;320.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>120</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>72</x>
+      <y>136</y>
+      <w>24</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>240</y>
+      <w>56</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>240</y>
+      <w>56</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>344</x>
+      <y>232</y>
+      <w>464</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;80.0;560.0;80.0;560.0;10.0;540.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>768</x>
+      <y>0</y>
+      <w>136</w>
+      <h>256</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>150.0;40.0;150.0;10.0;30.0;10.0;30.0;300.0;10.0;300.0</additional_attributes>
+  </element>
+</diagram>

@@ -1,0 +1,20 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf460
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\qr\partightenfactor0
+
+\f0\fs24 \cf0 Sam Gomena\
+CS202 - Fall 2017\
+Karla Fant\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+	For this assignment I had a hard time visualizing what a finished program would look like. Along with that, I have not taken an object oriented class before which lead to many of the design concepts seem abstract to think about.\
+\
+	Ultimately, I decided to model the graph with an array of doubly-linked lists (also because this was required). This became a good design for me because: 1. I have prior experience implementing similar graphs with a similar data structure and 2: because this data structure is easily traversed recursively. The graph is modeled by the array in that the array is a list of the vertices (cities) in the graph, with each node in the linked list being the connections (roads) between the vertices.\
+\
+	I ended up with significantly more classes than I had intended on having. This was in part due to creating a separate node class for the two linked lists. As well, I realized that after factoring code out to the bases class the child classes were very succinct. I\'92m sure the class signatures will be modified after I begin implementation. I can, however, see the immediate benefits of OOP and a good design.\
+\
+	My idea for the program is to begin by initializing the graphs nodes with city objects which will have randomly initialized data for size, population, and setting. Where setting will be rural, metro, city. After the graph is initialized a fire will start in one of the cities which will then be detected by that cities fire manager which inherits from a fire class. The fire manager will be responsible for determining the type of work and the amount of work to be done to successfully suppress the fire. It begins doing this with a pointer the Fire_Suppression class, which is a base class for 3 different types of fire suppression classes specific to the three settings. The manager, after having determined the type of fire suppression techniques needed, will create the respective object on the fly and add it to the list of fire suppression tools. With interactivity from the user the manager is then responsible for applying it\'92s tools to the fire until it is successfully put out. My intent is to have most of the fire suppression done programmatically with as little input from the user as possible. Or rather, have a larger emphasis on updating the user with the state of the fire while the \'93firefighting\'94 is done in the background. The human interface will be a list of options that the user can choose from to interact with the fire. After all the fires are out or the user decides to quit the program, statistical information will be displayed. I still have work to do deciding what will be the \'91driver\'92 of the program though. \
+\
+	Overall, I am happy with my design, but I can already see downfalls with it. For instance, I used containment in two places where I would have liked to have had inheritance. I know right now that I will run in to trouble accessing members. The other side of the argument is that using inheritance would likeIy violated some object oriented design principles. I would have liked to keep iterating but with the deadline approaching I made the decisions I did with the intention to (I hope) mitigate the amount of work on the other end. That is, the amount to be done accessing data I do not have direct access to. In the end, I am excited to deal with these challenges and am excited to begin implementing.}
