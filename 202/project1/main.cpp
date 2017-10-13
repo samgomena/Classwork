@@ -9,6 +9,7 @@
 #include <time.h>
 
 #include "node.h"
+#include "fire_suppression.h"
 
 using namespace std;
 
@@ -315,8 +316,18 @@ int main() {
     // delete arr;
     // arr = NULL;
 
+    FireSuppression *areal = new Areal();
+    FireSuppression *structural = new Structural();
+    FireSuppression *wild = new Wild();
+    
+    areal->report();
+    structural->report();
+    wild->report();
+    
+    delete areal;
+    delete structural;
+    delete wild;
 }
-
 
 
 
