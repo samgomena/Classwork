@@ -8,7 +8,7 @@
 #define NODE_H
 
 #include <iostream>
-#include "utils.h"
+#include "location.h"
 
 using namespace std;
 
@@ -31,7 +31,7 @@ class D_Node {
         // Unique id generator
         static int uuid;
         // constant id variable
-        const int uid = 1;
+        const int uid;
 };
 
 class L_Node {
@@ -39,16 +39,16 @@ class L_Node {
         L_Node();
         ~L_Node();
         L_Node(const L_Node &);
-        L_Node(int data);
-        int get_data();
+        L_Node(int);
+        int get_city();
         L_Node *& next();
         void next(L_Node *);
-    protected:
-        int data;
-        L_Node *_next;
     private:
         static int uuid;
-        const int uid = 1;
+    protected:
+        L_Node *_next;
+        const int uid;
+        City city;
 };
 
 #endif

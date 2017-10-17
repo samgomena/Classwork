@@ -15,14 +15,12 @@ class Location {
     public:
         Location();
         ~Location();
-        Location(const Location &);
+        //Location(const Location &);
         
     protected:
         int population_size;
         float area;
         int setting;
-        static int id_generator;
-        const int id;
         
     private:
         // 1,000,000
@@ -35,9 +33,12 @@ class City : public Location {
     public:
         City();
         ~City();
-        City(const City &);
-        City(bool);
+        //City(const City &);
+        City(int);
+        int id();
+        friend ostream& operator<<(ostream& steam, const City&);
     protected:
+        int city_id;
         bool on_fire;
         bool is_on_fire();
         void is_on_fire(bool);

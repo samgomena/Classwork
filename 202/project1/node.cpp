@@ -56,16 +56,16 @@ void D_Node::prev(D_Node * new_prev) {
 // L_NODE
 // ----------------------------------------------------------
 int L_Node::uuid = 0;
-L_Node::L_Node() : _next(NULL), data(0), uid(uuid++) {
+L_Node::L_Node() : _next(NULL), uid(uuid++), city(uid) {
     if(DEBUG) {
         NOTICE();
         cout << "L_Node " << uid << " constructor called!" << endl;    
     }
 }
-L_Node::L_Node(int init_data) : _next(NULL), uid(uuid++), data(init_data){
+L_Node::L_Node(int city_id) : _next(NULL), uid(uuid++), city(city_id){
     if(DEBUG) {
         NOTICE();
-        cout << "L_Node " << uid << " constructor called with " << init_data << endl;
+        cout << "L_Node " << uid << " constructor called with " << endl; //init_city << endl;
     }
 }
 L_Node::~L_Node() {
@@ -75,15 +75,16 @@ L_Node::~L_Node() {
     }
     
 }
-L_Node::L_Node(const L_Node &to_copy) : _next(to_copy._next), data(to_copy.data), uid(uuid) {
+L_Node::L_Node(const L_Node &to_copy) : _next(to_copy._next), city(to_copy.city), uid(uuid) {
     if(DEBUG) {
         NOTICE();
         cout << "D_Node " << uid << " copy constructor called." << endl;
     }
     
 }
-int L_Node::get_data() {
-    return data;
+int L_Node::get_city() {
+    cout << city;
+    return city.id();
 }
 L_Node *& L_Node::next() {
     return _next;
