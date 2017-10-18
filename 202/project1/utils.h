@@ -7,6 +7,9 @@
  * Instructor: Karla Fant
  */
 
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <iostream>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>
@@ -19,3 +22,5 @@ const bool DEBUG = false;
 int generate_random(int lower, int upper);
 const void NOTICE();
 const void WARN();
+
+#endif

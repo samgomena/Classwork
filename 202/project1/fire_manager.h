@@ -14,6 +14,7 @@
 #ifndef FIRE_H
 #define FIRE_H
 
+#include "list.h"
 #include "fire_suppression.h"
 
 class Fire {
@@ -31,12 +32,12 @@ class Fire {
 
 class FireManager : public Fire {
     public:
-        FireManager();
+        FireManager(int);
         ~FireManager();
-        float get_size();
+        FireManager(const FireManager&);
     protected:
         FireSuppression *fs;
-        void determine_suppression(int, int);
+        DLL *manager_list;
 };
 
 #endif

@@ -52,11 +52,9 @@ void DLL::display() {
         cout << "DLL display called." << endl;    
     }
     if(_head) {
-        cout << "DLL: ";
         int length = recursive_display(_head);
-        cout << endl << "DLL is " << length << " items long." << endl;
     } else {
-        cout << "DLL is empty!" << endl;
+        cout << "There are no fire suppression units available." << endl;
     }
     
 }
@@ -93,16 +91,8 @@ int DLL::recursive_display(D_Node * _head) {
     if(!_head) {
         return 0;
     }
-    // Pretty print/debug print outs 
-    if(!_head->next() && DEBUG) {
-        cout << _head->prev() << " <--|("<<_head<<") " << _head->get_data() << "|--> " << _head->next();        
-    } else if(!_head->next()) {
-        cout << _head->get_data();
-    } else if(DEBUG) {
-        cout << _head->prev() << " <--|("<<_head<<") " << _head->get_data() << "|--> " << _head->next() << " ... ";
-    } else {
-        cout << _head->get_data() << " -> ";    
-    }
+
+    cout << _head->get_data() << " -> ";
     return 1 + recursive_display(_head->next());
 }
 /**
@@ -131,25 +121,6 @@ bool DLL::recursive_copy(D_Node *& dest, D_Node *source) {
     return result;
 }
 /**
- * @brief Initializes list with random values between [1 and 100] (hardcoded)
- *
- * Used to generate lists of arbitrary data, intended use is for ease of testing.
- *
- * @param length The length of the list to build.
- *
- * @return void
- */
-void DLL::build(int length) {
-    int i = 1;
-    if(length == 1) {
-        i = 0;
-    } 
-    for(; i <= length; i++) {
-        int rand = generate_random(1, 100);
-        add(rand);
-    }
-}
-/**
  * @brief Adds `data` to the end of the list.
  *
  * General add function for the list. Analagous to `push_back(...)` with vectors.
@@ -158,12 +129,12 @@ void DLL::build(int length) {
  *
  * @return bool The result of adding `data` to the list.
  */
-bool DLL::add(int data) {
+bool DLL::add(FireSuppression *& fs_data) {
     if(DEBUG) {
         NOTICE();
         cout << "DLL add called." << endl;    
     }
-    D_Node *new_node = new D_Node(data);
+    D_Node *new_node = new D_Node(fs_data);
     D_Node *curr = _head;
     if(!_head) {
         _head = new_node;

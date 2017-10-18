@@ -19,8 +19,7 @@ class DLL {
         ~DLL();
         DLL(const DLL &);
         void display();
-        bool add(int);
-        void build(int);
+        bool add(FireSuppression *&);
         void destroy(D_Node *);
     protected:
         D_Node *_head;

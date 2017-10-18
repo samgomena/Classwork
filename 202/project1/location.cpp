@@ -30,11 +30,24 @@ Location::~Location(){
 // ----------------------------------------------------------
 // CITY
 // ----------------------------------------------------------
-
-City::City() : on_fire(false) {}
-City::City(int id) : on_fire(false), city_id(id) {}
-City::~City() {}
-// City::City(const City &){}
+City::City() : city_id(0), on_fire(false), fm(NULL) {
+    int fire_gen = generate_random(1, 101);
+    bool now_on_fire = fire_gen < 51;
+    is_on_fire(now_on_fire);
+}
+City::City(int id) : city_id(id), on_fire(false), fm(NULL) {
+    int fire_gen = generate_random(1, 101);
+    bool now_on_fire = fire_gen < 51;
+    is_on_fire(now_on_fire);
+    if(is_on_fire()) {
+        fm = new FireManager(setting);
+    }
+}
+City::~City() {
+    if(fm) {
+        delete fm;
+    }
+}
 
 const int City::id() const {
     return city_id;
@@ -48,9 +61,13 @@ void City::is_on_fire(bool fire_bool) {
     on_fire = fire_bool;
 }
 
-
 ostream& operator<<(ostream& os, const City& city) {
-    os << "\n------------\nCITY ID: " << city.id() << "\nPop: " << city.population_size << "\nArea: " << city.area << "mi^2\nSetting: " << city.setting << "\n-------------" << endl;
+    os << "\n------------\nCITY ID: " << city.id()
+       << "\nPop: " << city.population_size
+       << "\nArea: " << city.area
+       << "mi^2\nSetting: "
+       << city.setting
+       << "\n-------------" << endl;
     return os;
 }
 

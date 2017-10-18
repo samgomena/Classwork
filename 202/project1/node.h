@@ -11,6 +11,7 @@
 #define NODE_H
 
 #include <iostream>
+#include "fire_suppression.h"
 #include "location.h"
 
 using namespace std;
@@ -20,16 +21,16 @@ class D_Node {
         D_Node();
         ~D_Node();
         D_Node(const D_Node &);
-        D_Node(int data);
-        int get_data();
+        D_Node(FireSuppression *&);
+        FireSuppression *& get_data();
         D_Node *& next();
         void next(D_Node *);
         D_Node * prev();
         void prev(D_Node *);
     protected:
-        int data;
-        D_Node * _next;
+        D_Node *_next;
         D_Node *_prev;
+        FireSuppression *fs;
     private:
         // Unique id generator
         static int uuid;

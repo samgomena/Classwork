@@ -29,14 +29,14 @@ class FireSuppression {
         virtual void suppress(int);
         virtual void report();
     protected:
-        void determine_effectiveness();
+//        void determine_effectiveness();
         const int MAX_FIRE_FIGHTERS;
         const int MAX_WATER_AVAILABLE;
         bool is_water_available;
         int max_water;
         
         int fire_fighters_available;
-        int effectivness;
+        int effectiveness;
         
 };
 

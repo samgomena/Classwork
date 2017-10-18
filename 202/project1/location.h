@@ -18,8 +18,9 @@
 #define LOCATION_H
 
 #include <iostream>
-
 #include "utils.h"
+#include "fire_manager.h"
+
 
 class Location {
     public:
@@ -48,6 +49,7 @@ class City : public Location {
     protected:
         int city_id;
         bool on_fire;
+        FireManager *fm;
         bool is_on_fire();
         void is_on_fire(bool);
 };

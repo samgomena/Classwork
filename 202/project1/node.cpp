@@ -10,42 +10,40 @@
 #include "node.h"
 
 // ----------------------------------------------------------
-// D_NODE
+// D_NODE implementation
 // ----------------------------------------------------------
 int D_Node::uuid = 0;
-D_Node::D_Node() : _next(NULL), _prev(NULL), data(0), uid(uuid++) {
+D_Node::D_Node() : _next(NULL), _prev(NULL), fs(NULL), uid(uuid++) {
     if(DEBUG) {
         NOTICE();
         cout << "D_Node " << uid << " constructor called!" << endl;    
     }
 }
-D_Node::D_Node(int init_data) : _next(NULL), _prev(NULL), uid(uuid++), data(init_data){
+D_Node::D_Node(FireSuppression *& fs_unit) : _next(NULL), _prev(NULL), fs(fs_unit), uid(uuid++) {
     if(DEBUG) {
         NOTICE();
-        cout << "D_Node " << uid << " constructor called with " << init_data << endl;
+        cout << "D_Node " << uid << " constructor called." << endl;
     }
 }
 D_Node::~D_Node() {
     if(DEBUG) {
         NOTICE();
-        cout << "D_Node" << uid << " destructor called" << endl;  
+        cout << "D_Node" << uid << " destructor called" << endl;
     }
-    
 }
-D_Node::D_Node(const D_Node &to_copy) : _next(to_copy._next), _prev(to_copy._prev), data(to_copy.data), uid(uuid) {
+D_Node::D_Node(const D_Node &to_copy) : _next(to_copy._next), _prev(to_copy._prev), fs(to_copy.fs), uid(uuid) {
     if(DEBUG) {
         NOTICE();
         cout << "D_Node " << uid << " copy constructor called." << endl;
     }
-    
 }
 /**
- * @brief Get the nodes data member.
+ * @brief Get the nodes data.
  *
- * @return int The nodes data member
+ * @return FireSuppression The nodes fire suppression object.
  */
-int D_Node::get_data() {
-    return data;
+FireSuppression *& D_Node::get_data() {
+    return fs;
 }
 /**
  * @breif Get the next node (by reference).
@@ -83,7 +81,7 @@ void D_Node::prev(D_Node * new_prev) {
 }
 
 // ----------------------------------------------------------
-// L_NODE
+// L_NODE implementation
 // ----------------------------------------------------------
 // Initialize unique id generator. This is used for testing.
 int L_Node::uuid = 0;
@@ -106,7 +104,7 @@ L_Node::~L_Node() {
     }
     
 }
-L_Node::L_Node(const L_Node &to_copy) : _next(to_copy._next), city(to_copy.city), uid(uuid) {
+L_Node::L_Node(const L_Node &to_copy) : _next(to_copy._next), uid(uuid), city(to_copy.city) {
     if(DEBUG) {
         NOTICE();
         cout << "D_Node " << uid << " copy constructor called." << endl;
