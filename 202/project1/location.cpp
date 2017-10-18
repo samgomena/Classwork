@@ -30,11 +30,11 @@ Location::~Location(){
 // ----------------------------------------------------------
 
 City::City() : on_fire(false) {}
-City::City(int id) : on_fire(false), city_id(id){}
+City::City(int id) : on_fire(false), city_id(id) {}
 City::~City() {}
 // City::City(const City &){}
 
-int City::id() {
+const int City::id() const {
     return city_id;
 }
 
@@ -48,7 +48,7 @@ void City::is_on_fire(bool fire_bool) {
 
 
 ostream& operator<<(ostream& os, const City& city) {
-    os << "Pop: " << city.population_size << "\nArea: " << city.area << "mi^2\nSetting: " << city.setting << endl << endl;
+    os << "\n------------\nCITY ID: " << city.id() << "\nPop: " << city.population_size << "\nArea: " << city.area << "mi^2\nSetting: " << city.setting << "\n-------------" << endl;
     return os;
 }
 

@@ -35,7 +35,7 @@ class City : public Location {
         ~City();
         //City(const City &);
         City(int);
-        int id();
+        const int id() const;
         friend ostream& operator<<(ostream& steam, const City&);
     protected:
         int city_id;

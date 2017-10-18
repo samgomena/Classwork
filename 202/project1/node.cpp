@@ -65,7 +65,7 @@ L_Node::L_Node() : _next(NULL), uid(uuid++), city(uid) {
 L_Node::L_Node(int city_id) : _next(NULL), uid(uuid++), city(city_id){
     if(DEBUG) {
         NOTICE();
-        cout << "L_Node " << uid << " constructor called with " << endl; //init_city << endl;
+        cout << "L_Node " << uid << " constructor called with " << endl;
     }
 }
 L_Node::~L_Node() {
@@ -82,9 +82,8 @@ L_Node::L_Node(const L_Node &to_copy) : _next(to_copy._next), city(to_copy.city)
     }
     
 }
-int L_Node::get_city() {
+void L_Node::display_city() {
     cout << city;
-    return city.id();
 }
 L_Node *& L_Node::next() {
     return _next;

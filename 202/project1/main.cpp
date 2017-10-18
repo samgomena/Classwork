@@ -80,9 +80,10 @@ int main() {
         }
     }
     
-    for(i = 0; i < 10; ++i) {
-        cout << "LLL " << i << ": ";
+    for(i = 0; i < ARRAY_LENGTH; ++i) {
+        // cout << "LLL " << i << ": ";
         arr[i]->display();
+        cout << "-----------------------------------------";
         delete arr[i];
         arr[i] = NULL;
     }
@@ -93,6 +94,7 @@ int main() {
     FireSuppression *structural = new Structural();
     FireSuppression *wild = new Wild();
     
+   cout << endl; 
     areal->report();
     structural->report();
     wild->report();

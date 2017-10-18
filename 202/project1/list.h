@@ -1,3 +1,13 @@
+/**
+ * Author: Sam Gomena
+ * Class: CS202 Fall 2017
+ * Instructor: Karla Fant
+ *
+ * Purpose:
+ *      A header file to store node classes for doubly linked lists and linear linked lists. Hence their names `DLL` and `LLL`, respectively.
+
+ */
+
 #ifndef LIST_H
 #define LIST_H
 

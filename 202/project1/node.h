@@ -40,7 +40,7 @@ class L_Node {
         ~L_Node();
         L_Node(const L_Node &);
         L_Node(int);
-        int get_city();
+        void display_city();
         L_Node *& next();
         void next(L_Node *);
     private:
