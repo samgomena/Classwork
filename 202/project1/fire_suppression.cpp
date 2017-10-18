@@ -1,6 +1,7 @@
 /**
  * @file fire_suppression.cpp
- * @brief Implementation of doubly linked list and linearly linked list classes, respectively.
+ * @brief Implementation of fire suppression base class and three fire suppression subclasses each pertaining
+ * to a specific fire fighting technique.
  *
  * @author Sam Gomena
  * Class: CS202 Fall 2017
@@ -19,51 +20,66 @@ void FireSuppression::report() {
             "\n\tAreal(...)\n\tStructural()\n\tWild()\nclass types." << endl;
 }
 
-Areal::Areal() {
+UrbanSupport::UrbanSupport() {
     if(DEBUG) {
         NOTICE();
-        cout << "In areal default constructor." << endl;
+        cout << "In urban default constructor." << endl;
     }
 }
-Areal::~Areal() {
+UrbanSupport::~UrbanSupport() {
     if(DEBUG) {
         NOTICE();
-        cout << "In areal destructor." << endl;
+        cout << "In urban destructor." << endl;
     }
 }
-void Areal::report() {
-    cout << "Areal Report." << endl;
+/**
+ * @brief Report back the state of this techniques effectiveness fighting the fire.
+ *
+ * @return void
+ */
+void UrbanSupport::report() {
+    cout << "Urban Report." << endl;
 }
 
-Structural::Structural() {
+SuburbanSupport::SuburbanSupport() {
     if(DEBUG) {
         NOTICE();
-        cout << "In structural default constructor." << endl;
+        cout << "In SuburbanSupport default constructor." << endl;
     }
 }
-Structural::~Structural() {
+SuburbanSupport::~SuburbanSupport() {
     if(DEBUG) {
         NOTICE();
-        cout << "In structural destructor." << endl;
+        cout << "In SuburbanSupport destructor." << endl;
     }
 }
-void Structural::report() {
-    cout << "Structural Report." << endl;
+/**
+ * @brief Report back the state of this techniques effectiveness fighting the fire.
+ *
+ * @return void
+ */
+void SuburbanSupport::report() {
+    cout << "Suburban Report." << endl;
 }
 
-Wild::Wild() {
+WildSupport::WildSupport() {
     if(DEBUG) {
         NOTICE();
         cout << "In wild default constructor." << endl;
     }
 }
-Wild::~Wild() {
+WildSupport::~WildSupport() {
     if(DEBUG) {
         NOTICE();
         cout << "In wild destructor." << endl;
     }
 }
-void Wild::report() {
+/**
+ * @brief Report back the state of this techniques effectiveness fighting the fire.
+ *
+ * @return void
+ */
+void WildSupport::report() {
     cout << "Wild Report." << endl;
 }
 
