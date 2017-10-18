@@ -63,7 +63,6 @@ void LLL::display() {
     }
     if(_head) {
         int length = recursive_display(_head);
-        cout << "There are " << length << " cities being watched." << endl;
     } else {
         cout << "City list is empty!" << endl;
     }
