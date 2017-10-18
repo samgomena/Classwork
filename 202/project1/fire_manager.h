@@ -14,8 +14,8 @@
 #ifndef FIRE_H
 #define FIRE_H
 
-#include "list.h"
-#include "fire_suppression.h"
+#include "dlist.h"
+//#include "fire_suppression.h"
 
 class Fire {
     public:

@@ -17,7 +17,7 @@
 #ifndef LOCATION_H
 #define LOCATION_H
 
-#include <iostream>
+//#include <iostream>
 #include "utils.h"
 #include "fire_manager.h"
 
@@ -45,7 +45,7 @@ class City : public Location {
         ~City();
         City(int);
         const int id() const;
-        friend ostream& operator<<(ostream& steam, const City&);
+        friend ostream& operator<<(ostream&, const City&);
     protected:
         int city_id;
         bool on_fire;
