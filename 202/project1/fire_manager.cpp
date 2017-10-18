@@ -1,3 +1,12 @@
+/**
+ * @file fire_manager.cpp
+ * @brief Implementation of the `Fire` and `FireManager` classes respectively.
+ *
+ * @author: Sam Gomena
+ * Class: CS202 Fall 2017
+ * Instructor: Karla Fant
+ */
+
 #include "utils.h"
 #include "fire_manager.h"
 

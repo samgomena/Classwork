@@ -1,7 +1,17 @@
+/**
+ * @file fire_suppression.h
+ * @brief Implementation of doubly linked list and linearly linked list classes, respectively.
+ *
+ * @author Sam Gomena
+ * Class: CS202 Fall 2017
+ * Instructor: Karla Fant
+ */
+
 #ifndef FIRE_SUPPRESSION_H
 #define FIRE_SUPPRESSION_H
 
 #include <iostream>
+#include "utils.h"
 
 using namespace std;
 

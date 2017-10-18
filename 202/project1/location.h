@@ -1,5 +1,15 @@
 /**
- * Author: Sam Gomena
+ * @file location.h
+ * @brief Header file for class and method definitions of Location and City classes.
+ *
+ * `City` is the data member of the nodes in the linked-list. The `City` class maintains
+ * information pertaining to the state of the city. That is, which city it is and whether its on fire.
+ *
+ * The `Location` class maintains information about the - you guessed it - the location.
+ * That is, the population, the land area, and the type of area it's in. All these values are initialized
+ * randomly using the `generate_random(...)` function in `utils.cpp`.
+ *
+ * @author: Sam Gomena
  * Class: CS202 Fall 2017
  * Instructor: Karla Fant
  */
@@ -15,8 +25,7 @@ class Location {
     public:
         Location();
         ~Location();
-        //Location(const Location &);
-        
+
     protected:
         int population_size;
         float area;
@@ -33,7 +42,6 @@ class City : public Location {
     public:
         City();
         ~City();
-        //City(const City &);
         City(int);
         const int id() const;
         friend ostream& operator<<(ostream& steam, const City&);
@@ -43,6 +51,5 @@ class City : public Location {
         bool is_on_fire();
         void is_on_fire(bool);
 };
-
 
 #endif

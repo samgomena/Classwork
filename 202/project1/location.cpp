@@ -1,5 +1,8 @@
 /**
- * Author: Sam Gomena
+ * @file location.cpp
+ * @brief Implementation of the `Location` and `City` classes.
+ *
+ * @author: Sam Gomena
  * Class: CS202 Fall 2017
  * Instructor: Karla Fant
  */
@@ -23,7 +26,6 @@ Location::~Location(){
         cout << "Location  destructor called." << endl;
     }
 }
-// Location::Location(const Location &);
 
 // ----------------------------------------------------------
 // CITY

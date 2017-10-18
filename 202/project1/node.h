@@ -1,5 +1,8 @@
 /**
- * Author: Sam Gomena
+ * @file node.h
+ * @brief Header file for class and method definitions of doubly linked list and linearly linked list classes, respectively.
+ *
+ * @author Sam Gomena
  * Class: CS202 Fall 2017
  * Instructor: Karla Fant
  */

@@ -1,5 +1,12 @@
 /**
- * Author: Sam Gomena
+ * @file main.cpp
+ * @brief The driver of the application.
+ *
+ * The main function is responsible for kicking off the initialization of our city.
+ * It does this by representing a graph with a 2D array of numbers where each number corresponds to a different city.
+ * The nodes in the list are the cities that the city (the head of the linked-list) is connected to.
+ *
+ * @author: Sam Gomena
  * Class: CS202 Fall 2017
  * Instructor: Karla Fant
  */
