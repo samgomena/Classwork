@@ -19,7 +19,6 @@
 #define FIRE_SUPPRESSION_H
 
 #include <iostream>
-#include "utils.h"
 
 using namespace std;
 

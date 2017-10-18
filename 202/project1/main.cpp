@@ -97,11 +97,11 @@ int main() {
     delete arr;
     arr = NULL;
 
-    FireSuppression *areal = new Areal();
-    FireSuppression *structural = new Structural();
-    FireSuppression *wild = new Wild();
+    FireSuppression *areal = new UrbanSupport();
+    FireSuppression *structural = new SuburbanSupport();
+    FireSuppression *wild = new WildSupport();
     
-   cout << endl; 
+    cout << endl;
     areal->report();
     structural->report();
     wild->report();

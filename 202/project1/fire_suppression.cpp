@@ -9,6 +9,8 @@
  */
 
 #include "fire_suppression.h"
+// Necessary to prevent double includes
+#include "utils.h"
 
 FireSuppression::FireSuppression() : MAX_FIRE_FIGHTERS(generate_random(5, 20)),
                                      MAX_WATER_AVAILABLE(generate_random(1000, 1000000)) {}
