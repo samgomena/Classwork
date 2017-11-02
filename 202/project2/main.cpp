@@ -5,11 +5,11 @@
  */
 
 #include "list.h"
-// #include "utils.h"
 
 using namespace std;
 
 int main() {
     CLL *cll = new CLL();
     cll->display();
+    delete cll;
 }

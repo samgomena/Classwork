@@ -7,41 +7,48 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include <iostream>
 #include "study_materials.h"
 
 using namespace std;
 
 class Node {
-    public:
-        Node(int);
-        ~Node();
-        Node(const Node &);
-        StudyMaterials& data();
-        void print() const;
-        // Node *& next();
-        // void next(Node *);
-        Node *next;
-    protected:
-        StudyMaterials *materials;
-        
+public:
+    Node(int);
+    ~Node();
+    Node(const Node &);
+    StudyMaterials& data();
+    void print() const;
+    const int studies() const;
+    // Node *& next();
+    // void next(Node *);
+    Node *next;
+protected:
+    const int study_type;
+    StudyMaterials *materials;
 };
 
 class CLL {
 public:
     CLL();
     ~CLL();
-    CLL(const CLL&);
+    CLL(const CLL &);
     bool add(Node *&);
-    void retrieve();
-    void remove();
+    Node &retrieve_first(const char *);
+    bool remove_first(const char *);
     void remove_all();
     void display();
-    // Recursive display
-    void r_display(Node *);
+    void r_display(Node *); // Recursive display
 protected:
     Node *rear;
     int *review_questions;
+
+    int find_index(Node *, const char *);
+    void destroy(Node *&);
+    void copy(Node *&, Node *);
+private:
+    const int size;  // Number of questions to answer
+    Node & find_node(Node *&, int, int);
+    bool remove_node(Node *&, int, int);
 };
 
 #endif
