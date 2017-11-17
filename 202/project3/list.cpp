@@ -2,14 +2,14 @@
 
 ListNode::ListNode() : next(NULL) {}
 ListNode::ListNode(float data_point) : next(NULL), data_point(data_point) {}
-ListNode::~ListNode() {}
-ListNode::ListNode(const ListNode& copy) : next(NULL) {}
-ListNode& ListNode::operator=(const ListNode& equal) {
-    if(this == &equal) {
-        return *this;
-    }
-    return *this;
-}
+//ListNode::ListNode(const ListNode& copy) : next(NULL) {}
+//ListNode& ListNode::operator=(const ListNode& equal) {
+//    // TODO
+//    if(this == &equal) {
+//        return *this;
+//    }
+//    return *this;
+//}
 
 Sol::Sol() : head(NULL), tail(NULL) {}
 Sol::~Sol() {

@@ -33,8 +33,8 @@ BST::BST() : root(NULL) {
 
 BST::~BST() {
     destroy(root);
-    delete root;
-    root = NULL;
+//    delete root;
+//    root = NULL;
 }
 
 BST::BST(const BST & copy_me) : root(NULL) {

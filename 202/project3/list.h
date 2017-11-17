@@ -7,9 +7,8 @@ class ListNode {
 public:
     ListNode();
     ListNode(float);
-    ~ListNode();
-    ListNode(const ListNode&);
-    ListNode& operator=(const ListNode&);
+//    ListNode(const ListNode&);
+//    ListNode& operator=(const ListNode&);
     ListNode *next;
 
 protected:
