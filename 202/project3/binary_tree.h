@@ -42,7 +42,7 @@ protected:
     void copy(Node *&, Node *);
     bool add(Node *, Node *&, int);
 private:
-    const char * DATA_FILE = "data.txt";
+    const char * DATA_FILE = "./data.txt";
     void import();
 };
 

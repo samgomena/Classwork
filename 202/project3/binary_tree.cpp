@@ -5,7 +5,9 @@ Node::Node() : left(NULL), right(NULL), race_history(NULL), uid(uuid++) {}
 
 Node::Node(int days_to_race, int train_type, float workouts_per_week, int race_type)
         : left(NULL), right(NULL),  race_history(NULL), uid(uuid++), days_to_race(days_to_race),
-          train_type(train_type), workouts_per_week(workouts_per_week), race_type(race_type) {}
+          train_type(train_type), workouts_per_week(workouts_per_week), race_type(race_type) {
+    race_history = new Sol();
+}
 
 Node::~Node() {
     if(race_history) {
@@ -53,10 +55,10 @@ BST &BST::operator=(const BST & equal) {
 bool BST::add(int days_to_race, int train_type, float workouts_per_week, int race_type, char * race_history) {
     Node *node = new Node(days_to_race, train_type, workouts_per_week, race_type);
     char *str_char;
-    str_char = strtok(race_history, ", ");
-    while(!str_char) {
-        node->add(atof(str_char)); // Node add to race history list function
-        str_char = strtok(NULL, ", ");
+    str_char = strtok(race_history, " ");  // Split list
+    while(str_char) {
+        node->add(stof(str_char)); // add to race history list function
+        str_char = strtok(NULL, " ");
     }
 
     add(root, node, days_to_race);
