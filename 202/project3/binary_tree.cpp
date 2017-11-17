@@ -31,6 +31,8 @@ BST::BST() : root(NULL) {
 
 BST::~BST() {
     destroy(root);
+    delete root;
+    root = NULL;
 }
 
 BST::BST(const BST & copy_me) : root(NULL) {
@@ -53,7 +55,7 @@ bool BST::add(int days_to_race, int train_type, float workouts_per_week, int rac
     char *str_char;
     str_char = strtok(race_history, ", ");
     while(!str_char) {
-        node->add(stof(str_char)); // Node add to race history list function
+        node->add(atof(str_char)); // Node add to race history list function
         str_char = strtok(NULL, ", ");
     }
 

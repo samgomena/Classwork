@@ -2,6 +2,8 @@
 #define BINARY_TREE_H
 
 #include <fstream>
+#include <cstring>
+#include <cstdlib>
 #include "list.h"
 
 class Node {
