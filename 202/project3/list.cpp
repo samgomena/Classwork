@@ -2,14 +2,9 @@
 
 ListNode::ListNode() : next(NULL) {}
 ListNode::ListNode(float data_point) : next(NULL), data_point(data_point) {}
-//ListNode::ListNode(const ListNode& copy) : next(NULL) {}
-//ListNode& ListNode::operator=(const ListNode& equal) {
-//    // TODO
-//    if(this == &equal) {
-//        return *this;
-//    }
-//    return *this;
-//}
+ostream& operator << (ostream& out, const ListNode& node) {
+    out << node.data_point;
+}
 
 Sol::Sol() : head(NULL), tail(NULL) {}
 Sol::~Sol() {
@@ -39,6 +34,14 @@ bool Sol::add(float data_point) {
     add(node);
 }
 
+int Sol::display() {
+    if(!head) {
+        return 0;
+    }
+    return display(head);
+}
+
+// Protected
 void Sol::destroy(ListNode *& head) {
     if(!head) {
         return;
@@ -64,7 +67,15 @@ bool Sol::add(ListNode *& new_node) {
         tail = new_node;
         return true;
     }
-    tail->next = new_node;
-    tail = new_node;
+    new_node->next = head;
+    head = new_node;
     return true;
+}
+
+int Sol::display(ListNode *curr) {
+    if(!curr) {
+        return 0;
+    }
+    cout << curr;
+    return display(curr->next) + 1;
 }

@@ -7,9 +7,9 @@ class ListNode {
 public:
     ListNode();
     ListNode(float);
-//    ListNode(const ListNode&);
-//    ListNode& operator=(const ListNode&);
+    friend ostream& operator << (ostream&, const ListNode&);
     ListNode *next;
+
 
 protected:
     float data_point;
@@ -22,6 +22,8 @@ public:
     Sol(const Sol &);
     Sol& operator=(const Sol&);
     bool add(float);
+    int display();
+
 
 protected:
     ListNode * head, * tail;
@@ -29,6 +31,7 @@ protected:
     void destroy(ListNode *&);
     bool copy(ListNode *&, ListNode *);
     bool add(ListNode *&);
+    int display(ListNode *);
 };
 
 #endif
