@@ -4,6 +4,11 @@ ListNode::ListNode() : next(NULL) {}
 ListNode::ListNode(float data_point) : next(NULL), data_point(data_point) {}
 ostream& operator << (ostream& out, const ListNode& node) {
     out << node.data_point;
+    return out;
+}
+
+float ListNode::data() {
+    return data_point;
 }
 
 Sol::Sol() : head(NULL), tail(NULL) {}
@@ -76,6 +81,10 @@ int Sol::display(ListNode *curr) {
     if(!curr) {
         return 0;
     }
-    cout << curr;
+    if(!curr->next) {
+        cout << *curr << endl;
+    } else {
+        cout << *curr << ", ";
+    }
     return display(curr->next) + 1;
 }

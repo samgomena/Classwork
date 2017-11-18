@@ -8,6 +8,7 @@ public:
     ListNode();
     ListNode(float);
     friend ostream& operator << (ostream&, const ListNode&);
+    float data();
     ListNode *next;
 
 

@@ -43,7 +43,7 @@ protected:
     void destroy(Node *&);
     void copy(Node *&, Node *);
     bool add(Node *&, Node *&, int);
-    void display(Node *&);
+    void display(Node *);
 
     Node * root;
 private:

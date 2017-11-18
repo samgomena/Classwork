@@ -4,7 +4,7 @@ int Node::uuid = 0;
 Node::Node() : left(NULL), right(NULL), race_history(NULL), uid(uuid++) {}
 
 Node::Node(int days_to_race, int train_type, float workouts_per_week, int race_type)
-        : left(NULL), right(NULL),  race_history(NULL), uid(uuid++), days_to_race(days_to_race),
+        : left(NULL), right(NULL), race_history(NULL), uid(uuid++), days_to_race(days_to_race),
           train_type(train_type), workouts_per_week(workouts_per_week), race_type(race_type) {
     race_history = new Sol();
 }
@@ -43,6 +43,7 @@ ostream& operator << (ostream& out, const Node& node) {
         << "\nPrevious race times: ";
     int num_races = node.race_history->display();
     cout << "Total races completed: " << num_races << endl;
+    return out;
 }
 
 BST::BST() : root(NULL) {
@@ -71,10 +72,10 @@ BST &BST::operator=(const BST & equal) {
 bool BST::add(int days_to_race, int train_type, float workouts_per_week, int race_type, char * race_history) {
     Node *node = new Node(days_to_race, train_type, workouts_per_week, race_type);
     char *str_char;
-    str_char = strtok(race_history, " ");  // Split list
+    str_char = strtok(race_history, ", ");  // Split list
     while(str_char) {
         node->add(atof(str_char)); // add to race history list function
-        str_char = strtok(NULL, " ");
+        str_char = strtok(NULL, ", ");
     }
 
     add(this->root, node, days_to_race);
@@ -123,12 +124,12 @@ bool BST::add(Node *& root, Node *& new_node, int key) {
     return true;
 }
 
-void BST::display(Node *&root) {
+void BST::display(Node * root) {
     if(!root) {
         return;
     }
     display(root->left);
-    cout << root << endl; // TODO: Make this use overloaded operator
+    cout << *root << endl; // TODO: Make this use overloaded operator
     display(root->right);
     return;
 }
