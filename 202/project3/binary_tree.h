@@ -19,18 +19,16 @@ public:
     ~Node();
     Node(const Node&);
     Node& operator=(const Node&);
-    void add(float); // Wrapper for list add
+    void add_data(float); // Wrapper for list add
     friend ostream& operator << (ostream&, const Node&);
 
     Node *left;
     Node *right;
     int days_to_race;
-    static int uuid; // TODO: get rid of this
 protected:
     int train_type;
     float workouts_per_week;
     int race_type;
-    const int uid; // TODO: get rid of this
 
 protected:
     Sol *race_history;

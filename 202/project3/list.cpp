@@ -21,16 +21,28 @@ float ListNode::data(float new_data) {
     data_point = new_data;
 }
 
-bool ListNode::operator==(const ListNode& cmp) const {
-    return this->data() == cmp.data();
+bool ListNode::operator==(const ListNode* cmp) const {
+    return this->data() == cmp->data();
 }
 
-bool ListNode::operator>(const ListNode& cmp) const {
-    return this->data() > cmp.data();
+bool ListNode::operator!=(const ListNode* cmp) const {
+    return this->data() != cmp->data();
 }
 
-bool ListNode::operator<(const ListNode& cmp) const {
-    return this->data() < cmp.data();
+bool ListNode::operator>(const ListNode* cmp) const {
+    return this->data() > cmp->data();
+}
+
+bool ListNode::operator>=(const ListNode* cmp) const {
+    return this->data() >= cmp->data();
+}
+
+bool ListNode::operator<=(const ListNode *cmp) const {
+    return this->data() <= cmp->data();
+}
+
+bool ListNode::operator<(const ListNode *cmp) const {
+    return this->data() < cmp->data();
 }
 
 // List Iplementation
@@ -57,7 +69,7 @@ Sol& Sol::operator=(const Sol& equal) {
 
 bool Sol::add(float data_point) {
     ListNode *node = new ListNode(data_point);
-    add(node);
+    return add(node);
 }
 
 int Sol::display() {
@@ -103,7 +115,7 @@ bool Sol::add(ListNode *& new_node) {
         head = new_node;
         tail = new_node;
         return true;
-    } else if(new_node < head) {
+    } else if(*new_node < head) {
         new_node->next = head;
         head = new_node;
         return true;
@@ -111,15 +123,16 @@ bool Sol::add(ListNode *& new_node) {
     return add(head, new_node);
 }
 
-bool Sol::add(ListNode *curr, ListNode *& new_node) {
+bool Sol::add(ListNode *&curr, ListNode *& new_node) {
     if(!curr) {
         curr = new_node;
         tail = new_node;
         return true;
-    }  else if(curr->next && curr->next > new_node) {
-        ListNode *temp = head->next;
+    }  else if(curr->next && *curr->next > new_node) {
+//        ListNode *temp = head->next;
         new_node->next = curr->next;
         curr->next = new_node;
+        return true;
     }
     return add(curr->next, new_node);
 }
@@ -135,16 +148,15 @@ int Sol::display(ListNode *curr) {
     }
     return display(curr->next) + 1;
 }
-// TODO: return node reference
+
 ListNode& Sol::operator[](int index) {
     return get_element_at(this->head, 0, index);
 }
-// TODO: return node reference
+
 const ListNode& Sol::operator[](int index) const {
     return get_element_at(this->head, 0, index);
 }
 
-// TODO: return node reference
 ListNode& Sol::get_element_at(ListNode* curr, int curr_index, int index) const {
     if(!curr) {
         ListNode *temp;

@@ -6,11 +6,10 @@
 
 #include "binary_tree.h"
 
-int Node::uuid = 0;
-Node::Node() : left(NULL), right(NULL), race_history(NULL), uid(uuid++) {}
+Node::Node() : left(NULL), right(NULL), race_history(new Sol()) {}
 
 Node::Node(int days_to_race, int train_type, float workouts_per_week, int race_type)
-        : left(NULL), right(NULL), race_history(NULL), uid(uuid++), days_to_race(days_to_race),
+        : left(NULL), right(NULL), race_history(NULL), days_to_race(days_to_race),
           train_type(train_type), workouts_per_week(workouts_per_week), race_type(race_type) {
     race_history = new Sol();
 }
@@ -21,7 +20,7 @@ Node::~Node() {
     }
 }
 
-Node::Node(const Node & copy) : left(NULL), right(NULL), race_history(copy.race_history), uid(uuid++) {}
+Node::Node(const Node & copy) : left(NULL), right(NULL), race_history(copy.race_history) {}
 
 Node &Node::operator=(const Node & equal) {
     if(this == &equal) {
@@ -37,7 +36,7 @@ Node &Node::operator=(const Node & equal) {
     this->race_history = equal.race_history;
 }
 
-void Node::add(float data_point) {
+void Node::add_data(float data_point) {
     race_history->add(data_point);
 }
 
@@ -80,7 +79,7 @@ bool BST::add(int days_to_race, int train_type, float workouts_per_week, int rac
     char *str_char;
     str_char = strtok(race_history, ", ");  // Split list
     while(str_char) {
-        node->add(atof(str_char)); // Convert to float and add to race history list function
+        node->add_data(atof(str_char)); // Convert to float and add to race history list function
         str_char = strtok(NULL, ", ");
     }
 
