@@ -52,7 +52,11 @@ ostream& operator << (ostream& out, const Node& node) {
 }
 
 BST::BST() : root(NULL) {
-    import();
+    import(); // Load data from file into bst
+}
+
+BST::BST(const char * INPUT): root(NULL), DATA_FILE(INPUT) {
+    import(); // Load data from file into bst
 }
 
 BST::~BST() {
@@ -88,9 +92,9 @@ bool BST::add(int days_to_race, int train_type, float workouts_per_week, int rac
 }
 
 void BST::display() {
-    if(!root) {
-        cout << "You have no racing data!" << endl;
-    }
+//    if(!root) {
+//        cout << "You have no racing data!" << endl;
+//    }
     display(root);
 }
 
@@ -160,7 +164,9 @@ void BST::import() {
             }
         }
     } else {
-        cout << "Could not find input data file.\nPlease try again." << endl;
+        cout << "Could not find data file."
+                "\nPlease try again, adding the data file as an argument."
+                "\n\tNote: data file provided is `data.txt`" << endl;
     }
 
 }

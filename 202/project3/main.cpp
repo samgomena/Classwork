@@ -7,8 +7,14 @@
 #include "binary_tree.h"
 
 int main(int argc, char **argv) {
+    BST *bst;
+    // Use command line argument if we cannot find the data file.
+    if(argc > 1) {
+        bst = new BST(argv[1]);
+    } else {
+        bst = new BST();
+    }
 
-    BST *bst = new BST();
     bst->display();
     delete bst;
 
