@@ -6,5 +6,16 @@ int main(int argc, char **argv) {
     BST *bst = new BST();
     bst->display();
     delete bst;
+
+    Sol *ll = new Sol();
+    ll->add(10);
+    ll->add(20);
+    ll->add(30);
+    ll->add(40);
+    ll->add(50);
+
+    ll->display();
+
+    ll[0];
     return 0;
 }

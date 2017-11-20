@@ -24,6 +24,8 @@ public:
     Sol& operator=(const Sol&);
     bool add(float);
     int display();
+    float operator[](int);
+    const float operator[](int) const;
 
 
 protected:
@@ -33,6 +35,7 @@ protected:
     bool copy(ListNode *&, ListNode *);
     bool add(ListNode *&);
     int display(ListNode *);
+    float get_element_at(ListNode*, int, int) const;
 };
 
 #endif

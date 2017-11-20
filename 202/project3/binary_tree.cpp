@@ -74,7 +74,7 @@ bool BST::add(int days_to_race, int train_type, float workouts_per_week, int rac
     char *str_char;
     str_char = strtok(race_history, ", ");  // Split list
     while(str_char) {
-        node->add(atof(str_char)); // add to race history list function
+        node->add(atof(str_char)); // Convert to float and add to race history list function
         str_char = strtok(NULL, ", ");
     }
 
@@ -84,7 +84,7 @@ bool BST::add(int days_to_race, int train_type, float workouts_per_week, int rac
 
 void BST::display() {
     if(!root) {
-        cout << "You have no race data!" << endl;
+        cout << "You have no racing data!" << endl;
     }
     display(root);
 }

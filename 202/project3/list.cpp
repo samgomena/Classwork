@@ -1,4 +1,5 @@
 #include "list.h"
+#include <cfloat>
 
 ListNode::ListNode() : next(NULL) {}
 ListNode::ListNode(float data_point) : next(NULL), data_point(data_point) {}
@@ -87,4 +88,22 @@ int Sol::display(ListNode *curr) {
         cout << *curr << ", ";
     }
     return display(curr->next) + 1;
+}
+
+float Sol::operator[](int index) {
+    return get_element_at(this->head, 0, index);
+}
+
+const float Sol::operator[](int index) const {
+    return get_element_at(this->head, 0, index);
+}
+
+float Sol::get_element_at(ListNode* curr, int curr_index, int index) const {
+    if(!curr) {
+        return FLT_MIN;
+    }
+    if(curr_index == index) {
+        return curr->data();
+    }
+    return get_element_at(curr->next, curr_index + 1, index);
 }
