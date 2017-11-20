@@ -22,6 +22,7 @@ public:
     void add_data(float); // Wrapper for list add
     friend ostream& operator << (ostream&, const Node&);
 
+
     Node *left;
     Node *right;
     int days_to_race;
@@ -30,8 +31,10 @@ protected:
     float workouts_per_week;
     int race_type;
 
-protected:
+private:
     Sol *race_history;
+    const void determine_race_type(int) const;
+    const void determine_train_type(int) const;
 };
 
 class BST {
@@ -52,7 +55,7 @@ protected:
 
     Node * root;
 private:
-    const char * DATA_FILE = "./data.txt";
+    const char * DATA_FILE;
     void import();
 };
 

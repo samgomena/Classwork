@@ -15,7 +15,7 @@ public:
     ListNode(float);
     friend ostream& operator << (ostream&, const ListNode&);
     const float data() const;
-    float data(float);
+    void data(float);
     bool operator==(const ListNode*) const;
     bool operator!=(const ListNode*) const;
     bool operator>(const ListNode*) const;
@@ -43,14 +43,13 @@ public:
 
 
 protected:
-    ListNode * head, * tail;
-
     void destroy(ListNode *&);
     bool copy(ListNode *&, ListNode *);
     bool add(ListNode *&);
     bool add(ListNode *&, ListNode *&);
     int display(ListNode *);
     ListNode& get_element_at(ListNode*, int, int) const;
+    ListNode * head, * tail;
 };
 
 #endif

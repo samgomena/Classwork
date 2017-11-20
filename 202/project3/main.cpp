@@ -18,6 +18,9 @@ int main(int argc, char **argv) {
     bst->display();
     delete bst;
 
+// Tests:
+//    BST *new_bst = new BST(*bst);
+//    new_bst->display();
 //    Sol *ll = new Sol();
 //    ll->add(10);
 //    ll->add(20);
@@ -31,5 +34,6 @@ int main(int argc, char **argv) {
 //
 //    ll->display();
 //    delete ll;
+//    delete new_bst;
     return 0;
 }
