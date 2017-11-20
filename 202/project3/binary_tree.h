@@ -1,3 +1,9 @@
+/**
+ * Author: Sam Gomena
+ * Class: CS202 Fall 2017
+ * Instructor: Karla Fant
+ */
+
 #ifndef BINARY_TREE_H
 #define BINARY_TREE_H
 

@@ -1,3 +1,9 @@
+/**
+ * Author: Sam Gomena
+ * Class: CS202 Fall 2017
+ * Instructor: Karla Fant
+ */
+
 #ifndef LIST_H
 #define LIST_H
 
@@ -8,7 +14,11 @@ public:
     ListNode();
     ListNode(float);
     friend ostream& operator << (ostream&, const ListNode&);
-    float data();
+    const float data() const;
+    float data(float);
+    bool operator==(const ListNode&) const;
+    bool operator>(const ListNode&) const;
+    bool operator<(const ListNode&) const;
     ListNode *next;
 
 
@@ -24,8 +34,9 @@ public:
     Sol& operator=(const Sol&);
     bool add(float);
     int display();
-    float operator[](int);
-    const float operator[](int) const;
+    ListNode& operator[](int);
+    const ListNode& operator[](int) const;
+
 
 
 protected:
@@ -34,8 +45,9 @@ protected:
     void destroy(ListNode *&);
     bool copy(ListNode *&, ListNode *);
     bool add(ListNode *&);
+    bool add(ListNode *, ListNode *&);
     int display(ListNode *);
-    float get_element_at(ListNode*, int, int) const;
+    ListNode& get_element_at(ListNode*, int, int) const;
 };
 
 #endif
