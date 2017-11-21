@@ -21,6 +21,12 @@ public:
     Node& operator=(const Node&);
     void add_data(float); // Wrapper for list add
     friend ostream& operator << (ostream&, const Node&);
+    Node& operator+=(const Node&);
+    void operator++();
+    void operator++(int);
+    Node& operator-=(const Node&);
+    void operator--();
+    void operator--(int);
 
 
     Node *left;

@@ -39,8 +39,7 @@ public:
     int display();
     ListNode& operator[](int);
     const ListNode& operator[](int) const;
-
-
+    Sol operator+(const Sol *&);
 
 protected:
     void destroy(ListNode *&);
@@ -48,8 +47,12 @@ protected:
     bool add(ListNode *&);
     bool add(ListNode *&, ListNode *&);
     int display(ListNode *);
-    ListNode& get_element_at(ListNode*, int, int) const;
+    void merge_list(Sol *& list1, ListNode *);
     ListNode * head, * tail;
+
+private:
+    ListNode& get_element_at(ListNode*, int, int) const;
+
 };
 
 #endif

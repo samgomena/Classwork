@@ -111,6 +111,7 @@ void Sol::destroy(ListNode *& head) {
     destroy(head->next);
     delete head;
     head = NULL;
+    tail = NULL;
 }
 
 bool Sol::copy(ListNode *&result, ListNode *source) {
@@ -192,7 +193,7 @@ int Sol::display(ListNode *curr) {
  * @param index The index at we want to get a node.
  * @return ListNode& The node at `index`.
  */
-ListNode& Sol::operator[](int index) {
+ListNode& Sol::operator[](int index) { // TODO: throw an error instead of return null
     return get_element_at(this->head, 0, index);
 }
 
@@ -205,10 +206,18 @@ ListNode& Sol::operator[](int index) {
  * @param index The index at we want to get a node.
  * @return ListNode& The node at `index`.
  */
-const ListNode& Sol::operator[](int index) const {
+const ListNode& Sol::operator[](int index) const { // TODO: throw an error instead of return null
     return get_element_at(this->head, 0, index);
 }
 
+
+Sol Sol::operator+(const Sol *& addend) {
+    Sol *new_list = new Sol(*this);
+    this->merge_list(new_list, addend->head);
+    return *new_list;
+}
+
+// Private functions
 /**
  * @brief Helper function used by the overloaded array-access operator.
  * @param curr The current node in the list. Used exclusively for traversal.
@@ -218,7 +227,7 @@ const ListNode& Sol::operator[](int index) const {
  */
 ListNode& Sol::get_element_at(ListNode* curr, int curr_index, int index) const {
     if(!curr) {
-        ListNode *temp;
+        ListNode *temp = NULL;
         return *temp;
     }
     if(curr_index == index) {
@@ -226,3 +235,14 @@ ListNode& Sol::get_element_at(ListNode* curr, int curr_index, int index) const {
     }
     return get_element_at(curr->next, curr_index + 1, index);
 }
+
+void Sol::merge_list(Sol *& list1, ListNode *curr) {
+    if(!curr) {
+        return;
+    }
+    list1->add(curr);
+    merge_list(list1, curr->next);
+}
+
+
+

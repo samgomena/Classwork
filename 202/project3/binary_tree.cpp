@@ -9,10 +9,8 @@
 Node::Node() : left(NULL), right(NULL), race_history(new Sol()) {}
 
 Node::Node(int days_to_race, int train_type, float workouts_per_week, int race_type)
-        : left(NULL), right(NULL), race_history(NULL), days_to_race(days_to_race),
-          train_type(train_type), workouts_per_week(workouts_per_week), race_type(race_type) {
-    race_history = new Sol();
-}
+        : left(NULL), right(NULL), days_to_race(days_to_race),
+          train_type(train_type), workouts_per_week(workouts_per_week), race_type(race_type), race_history(new Sol()) {}
 
 Node::~Node() {
     if(race_history) {
@@ -22,9 +20,11 @@ Node::~Node() {
 
 Node::Node(const Node & copy)
         : left(NULL), right(NULL), days_to_race(copy.days_to_race), train_type(copy.train_type),
-          workouts_per_week(copy.workouts_per_week), race_type(copy.race_type), race_history(copy.race_history) {}
+          workouts_per_week(copy.workouts_per_week), race_type(copy.race_type) {
+    race_history = new Sol(*copy.race_history);
+}
 
-Node &Node::operator=(const Node & equal) {
+Node &Node::operator=(const Node& equal) {
     if(this == &equal) {
         return *this;
     }
@@ -36,6 +36,7 @@ Node &Node::operator=(const Node & equal) {
     this->train_type = equal.train_type;
     this->race_type = equal.race_type;
     this->race_history = equal.race_history;
+    return *this;
 }
 
 /**
@@ -61,6 +62,34 @@ ostream& operator << (ostream& out, const Node& node) {
     int num_races = node.race_history->display(); // Use external list print function and get number of race history items
     out << "Total races completed: " << num_races << endl;
     return out;
+}
+
+Node& Node::operator += (const Node& operand) {
+    this->days_to_race += operand.days_to_race;
+    return *this;
+}
+
+// Prefix
+void Node::operator++() {
+    ++this->days_to_race;
+}
+
+// Postfix
+void Node::operator++(int) {
+    this->days_to_race++;
+}
+
+Node& Node::operator-=(const Node& operand) {
+    this->days_to_race -= operand.days_to_race;
+    return *this;
+}
+
+void Node::operator--() {
+    --this->days_to_race;
+}
+
+void Node::operator--(int) {
+    this->days_to_race--;
 }
 
 const void Node::determine_race_type(int type) const {
@@ -109,6 +138,7 @@ const void Node::determine_train_type(int type) const {
     }
 }
 
+// BST implementation
 BST::BST() : root(NULL), DATA_FILE("./data.txt") {
     import(); // Load data from file `data.txt` into bst
 }
@@ -121,7 +151,7 @@ BST::~BST() {
     destroy(root);
 }
 
-BST::BST(const BST & copy_me) : root(NULL) {
+BST::BST(const BST& copy_me) : root(NULL) {
     copy(root, copy_me.root);
 }
 
