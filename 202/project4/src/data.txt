@@ -1,0 +1,28 @@
+//      Sam Gomena
+//
+//      Some might even call it a DSL. The take away is that it's very nit-picky.
+//      The general syntax is as follows:
+//       |-------- data.txt --------|
+//       |Restaurant 1 distance  <-- Notice 'Restaurant Name' is fully left justified
+//       |- Food Item 1 price    <-- As long as the items name is between '- ' and x.xx (3 digit price) it will be read in
+//       |- Food Item 2 price       |
+//       |...                    <-- Have as many items as you like, it's a buffered reader.
+//       |- Food Item n price       |
+//       |Restaurant 2 distance  <-- Once food items are done being listed, begin reading in new restaurant's items.
+//       |- ...                     |
+//       |--------------------------|
+//      Note: inline comments '//' and empty lines/whitespace allowed
+
+McDonald's 15,20
+- Big Mac 3.00
+- Big Mac Meal 7.05
+- 10 Pc. Chicken Nuggets 6.45
+- McFlurry 1.00
+Subway 20,30
+- Meatball Six Inch 8.29
+- Spicy Italian Six Inch 8.39
+- Subway Club Six Inch 9.39
+City Thai 35,45
+- Mango Red Curry 9.50
+- Cashew Nut Delight 9.50
+- Spicy Basil 9.50
