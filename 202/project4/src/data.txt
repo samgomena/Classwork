@@ -1,4 +1,8 @@
-//      Sam Gomena
+//      /**
+//       * Author: Sam Gomena
+//       * Class: CS202 Fall 2017
+//       * Instructor: Karla Fant
+//       */
 //
 //      Some might even call it a DSL. The take away is that it's very nit-picky.
 //      The general syntax is as follows:
@@ -13,16 +17,16 @@
 //       |--------------------------|
 //      Note: inline comments '//' and empty lines/whitespace allowed
 
-McDonald's 15,20
+McDonald's 15-20
 - Big Mac 3.00
 - Big Mac Meal 7.05
 - 10 Pc. Chicken Nuggets 6.45
 - McFlurry 1.00
-Subway 20,30
+Subway 20-30
 - Meatball Six Inch 8.29
 - Spicy Italian Six Inch 8.39
 - Subway Club Six Inch 9.39
-City Thai 35,45
+City Thai 35-45
 - Mango Red Curry 9.50
 - Cashew Nut Delight 9.50
 - Spicy Basil 9.50

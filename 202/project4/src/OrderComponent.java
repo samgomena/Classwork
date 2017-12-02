@@ -1,20 +1,30 @@
-public class OrderComponent {
+/**
+ * Author: Sam Gomena
+ * Class: CS202 Fall 2017
+ * Instructor: Karla Fant
+ */
 
-    private final float price;
-    private final float prep_time;
-    private String meal_name;
+public class OrderComponent {
+    protected final float price;
+    private float totalPrice = 0;
+    protected String mealName;
 
 
     public OrderComponent() {
         price = 0f;
-        prep_time = 0f;
-        meal_name = "";
+        mealName = "";
     }
 
-    public OrderComponent(float _price, float _prep_time, String _meal_name) {
+    public OrderComponent(String _meal_name, float _price) {
         price = _price;
-        prep_time = _prep_time;
-        meal_name = _meal_name;
+        totalPrice += _price;
+        mealName = _meal_name;
+    }
+
+    public boolean display() {
+        return true;
     }
 }
+
+
 

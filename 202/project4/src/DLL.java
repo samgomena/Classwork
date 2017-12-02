@@ -1,3 +1,12 @@
+/**
+ * Author: Sam Gomena
+ * Class: CS202 Fall 2017
+ * Instructor: Karla Fant
+ */
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DLL {
     private D_Node head;
     private D_Node tail;
@@ -9,17 +18,31 @@ public class DLL {
         order_nums = 0;
     }
 
-    public boolean add() {
-        addFront(new D_Node());
-        addBack(new D_Node());
-        return true;
+    /**@brief The interface to main, takes in the order details and delegates their addition to the list.
+     *
+     * @param orderStuff: ArrayList<HashMap<String, String>> a list of the items and prices pertaining to an order.
+     *                  Planned to be used in project 5 but has no use here.
+     * @param restaurantOrderedFrom: String the name of the restaurant ordered from.
+     * @param orderedItem: String the item that the user ordered.
+     * @param price: float the price of the item the user ordered.
+     * @return: boolean Whether or not `add(...)` was able to add the node.
+     */
+    public boolean addOrder(ArrayList<HashMap<String, String>> orderStuff,
+                            String restaurantOrderedFrom,
+                            String orderedItem,
+                            float price) {
+        return addFront(new D_Node(orderStuff, restaurantOrderedFrom, orderedItem, price));
     }
 
-    public void display() {
+    /**
+     * @brief Wrapper function for private display function.
+     * @return int the number of items in the list.
+     */
+    public int display() {
         if(head == null) {
-            return;
+            return 0;
         }
-        display(head);
+        return display(head);
     }
 
     public boolean removeAll() {
@@ -28,40 +51,37 @@ public class DLL {
         return true;
     }
 
-    private D_Node addFront(D_Node new_node) {
+    public int getOrderNums() {
+        return order_nums;
+    }
+
+    /**
+     * @brief Adds a node to the front of the list.
+     *
+     * Note: Increments `order_num` for every node added.
+     * Note: This function will always return true.
+     * @param new_node: D_Node the node to add to the front of the list.
+     * @return boolean: Whether or not we were able to add a node.
+     */
+    private boolean addFront(D_Node new_node) {
         if(head == null) {
             head = new_node;
             tail = new_node;
-            return head;
+            ++order_nums;
+            return true;
         }
         new_node.next(head);
         head.prev(new_node);
         head = new_node;
         ++order_nums;
-        return head;
-    }
-
-    private D_Node addBack(D_Node new_node) {
-        if(head == null) {
-            head = new_node;
-            tail = new_node;
-            return head;
-        }
-        new_node.prev(tail);
-        tail.next(new_node);
-        tail = new_node;
-        ++order_nums;
-        return tail;
+        return true;
     }
 
     protected int display(D_Node curr) {
         if(curr == null) {
             return 0;
         }
-//        curr.list.display();
-        int i = 1;
-        System.out.print("Order " + i + " ");
-        return display(curr.next()) + (++i);
-//        return 0;
+        curr.display(); // Call D_Node classes display.
+        return display(curr.next()) + 1;
     }
 }

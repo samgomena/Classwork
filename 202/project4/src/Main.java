@@ -1,54 +1,75 @@
+/**
+ * Author: Sam Gomena
+ * Class: CS202 Fall 2017
+ * Instructor: Karla Fant
+ */
+
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-//        Tree new_tree;
-//        new_tree = new Tree();
-//        int num_nodes = new_tree.display();
-//        System.out.println("Number of nodes: " + num_nodes);
 
-//        Menu $ = new Menu(); // Used as quick-access utility identifier
-        DLL dll  = new DLL();
+        DLL dll = new DLL(); // Create new list to house our orders.
         Menu.print("Welcome to CS202_Eatz.", "\n\n");
 
-        Menu.readData();
-        Menu.showRestaurants(false);
-//        Menu.showRestaurants(true);
-
-
-        do {
-            Menu.options();
-            switch(Menu.getOptions()) {
-                case -1:
-                    Menu.print("Please select a valid menu option and try again");
-                    break;
-                case 1:
-                    Menu.print("Starting New Order");
-                    dll.add();
-                    break;
-                case 2:
-                    Menu.print("These are your orders so far");
-                    dll.display();
-                    break;
-                case 3:
-                    Menu.print("Are you sure you want to remove this order?");
-                    break;
-                case 4:
-                    Menu.print("We only take whole bitcoins'.\nAre you sure you want to continue?");
-                    Menu.done();
-                    break;
-                default:
-                    Menu.print("Sorry, we didn't understand that.\nPlease try again.");
-            }
-        } while(Menu.notDone());
-
-
-
-        dll.add();
-        dll.add();
-        dll.add();
-        dll.display();
-        dll.removeAll();
-        dll.display();
+        // If we were able to open and read the data.
+        if (Menu.readData()) {
+            do {
+                switch (Menu.showOptions(Menu.stdOps, "What would you like to do")) {
+                    case -1:
+                        Menu.print("Please select a valid menu option and try again");
+                        break;
+                    case 1:
+                        Menu.print("Starting New Order...");
+                        String chosenRestaurant =
+                                Menu.showAndGetOptions(
+                                        Menu.restaurants(false),
+                                "Here are the available restaurants with distances:",
+                                "mins");
+                        if(chosenRestaurant == null) {
+                            Menu.print("Sorry, we didn't get that.\nPlease try again.");
+                            break;
+                        }
+                        String[] itemWithPrice =
+                                Menu.showAndGetOptions(
+                                        Menu.menuItems(chosenRestaurant),
+                                        ("What do you want to order from " + chosenRestaurant.split(" ")[0] + "?"),
+                                "").split("\\$");
+                        if(itemWithPrice.length == 1) {
+                            Menu.print("Sorry, we didn't get that.\nPlease try again.");
+                            break;
+                        }
+                        String item = itemWithPrice[0];
+                        String price = itemWithPrice[1];
+                        if(dll.addOrder(Menu.getRestaurant(chosenRestaurant), chosenRestaurant, item, Float.parseFloat(price))) {
+                            Menu.print("Your order of " + item + "has been added.\nTotal orders: " + dll.getOrderNums());
+                        } else {
+                            Menu.print("Sorry, we were not able to add your order, please try again.");
+                        }
+                        break;
+                    case 2:
+                        int orders = dll.display();
+                        if(orders == 0) {
+                            Menu.print("It looks like you don't have any orders yet.\nPress '1' to change that.");
+                        } else {
+                            Menu.print("Total orders: " + orders);
+                        }
+                        break;
+                    case 3:
+                        // TODO: Add functionality for project 5.
+                        break;
+                    case 4:
+                        Menu.print("Note: We only take whole bitcoins.");
+                        // TODO: Add functionality for project 5.
+                        Menu.done();
+                        break;
+                    default:
+                        Menu.print("Sorry, we didn't get that.\nPlease try again.");
+                }
+            } while (Menu.notDone());
+            dll.removeAll();
+        } else {
+            System.exit(0); // We done goofed.
+        }
     }
 }
