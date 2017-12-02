@@ -4,11 +4,11 @@
  
 *Note: the path shown will not be the shortest path.*
 
-####To run the application:
+#### To run the application:
 
     $ make
     $ ./hw1 <maze_file>
 
-####The program will output information about the maze and then the path that was taken to get out.
+#### The program will output information about the maze and then the path that was taken to get out.
 
 *Note: the path taken will be shown in green, with the hallways not traveled in red.*
