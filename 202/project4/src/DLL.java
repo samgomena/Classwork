@@ -10,12 +10,12 @@ import java.util.HashMap;
 public class DLL {
     private D_Node head;
     private D_Node tail;
-    private int order_nums;
+    private int orderNums;
 
     public DLL() {
         head = null;
         tail = null;
-        order_nums = 0;
+        orderNums = 0;
     }
 
     /**@brief The interface to main, takes in the order details and delegates their addition to the list.
@@ -25,7 +25,7 @@ public class DLL {
      * @param restaurantOrderedFrom: String the name of the restaurant ordered from.
      * @param orderedItem: String the item that the user ordered.
      * @param price: float the price of the item the user ordered.
-     * @return: boolean Whether or not `add(...)` was able to add the node.
+     * @return: boolean Whether or not `addFront(...)` was able to insert the node.
      */
     public boolean addOrder(ArrayList<HashMap<String, String>> orderStuff,
                             String restaurantOrderedFrom,
@@ -33,6 +33,7 @@ public class DLL {
                             float price) {
         return addFront(new D_Node(orderStuff, restaurantOrderedFrom, orderedItem, price));
     }
+
 
     /**
      * @brief Wrapper function for private display function.
@@ -52,7 +53,7 @@ public class DLL {
     }
 
     public int getOrderNums() {
-        return order_nums;
+        return orderNums;
     }
 
     /**
@@ -60,20 +61,20 @@ public class DLL {
      *
      * Note: Increments `order_num` for every node added.
      * Note: This function will always return true.
-     * @param new_node: D_Node the node to add to the front of the list.
-     * @return boolean: Whether or not we were able to add a node.
+     * @param new_node: D_Node the node to insert to the front of the list.
+     * @return boolean: Whether or not we were able to insert a node.
      */
     private boolean addFront(D_Node new_node) {
         if(head == null) {
             head = new_node;
             tail = new_node;
-            ++order_nums;
+            ++orderNums;
             return true;
         }
         new_node.next(head);
         head.prev(new_node);
         head = new_node;
-        ++order_nums;
+        ++orderNums;
         return true;
     }
 

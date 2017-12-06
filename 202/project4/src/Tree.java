@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Tree {
 
     private Node root;
@@ -8,65 +11,88 @@ public class Tree {
         root = null;
     }
 
-    public boolean put(int data) {
-        Node new_node = new Node(data);
-        root = add(root, new_node);
-        refactorAfterInsertion(new_node);
-        return true;
+    public Tree(HashMap<String, ArrayList<HashMap<String, String>>> initData) {
+        root = null;
+        boolean error = false;
+        for(String restName: initData.keySet()) {
+            error |= !insert(restName); // If insert ever fails `error` is set to true [error = false || !insert(...)]
+        }
+        // If we encountered an error entering data, lets quit and try again.
+        if(error) {
+            System.out.println("There was an error parsing the restaurant data.\nPlease try running again.");
+            System.exit(0);
+        }
     }
 
-    public int get() {
-        return root.data();
+    public boolean insert(String restaurantName) {
+        Node new_node = new Node(restaurantName);
+        root = insert(root, new_node);
+        return refactorAfterInsertion(new_node);
     }
 
-    public int get(int data) {
-        return get(root, data);
+    public String retrieve(String data) {
+        return retrieve(root, data);
+    }
+
+    public String retrieveAll(String data) {
+        return retrieveAll(root, data);
     }
 
     public int height() {
-        if(root == null) {
-            return 0;
-        }
-        return height(root);
+        return root == null ? 0 : height(root);
     }
 
     public int display() {
-        if(root == null) {
-            return 0;
-        }
-        return display(root);
+        return root == null ? 0 : display(root);
     }
 
-    private Node add(Node root, Node new_node) {
+    public boolean removeAll() {
+        root = null;
+        return true;
+    }
+
+    protected Node insert(Node root, Node new_node) {
         if(root == null) {
             return new_node;
-        } else if (new_node.data() < root.data()) {
-            Node leftChild = add(root.left, new_node);
+        } else if (new_node.data().equals(root.data())) {
+            Node leftChild = insert(root.left, new_node);
             root.left = leftChild;
             leftChild.parent = root;
         } else {
-            Node rightChild = add(root.right, new_node);
+            Node rightChild = insert(root.right, new_node);
             root.right = rightChild;
             rightChild.parent = root;
         }
         return root;
     }
 
-    private int get(Node root, int key) {
+    protected String retrieve(Node root, String key) {
         if(root == null) {
-            return -1;
-        } else if(key < root.data()) {
-            get(root.left, key);
-        }
-        else if (key > root.data()) {
-            get(root.right, key);
-        } else if(key == root.data()) {
+            return "";
+        } else if(key.equals(root.data())) {
             return root.data();
+        } else if(key.compareTo(root.data()) < 0) {
+            return retrieve(root.left, key);
+        } else if (key.compareTo(root.data()) >= 0) {
+            return retrieve(root.right, key);
         }
         return root.data();
     }
 
-    private int height(Node root) {
+    protected String retrieveAll(Node root, String key) {
+        if(root == null) {
+            return "";
+        } else if(key.equals(root.data())) {
+            return root.data();
+        } else if(key.compareTo(root.data()) < 0) {
+            return retrieve(root.left, key);
+        } else if (key.compareTo(root.data()) >= 0) {
+            return retrieve(root.right, key);
+        }
+        return root.data();
+    }
+
+    protected int height(Node root) {
         if(root == null) {
             return 0;
         }
@@ -75,96 +101,101 @@ public class Tree {
         return left > right ? left : right;
     }
 
-    private int display(Node root) {
+    protected int display(Node root) {
         if(root == null) {
             return 0;
         }
         int count = display(root.left) + 1;
-        System.out.print(root.data() + ", ");
+        System.out.print(root.data() + ": ");
+        root.display(); // Call display on node in tree.
         return count + display(root.right);
     }
 
-    private void refactorAfterInsertion(Node newNode) {
+    private boolean refactorAfterInsertion(Node newNode) {
+        boolean error = false;
         Node temp;
         newNode.color(RED);
-        while (newNode.parent() != null && newNode.parent().isRed()) {
-            if (newNode.parent() == newNode.grandparent().left) {
-                temp = newNode.grandparent().right; // Uncle
-                if (temp != null && temp.isRed()) {
+        while(newNode.parent() != null && newNode.parent().isRed()) {
+            if(newNode.parent() == newNode.grandparent().left) {
+                temp = newNode.grandparent().right; // Uncle of node added on left sub-tree
+                if(temp != null && temp.isRed()) { // If Uncle is red -> recolor and keep refactoring
                     newNode.parent().color(BLACK);
-                    temp.color(BLACK);
-                    newNode.grandparent().color(RED);
-                    newNode = newNode.grandparent();
-                } else {
-                    if (newNode == newNode.parent().right) {
-                        newNode = newNode.parent();
-                        rotateLeft(newNode);
+                    temp.color(BLACK); // Color parent and uncle black
+                    newNode.grandparent().color(RED); // Make grandparent red
+                    newNode = newNode.grandparent(); // Move up the tree (incremental step)
+                } else { // If uncle is black
+                    if(newNode == newNode.parent().right) { // We added on a right sub-tree
+                        newNode = newNode.parent(); // Move up a level to perform rotation
+                        error |= !rotateLeft(newNode); // Leaning right so rotate left
                     }
                     newNode.parent().color(BLACK);
                     newNode.grandparent().color(RED);
-                    rotateRight(newNode.grandparent());
+                    error |= !rotateRight(newNode.grandparent()); // Rotate right to adjust height. If rotation fails update error
                 }
-            } else {
-                temp = newNode.grandparent().left;
-                if (temp != null && temp.isRed()) {
-                     newNode.parent().color(BLACK);
-                    temp.color(BLACK);
-                    newNode.grandparent().color(RED);
-                    newNode = newNode.grandparent();
+            } else { // Same operations performed as above but adjust operations for use on right sub-tree
+                temp = newNode.grandparent().left; // Uncle of node added on right sub-tree
+                if(temp != null && temp.isRed()) { // Again if uncle is red -> recolor and keep refactoring
+                    newNode.parent().color(BLACK);
+                    temp.color(BLACK); // Color parent and uncle black
+                    newNode.grandparent().color(RED); // Make grandparent red
+                    newNode = newNode.grandparent(); // Move up the tree (incremental step)
                 } else {
-                    if (newNode == newNode.parent().left) {
-                        newNode = newNode.parent();
-                        rotateRight(newNode);
+                    if(newNode == newNode.parent().left) { // We added on a left sub-tree
+                        newNode = newNode.parent(); // Move up a level to perform rotation
+                        error |= !rotateRight(newNode); // Leaning left so rotate right
                     }
                     newNode.parent().color(BLACK);
                     newNode.grandparent().color(RED);
-                    rotateLeft(newNode.grandparent());
+                    error |= !rotateLeft(newNode.grandparent()); // Rotate left to adjust height
                 }
             }
         }
-        root.color(BLACK);
+        root.color(BLACK); // Root is always black. (Essentially our base case)
+        return !error;
     }
 
-    private void rotateRight(Node x) {
-        Node y = x.left;
-
-        x.left = y.right;
-        if (x.left != null) {
-            y.right.parent = x;
+    private boolean rotateRight(Node rotateAbout) {
+        int subTreeHeight = height(rotateAbout); // Used for veracity check
+        Node subTree = rotateAbout.left; // Grab left sub-tree
+        rotateAbout.left = subTree.right; // Update left sub-tree of rotating node to inorder predecessor
+        if(rotateAbout.left != null) {
+            subTree.right.parent = rotateAbout; // Update parent of inorder predecessor
         }
-        y.parent = x.parent;
-        y.right = x;
-        x.parent = y;
-        if (root == x) {
-            root = y;
-        } else {
-            if (y.parent.left == x) {
-                y.parent.left = y;
+        subTree.parent = rotateAbout.parent();  // ---------
+        subTree.right = rotateAbout;            // Move left leaning sub-tree up i.e. rotate
+        rotateAbout.parent = subTree;           // ---------
+        if(root == rotateAbout) { // Handle rotations around root
+            root = subTree;
+        } else { // We're in a sub-tree
+            if(subTree.parent().left == rotateAbout) { // Update parents left/right links
+                subTree.parent().left = subTree;
             } else {
-                y.parent.right = y;
+                subTree.parent().right = subTree;
             }
         }
+        return subTreeHeight - height(subTree) <= 1; // True if difference in height is at most 1; false otherwise.
     }
 
-    private void rotateLeft(Node x) {
-        Node y = x.right;
-        x.right = y.left;
-        if (y.left != null) {
-            y.left.parent = x;
+    private boolean rotateLeft(Node rotateAbout) {
+        int subTreeHeight = height(rotateAbout);
+        Node subTree = rotateAbout.right;
+        rotateAbout.right = subTree.left;
+        if(subTree.left != null) {
+            subTree.left.parent = rotateAbout; // Update parent of inorder predecessor
         }
-
-        y.parent = x.parent;
-        if (x.parent == null) {
-            root = y;
-        } else {
-            if (x == x.parent.left) {
-                x.parent.left = y;
+        subTree.parent = rotateAbout.parent();  // ---------
+        subTree.left = rotateAbout;             // Move right leaning sub-tree up i.e. rotate
+        rotateAbout.parent = subTree;           // ---------
+        if(root == rotateAbout) { // Handle rotations around root
+            root = subTree;
+        } else { // We're in a sub-tree
+            if(subTree.parent().left == rotateAbout) { // Update parents left/right link
+                subTree.parent().left = subTree;
             } else {
-                x.parent.right = y;
+                subTree.parent().right = subTree;
             }
         }
-        y.left = x;
-        x.parent = y;
+        return subTreeHeight - height(subTree) <= 1; // True if difference in height is at most 1; false otherwise.
     }
 
     public void printLevelOrder() {

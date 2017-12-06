@@ -24,7 +24,7 @@ public class Order extends OrderComponent {
     /**
      * @brief method to be used for project 5.
      * @param _note
-     * @return boolean whether or not we were able to add the note.
+     * @return boolean whether or not we were able to insert the note.
      */
     public boolean addNotes(String _note) {
         // Check if empty note, or note has already been added.

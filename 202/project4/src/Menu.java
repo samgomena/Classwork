@@ -13,7 +13,7 @@ import java.nio.charset.Charset;
  * @brief Static class of helper functions for use throughout the program.
  *
  * @desc Using such complicated file I/O, heavy builtin data structure dependency and a static utility class were perhaps the
- * worst decision I have made all term. To be honest, I'm not sure how I managed to get it working, but am assured that
+ * worst decision I have made all term. To be honest, I'm not sure how I managed to retrieve it working, but am assured that
  * this will be the last time I use a non-standard data format.
  *
  * As well, forgive the complexity of this class. Fortunately, there isn't really any code in here that we were required to
@@ -23,7 +23,7 @@ import java.nio.charset.Charset;
 public class Menu {
     private static final Path file = Paths.get("src/data.txt"); // Use src b/c it looks for file at program entry point. I.e. 'project4/'
     private static boolean notDone = true; // Bool to control our menu driven program.
-    public static String[] stdOps = {"Start a new order.", "Review your orders.", "Remove an order. [Beta]", "Pay for an order."}; // List of the four menu options allowed
+    public static String[] stdOps = {"Start a new order.", "Review your orders.", "[Beta] Remove an order.", "Pay for an order."}; // List of the four menu options allowed
     private static HashMap<String, ArrayList<HashMap<String, String>>> restaurantData = new HashMap<>(); // Implicit call to ArrayList constructor using newer java 7(?) syntax: '<>'
 
     public static boolean notDone() {
@@ -66,7 +66,7 @@ public class Menu {
      * @brief Returns a restaurants list of items and prices given a restaurants name.
      *
      * Note: if the restaurant parameter is not found this function returns null
-     * @param restaurant: String the restaurant who's data we want to get.
+     * @param restaurant: String the restaurant who's data we want to retrieve.
      * @return ArrayList<HashMap<String, String>> the list of restaurant items and prices
      */
     public static ArrayList<HashMap<String, String>> getRestaurant(String restaurant) {
@@ -133,6 +133,11 @@ public class Menu {
         return should_be_int;
     }
 
+    public static String[] parseRestaurantName(String restaurant) {
+        String[] rstrnt = restaurant.split(" +");
+        return new String[] {String.join(" ", Arrays.copyOfRange(rstrnt, 0, rstrnt.length-1)), rstrnt[rstrnt.length-1]};
+    }
+
     /**
      * @brief Returns the list of available restaurants.
      *
@@ -146,8 +151,8 @@ public class Menu {
         String[] rstrntArr = new String[restaurantData.size()];
         int i = 0;
         for (String restaurant: restaurantData.keySet()) {
-            String[] rstrnt = restaurant.split(" +");
-            String formattedRstrnt = String.join(" ", Arrays.copyOfRange(rstrnt, 0, rstrnt.length-1)) + " " + rstrnt[rstrnt.length-1];
+            String[] rstrnt = parseRestaurantName(restaurant);
+            String formattedRstrnt = rstrnt[0] + " " + rstrnt[1];
             String value = restaurantData.get(restaurant).toString();
             if(withMenu) {
                 print(formattedRstrnt + ": " + value, "\n\n");
@@ -162,7 +167,7 @@ public class Menu {
      * @brief Returns a list of the items a restaurant has available.
      *
      * Note: This will return null if the restaurant has no data.
-     * @param restaurant: String the restaurant for which we want to get data from.
+     * @param restaurant: String the restaurant for which we want to retrieve data from.
      * @return String[] the list of items available from the restaurant.
      */
     public static String[] menuItems(String restaurant) {
@@ -187,14 +192,61 @@ public class Menu {
      * @return boolean: true is we were able to read in the data, false otherwise.
      * @throws IOException if the file cannot be found.
      */
-    public static boolean readData() throws IOException {
-        boolean noError = true;
+//    public static boolean readData() throws IOException {
+//        boolean noError = true;
+//        try {
+//            BufferedReader reader; // Keep compiler happy
+//            try {
+//                reader = Files.newBufferedReader(file, Charset.forName("UTF-8")); // data file should be in '<entry_point>/src'. I.e. platform agnostic
+//            } catch(IOException err) {
+//                Path last_try = Paths.get(System.getProperty("user.dir") + "/src/data.txt"); // Ask system for programs entry point and insert know data location.
+//                print("Couldn't find file: '" + file + "' in the working directory."); // Let 'em know
+//                print("Trying again with full path: '" + last_try + "'", "\n\n");
+//                reader = Files.newBufferedReader(last_try, Charset.forName("UTF-8")); // If it's not here, well...
+//            }
+//
+//            String line, restaurant_and_distance = ""; // For reading lines from data file.
+//            while ((line = reader.readLine()) != null) {
+//                while(line.startsWith("//") || line.trim().isEmpty()) { // Allow simple comments in this pseudo language
+//                    line = reader.readLine();
+//                }
+//                HashMap<String, String> items_and_prices = new HashMap<>(); // Map that will hold the item and its price.
+//                if(line.startsWith("- ")) {
+//                    while((line != null) && line.startsWith("- ")) {
+////                             && (line.startsWith("//") && (line = reader.readLine()) != null)) { // Handle comments in item listing
+//                        String[] temp = line.split(" +"); // Create array of the menu items' name and price
+//                        String price = temp[temp.length - 1]; // Price is always listed last in pseudo language
+//                        String item = String.join(" ", Arrays.copyOfRange(temp, 1, temp.length-1)); // The menu item name is all but the first and last words in the list
+//                        items_and_prices.put(item, price); // Add them to the map. (key = item, value = price)
+//                        line = reader.readLine();
+//                    }
+//                } else {
+//                    restaurant_and_distance = line; // Save for later. This is here exclusively to take care of the first line.
+//                }
+//                restaurantData.putIfAbsent(restaurant_and_distance, new ArrayList<>()); // If the key doesn't exist yet, insert it with a new arraylist as its value
+//                // If we found items on the restaurants menu (items_and_prices has more than 0 values), insert them.
+//                if(items_and_prices.size() > 0) {
+//                    restaurantData.get(restaurant_and_distance.trim()).add(items_and_prices);
+//                }
+//                // If we found a new restaurant, update our placeholder.
+//                if(!restaurant_and_distance.equalsIgnoreCase(line)) {
+//                    restaurant_and_distance = line;
+//                }
+//            }
+//        } catch (IOException io_err) {
+//            print("Sorry, we couldn't open the file: ", "\n\t");
+//            print("'" + io_err.getCause() + "'");
+//            noError = false;
+//        }
+//        return noError;
+//    }
+    public static HashMap<String, ArrayList<HashMap<String, String>>> readData() throws IOException {
         try {
             BufferedReader reader; // Keep compiler happy
             try {
                 reader = Files.newBufferedReader(file, Charset.forName("UTF-8")); // data file should be in '<entry_point>/src'. I.e. platform agnostic
             } catch(IOException err) {
-                Path last_try = Paths.get(System.getProperty("user.dir") + "/src/data.txt"); // Ask system for programs entry point and add know data location.
+                Path last_try = Paths.get(System.getProperty("user.dir") + "/src/data.txt"); // Ask system for programs entry point and insert know data location.
                 print("Couldn't find file: '" + file + "' in the working directory."); // Let 'em know
                 print("Trying again with full path: '" + last_try + "'", "\n\n");
                 reader = Files.newBufferedReader(last_try, Charset.forName("UTF-8")); // If it's not here, well...
@@ -218,8 +270,8 @@ public class Menu {
                 } else {
                     restaurant_and_distance = line; // Save for later. This is here exclusively to take care of the first line.
                 }
-                restaurantData.putIfAbsent(restaurant_and_distance, new ArrayList<>()); // If the key doesn't exist yet, add it with a new arraylist as its value
-                // If we found items on the restaurants menu (items_and_prices has more than 0 values), add them.
+                restaurantData.putIfAbsent(restaurant_and_distance, new ArrayList<>()); // If the key doesn't exist yet, insert it with a new arraylist as its value
+                // If we found items on the restaurants menu (items_and_prices has more than 0 values), insert them.
                 if(items_and_prices.size() > 0) {
                     restaurantData.get(restaurant_and_distance.trim()).add(items_and_prices);
                 }
@@ -231,8 +283,7 @@ public class Menu {
         } catch (IOException io_err) {
             print("Sorry, we couldn't open the file: ", "\n\t");
             print("'" + io_err.getCause() + "'");
-            noError = false;
         }
-        return noError;
+        return restaurantData;
     }
 }
