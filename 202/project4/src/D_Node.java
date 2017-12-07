@@ -22,7 +22,14 @@ public class D_Node {
         prev = null;
     }
 
-    public D_Node(ArrayList<HashMap<String, String>> orderStuff, String restaurantOrderedFrom, String orderName, float price) {
+//    public D_Node(ArrayList<HashMap<String, String>> orderStuff, String restaurantOrderedFrom, String orderName, float price) {
+//        next = null;
+//        prev = null;
+//        nameLiteral = restaurantOrderedFrom;
+//        oc = getBinding(orderName, price);
+//    }
+
+    public D_Node(String restaurantOrderedFrom, String orderName, float price) {
         next = null;
         prev = null;
         nameLiteral = restaurantOrderedFrom;
@@ -43,6 +50,8 @@ public class D_Node {
     public boolean display() {
         return oc.display();
     }
+
+    public float orderPrice() { return oc.getTotalPrice(); }
 
     private static OrderComponent getBinding(String name, float price) {
         Calendar cal = Calendar.getInstance();

@@ -19,7 +19,7 @@ public class Tree {
         }
         // If we encountered an error entering data, lets quit and try again.
         if(error) {
-            System.out.println("There was an error parsing the restaurant data.\nPlease try running again.");
+            System.out.println("There was an error parsing the restaurant name.\nPlease try running again.");
             System.exit(0);
         }
     }
@@ -30,31 +30,27 @@ public class Tree {
         return refactorAfterInsertion(new_node);
     }
 
-    public String retrieve(String data) {
-        return retrieve(root, data);
-    }
+    public Node retrieve(String data) { return retrieve(root, data); }
 
-    public String retrieveAll(String data) {
-        return retrieveAll(root, data);
-    }
+    public String retrieveAll(String data) { return retrieveAll(root, data); }
 
-    public int height() {
-        return root == null ? 0 : height(root);
-    }
+    public float getPriceOfAllOrders() { return getPriceOfAllOrders(root); }
+    public int getNumberOfAllOrders() { return getNumberOfAllOrders(root); }
 
-    public int display() {
-        return root == null ? 0 : display(root);
-    }
+    public int height() { return root == null ? 0 : height(root); }
+
+    public int display() { return root == null ? 0 : display(root); }
 
     public boolean removeAll() {
+        boolean removed = removeAll(root);
         root = null;
-        return true;
+        return removed;
     }
 
     protected Node insert(Node root, Node new_node) {
         if(root == null) {
             return new_node;
-        } else if (new_node.data().equals(root.data())) {
+        } else if (new_node.name().compareTo(root.name()) < 1) {
             Node leftChild = insert(root.left, new_node);
             root.left = leftChild;
             leftChild.parent = root;
@@ -66,30 +62,49 @@ public class Tree {
         return root;
     }
 
-    protected String retrieve(Node root, String key) {
+    protected Node retrieve(Node root, String key) {
         if(root == null) {
-            return "";
-        } else if(key.equals(root.data())) {
-            return root.data();
-        } else if(key.compareTo(root.data()) < 0) {
+            return root;
+        }
+        else if(key.equals(root.name())) {
+            return root;
+        }
+        else if(key.compareTo(root.name()) < 0) {
             return retrieve(root.left, key);
-        } else if (key.compareTo(root.data()) >= 0) {
+        } else if(key.compareTo(root.name()) >= 0) {
             return retrieve(root.right, key);
         }
-        return root.data();
+        return root;
     }
 
+    /**
+     * This is a poorly named function that really just returns the total price of all the orders. : /
+     * @param root
+     * @param key
+     * @return
+     */
     protected String retrieveAll(Node root, String key) {
         if(root == null) {
             return "";
-        } else if(key.equals(root.data())) {
-            return root.data();
-        } else if(key.compareTo(root.data()) < 0) {
-            return retrieve(root.left, key);
-        } else if (key.compareTo(root.data()) >= 0) {
-            return retrieve(root.right, key);
+        } else if(key.equals(root.name())) {
+            return root.name();
+        } else if(key.compareTo(root.name()) < 0) {
+            return retrieveAll(root.left, key);
+        } else if (key.compareTo(root.name()) >= 0) {
+            return retrieveAll(root.right, key);
         }
-        return root.data();
+        return root.name();
+    }
+
+    protected float getPriceOfAllOrders(Node root) {
+        if(root == null) {
+            return 0;
+        }
+        return root.getOrderTotal() + getPriceOfAllOrders(root.left) + getPriceOfAllOrders(root.right);
+    }
+
+    protected int getNumberOfAllOrders(Node root) {
+        return root == null ? 0 : root.getOrderSize() + getNumberOfAllOrders(root.left) + getNumberOfAllOrders(root.right);
     }
 
     protected int height(Node root) {
@@ -106,7 +121,7 @@ public class Tree {
             return 0;
         }
         int count = display(root.left) + 1;
-        System.out.print(root.data() + ": ");
+//        System.out.print(root.data() + ": "); TODO: Maybe remove this.
         root.display(); // Call display on node in tree.
         return count + display(root.right);
     }
@@ -198,22 +213,12 @@ public class Tree {
         return subTreeHeight - height(subTree) <= 1; // True if difference in height is at most 1; false otherwise.
     }
 
-    public void printLevelOrder() {
-        int h = height(root);
-        for (int i = 1; i <= h; ++i) {
-            printGivenLevel(root, i);
-            System.out.println();
+    private boolean removeAll(Node root) {
+        if(root == null) {
+            return true;
         }
-    }
-
-    private void printGivenLevel (Node root, int level) {
-        if (root == null)
-            return;
-        if (level == 1) {
-            System.out.print(root.data() + " ");
-        } else if (level > 1) {
-            printGivenLevel(root.left, level-1);
-            printGivenLevel(root.right, level-1);
-        }
+        removeAll(root.left);
+        removeAll(root.right);
+        return root.removeAll();
     }
 }

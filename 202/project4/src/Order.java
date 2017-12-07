@@ -57,10 +57,12 @@ class Breakfast extends Order {
     }
 
     public boolean display() {
-        Menu.print("Breakfast: ");
+//        Menu.print("Breakfast: ");
         Menu.print("\t" + mealName + " $" + price);
         return true;
     }
+
+    public float getTotalPrice() { return totalPrice; }
 }
 
 class Lunch extends Order {
@@ -69,10 +71,12 @@ class Lunch extends Order {
     }
 
     public boolean display() {
-        Menu.print("Lunch: ");
+//        Menu.print("Lunch: ");
         Menu.print("\t" + mealName + " $" + price);
         return true;
     }
+
+    public float getTotalPrice() { return totalPrice; }
 }
 
 class Dinner extends Order {
@@ -81,8 +85,10 @@ class Dinner extends Order {
     }
 
     public boolean display() {
-        Menu.print("Dinner: ");
+//        Menu.print("Dinner: ");
         Menu.print("\t" + mealName + " $" + price);
         return true;
     }
+
+    public float getTotalPrice() { return totalPrice; }
 }

@@ -6,9 +6,8 @@
 
 public class OrderComponent {
     protected final float price;
-    private float totalPrice = 0;
+    protected float totalPrice = 0;
     protected String mealName;
-
 
     public OrderComponent() {
         price = 0f;
@@ -24,6 +23,7 @@ public class OrderComponent {
     public boolean display() {
         return true;
     }
+    public float getTotalPrice() { return totalPrice; }
 }
 
 
