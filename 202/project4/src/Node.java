@@ -1,23 +1,32 @@
+/**
+ * Author: Sam Gomena
+ * Class: CS202 Fall 2017
+ * Instructor: Karla Fant
+ */
+
 import java.util.TreeSet;
 import java.util.Random;
 
-public class Node {
-    protected Node left;
-    protected Node right;
-    protected Node parent;
-    private static final boolean RED = true;
-    private static final boolean BLACK = false;
-    private String restaurantName;
-    private String driverDistances;
-    DLL restaurantOrders;
-    private TreeSet<Integer> driversAvailable;
-    private boolean color;
 
+public class Node {
+    protected Node left, right, parent;
+    private boolean color;
+    private static final boolean RED = true, BLACK = false;
+    private String restaurantName, driverDistances;
+    protected DLL restaurantOrders;
+    private TreeSet<Integer> driversAvailable;
+
+    /**
+     * This initializes the nodes references to null. As well it sets up the tree of drivers randomly.
+     *
+     * Note: this contains a built in self balancing tree, namely, `TreeSet` this is due to the fact that containing
+     * the tree I built would have resulted in an infinite loop of Tree's containing Node's containing Tree's
+     * containing Node's containing etc.
+     * @param restName: String the name of the restaurant we want to start tracking orders for.
+     */
     Node(String restName) {
         Random rnd = new Random();
-        left = null;
-        right = null;
-        parent = null;
+        left = right = parent = null;
         color = BLACK;
         restaurantName = restName;
         driverDistances = Menu.parseRestaurantName(restName)[1];

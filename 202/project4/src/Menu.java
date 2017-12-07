@@ -10,7 +10,7 @@ import java.nio.file.*;
 import java.nio.charset.Charset;
 
 /**
- * @brief Static class of helper functions for use throughout the program.
+ * Static class of helper functions for use throughout the program.
  *
  * @desc Using such complicated file I/O, heavy builtin data structure dependency and a static utility class were perhaps the
  * worst decision I have made all term. To be honest, I'm not sure how I managed to retrieve it working, but am assured that
@@ -34,7 +34,7 @@ public class Menu {
     }
 
     /**
-     * @brief Wrapper function for System.out.println(...)
+     * Wrapper function for System.out.println(...)
      *
      * Hint: pass in "" (empty string) to print a new line
      * @param s: String the string to print.
@@ -48,7 +48,7 @@ public class Menu {
     }
 
     /**
-     * @brief Similar to `print(...)` this will append a delimiter of your choice.
+     * Similar to `print(...)` this will append a delimiter of your choice.
      *
      * Hint: pass in "" (empty string) as the second arg for no delimiter.
      * @param s: String the string to print.
@@ -63,7 +63,7 @@ public class Menu {
     }
 
     /**
-     * @brief Returns a restaurants list of items and prices given a restaurants name.
+     * Returns a restaurants list of items and prices given a restaurants name.
      *
      * Note: if the restaurant parameter is not found this function returns null
      * @param restaurant: String the restaurant who's data we want to retrieve.
@@ -74,7 +74,7 @@ public class Menu {
     }
 
     /**
-     * @brief Displays options in a format they can easily select from.
+     * Displays options in a format they can easily select from.
      *
      * Note: This will return -1 on `getOptions(...)` behalf if an invalid option is selected.
      * @param opArr: String[] a list of options to display.
@@ -91,7 +91,7 @@ public class Menu {
     }
 
     /**
-     * @brief Similar to `showOptions(...)` this will return the literal value selected.
+     * Similar to `showOptions(...)` this will return the literal value selected.
      *
      * Note: This will return "" (empty string) if the user selects an invalid option from those displayed.
      * @param opArr: String[] a list of options to display.
@@ -113,7 +113,7 @@ public class Menu {
     }
 
     /**
-     * @brief Parse and return an option selected by the user.
+     * Parse and return an option selected by the user.
      *
      * @param OPTIONS_MIN: final int the minimum value a user may select.
      * @param OPTIONS_MAX: final int the maximum value a user may select.
@@ -139,7 +139,7 @@ public class Menu {
     }
 
     /**
-     * @brief Returns the list of available restaurants.
+     * Returns the list of available restaurants.
      *
      * @param withMenu: boolean prints the available restaurants as well as returns them.
      * @return String[] the list of available restaurants.
@@ -164,7 +164,7 @@ public class Menu {
     }
 
     /**
-     * @brief Returns a list of the items a restaurant has available.
+     * Returns a list of the items a restaurant has available.
      *
      * Note: This will return null if the restaurant has no data.
      * @param restaurant: String the restaurant for which we want to retrieve data from.
@@ -187,7 +187,7 @@ public class Menu {
     }
 
     /**
-     * @brief Reads in data from a data file. (Though you wouldn't realize by looking at it)
+     * Reads in data from a data file. (Though you wouldn't realize by looking at it)
      *
      * @return HashMap<String, ArrayList<HashMap<String, String>>>: The "database" of restaurants which is then consumed
      * by the Tree class's constructor.

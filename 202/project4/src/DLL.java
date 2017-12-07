@@ -4,9 +4,6 @@
  * Instructor: Karla Fant
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class DLL {
     private D_Node head;
     private D_Node tail;
@@ -18,28 +15,20 @@ public class DLL {
         orderNums = 0;
     }
 
-    /**@brief The interface to main, takes in the order details and delegates their addition to the list.
+    /**
+     * The interface to main, takes in the order details and delegates their addition to the list.
      *
-//     * @param orderStuff: ArrayList<HashMap<String, String>> a list of the items and prices pertaining to an order.
-     *                  Planned to be used in project 5 but has no use here.
      * @param restaurantOrderedFrom: String the name of the restaurant ordered from.
      * @param orderedItem: String the item that the user ordered.
      * @param price: float the price of the item the user ordered.
      * @return: boolean Whether or not `addFront(...)` was able to insert the node.
      */
-//    public boolean addOrder(ArrayList<HashMap<String, String>> orderStuff,
-//                            String restaurantOrderedFrom,
-//                            String orderedItem,
-//                            float price) {
-//        return addFront(new D_Node(orderStuff, restaurantOrderedFrom, orderedItem, price));
-//    }
-
     public boolean addOrder(String restaurantOrderedFrom, String orderedItem, float price) {
         return addFront(new D_Node(restaurantOrderedFrom, orderedItem, price));
     }
 
     /**
-     * @brief Wrapper function for private display function.
+     * Wrapper function for private display function.
      * @return int the number of items in the list.
      */
     public int display() {
@@ -73,7 +62,7 @@ public class DLL {
     }
 
     /**
-     * @brief Adds a node to the front of the list.
+     * Adds a node to the front of the list.
      *
      * Note: Increments `order_num` for every node added.
      * Note: This function will always return true.

@@ -85,7 +85,7 @@
 //    }
 //
 //    /**
-//     * @brief Determines the type of object we are going to dynamically bind to based on the time of day.
+//     * Determines the type of object we are going to dynamically bind to based on the time of day.
 //     *
 //     * Note: Time of day outlined below
 //     * @param name: the name of the ordered item. Passed to the new class instance.

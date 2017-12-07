@@ -6,7 +6,9 @@
 
 public class Order extends OrderComponent {
 
-    private String notes = ""; // TODO: planned to be used with project 5
+    // TODO: Ran out of time to implement this functionality but all that would need to be done is add a call to
+    // TODO: Menu and have it return the notes value. This would obviously be done at object instantiation.
+    private String notes = "";
 
     Order() {
         super();
@@ -22,7 +24,7 @@ public class Order extends OrderComponent {
     }
 
     /**
-     * @brief method to be used for project 5.
+     * method to be used for project 5.
      * @param _note
      * @return boolean whether or not we were able to insert the note.
      */
