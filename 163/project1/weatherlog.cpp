@@ -13,12 +13,10 @@ int main(int argc, char** argv) {
         cout << "Usage: " << argv[0] << " <datafile>" << endl;
         exit(0);
     }
-    const char* fileName = "/Users/sgomena/Documents/repos/Classwork/163/project1/climatedata.txt";
 
     // Read the data
-
     char* datafile = argv[1];
-    ifstream infile(fileName);
+    ifstream infile(datafile);
     int timestamp;
     double temperature;
     double windspeed;
