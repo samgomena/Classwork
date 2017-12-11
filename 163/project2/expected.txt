@@ -1,0 +1,598 @@
+Rover (ID 1) deploying...
+Rover (ID 1) ready.
+Rover (ID 2) deploying...
+Rover (ID 2) ready.
+Rover (ID 3) deploying...
+Rover (ID 3) ready.
+Rover (ID 4) deploying...
+Rover (ID 4) ready.
+Rover (ID 5) deploying...
+Rover (ID 5) ready.
+Rover (ID 6) deploying...
+Rover (ID 6) ready.
+Rover (ID 7) deploying...
+Rover (ID 7) ready.
+Rover (ID 4) moving to location 4989, 5060.
+Rover (ID 6) moving to location 5900, 5193.
+Rover (ID 5) moving to location 5838, 5002.
+Rover (ID 3) moving to location 5014, 5986.
+Rover (ID 3) moving to location 5223, 6371.
+Rover (ID 4) moving to location 5637, 5769.
+Rover (ID 5) moving to location 6819, 5848.
+Rover (ID 3) moving to location 5993, 6543.
+Rover (ID 2) moving to location 5499, 4379.
+Rover (ID 3) moving to location 6246, 6605.
+Rover (ID 6) moving to location 6304, 5619.
+Rover (ID 4) moving to location 5936, 6095.
+Rover (ID 6) moving to location 6509, 6136.
+Rover (ID 3) moving to location 6915, 7136.
+Rover (ID 4) moving to location 5204, 6187.
+Rover (ID 7) moving to location 5474, 5092.
+Rover (ID 5) moving to location 7633, 5921.
+Rover (ID 2) moving to location 4852, 5223.
+Rover (ID 1) moving to location 5505, 5695.
+Rover (ID 5) moving to location 8437, 6221.
+Rover (ID 5) moving to location 9119, 6925.
+Rover (ID 7) moving to location 6446, 5096.
+Rover (ID 1) moving to location 5960, 5904.
+Rover (ID 2) moving to location 5497, 4992.
+Rover (ID 4) moving to location 6025, 5224.
+Rover (ID 3) moving to location 7649, 7925.
+Rover (ID 5) moving to location 9475, 7528.
+Rover (ID 7) moving to location 7270, 5698.
+Rover (ID 1) moving to location 5144, 6364.
+Rover (ID 4) moving to location 5596, 5488.
+Rover (ID 6) moving to location 6966, 6435.
+Rover (ID 5) moving to location 9738, 8151.
+Rover (ID 2) moving to location 5893, 5423.
+Rover (ID 1) moving to location 4747, 6440.
+Rover (ID 3) moving to location 8579, 8822.
+Rover (ID 6) moving to location 7225, 7066.
+Rover (ID 1) moving to location 5075, 5453.
+Rover (ID 2) moving to location 6068, 5586.
+Rover (ID 6) moving to location 8091, 8045.
+Rover (ID 7) moving to location 7875, 6458.
+Rover (ID 4) moving to location 4952, 5706.
+Rover (ID 4) moving to location 5691, 4873.
+Rover (ID 5) moving to location 0, 8380.
+Rover (ID 2) moving to location 6568, 6565.
+Rover (ID 5) moving to location 392, 8641.
+Rover (ID 6) moving to location 9042, 8565.
+Rover (ID 6) moving to location 9990, 9413.
+Rover (ID 5) moving to location 645, 9017.
+Rover (ID 6) moving to location 0, 9655.
+Rover (ID 5) moving to location 1172, 9864.
+Rover (ID 7) moving to location 7893, 6441.
+Rover (ID 6) moving to location 17, 9679.
+Rover (ID 4) moving to location 5704, 4872.
+Rover (ID 4) scanning.
+Rover (ID 1) scanning.
+Rover (ID 6) moving to location 25, 9662.
+Rover (ID 6) moving to location 40, 9662.
+Rover (ID 5) moving to location 1182, 9843.
+Rover (ID 1) moving to location 5054, 5431.
+Rover (ID 3) moving to location 8566, 8812.
+Rover (ID 7) scanning.
+Rover (ID 7) moving to location 7897, 6420.
+Rover (ID 3) scanning.
+Rover (ID 1) moving to location 5074, 5428.
+Rover (ID 3) moving to location 8571, 8831.
+Rover (ID 3) scanning.
+Rover (ID 4) moving to location 5688, 4853.
+Rover (ID 6) scanning.
+Rover (ID 3) moving to location 8576, 8848.
+Rover (ID 6) moving to location 25, 9652.
+Rover (ID 1) moving to location 5071, 5432.
+Rover (ID 7) scanning.
+Rover (ID 4) scanning.
+Rover (ID 1) scanning.
+Rover (ID 3) scanning.
+Rover (ID 5) moving to location 1182, 9825.
+Rover (ID 2) scanning.
+Rover (ID 7) moving to location 7874, 6408.
+Rover (ID 4) moving to location 5712, 4864.
+Rover (ID 4) scanning.
+Rover (ID 1) moving to location 5047, 5435.
+Rover (ID 1) moving to location 5031, 5448.
+Rover (ID 5) moving to location 1189, 9839.
+Rover (ID 2) moving to location 6563, 6564.
+Rover (ID 3) moving to location 8582, 8840.
+Rover (ID 6) moving to location 46, 9676.
+Rover (ID 7) moving to location 7870, 6414.
+Rover (ID 6) moving to location 36, 9669.
+Rover (ID 7) moving to location 7893, 6408.
+Rover (ID 4) moving to location 5696, 4863.
+Rover (ID 4) scanning.
+Rover (ID 5) scanning.
+Rover (ID 3) moving to location 8596, 8853.
+Rover (ID 6) moving to location 18, 9673.
+Rover (ID 1) moving to location 5034, 5440.
+Rover (ID 2) moving to location 6587, 6585.
+Rover (ID 2) moving to location 6579, 6567.
+Rover (ID 7) scanning.
+Rover (ID 4) moving to location 5698, 4877.
+Rover (ID 3) scanning.
+Rover (ID 4) moving to location 5700, 4877.
+Rover (ID 6) moving to location 8, 9684.
+Rover (ID 7) moving to location 7885, 6408.
+Rover (ID 2) moving to location 6599, 6576.
+Rover (ID 3) moving to location 8603, 8868.
+Rover (ID 6) scanning.
+Rover (ID 1) moving to location 5028, 5440.
+Rover (ID 6) moving to location 10000, 9683.
+Rover (ID 2) scanning.
+Rover (ID 6) moving to location 9999, 9702.
+Rover (ID 5) moving to location 1196, 9859.
+Rover (ID 4) moving to location 5698, 4892.
+Rover (ID 5) moving to location 1197, 9881.
+Rover (ID 1) scanning.
+Rover (ID 6) moving to location 9986, 9714.
+Rover (ID 2) moving to location 6588, 6591.
+Rover (ID 4) scanning.
+Rover (ID 7) scanning.
+Rover (ID 6) scanning.
+Rover (ID 4) moving to location 5676, 4905.
+Rover (ID 5) moving to location 1208, 9865.
+Rover (ID 3) moving to location 8627, 8879.
+Rover (ID 7) moving to location 7895, 6428.
+Rover (ID 3) moving to location 8621, 8855.
+Rover (ID 6) moving to location 9998, 9717.
+Rover (ID 3) moving to location 8607, 8877.
+Rover (ID 7) scanning.
+Rover (ID 2) moving to location 6611, 6576.
+Rover (ID 7) moving to location 7918, 6425.
+Rover (ID 2) moving to location 6619, 6556.
+Rover (ID 6) scanning.
+Rover (ID 4) scanning.
+Rover (ID 2) moving to location 6630, 6561.
+Rover (ID 6) moving to location 9991, 9706.
+Rover (ID 3) moving to location 8617, 8894.
+Rover (ID 7) moving to location 7928, 6405.
+Rover (ID 3) scanning.
+Rover (ID 3) returning to base.
+Rover (ID 3) moving to location 8607, 8877.
+Rover (ID 3) moving to location 8621, 8855.
+Rover (ID 3) moving to location 8627, 8879.
+Rover (ID 3) moving to location 8603, 8868.
+Rover (ID 3) moving to location 8596, 8853.
+Rover (ID 3) moving to location 8582, 8840.
+Rover (ID 3) moving to location 8576, 8848.
+Rover (ID 3) moving to location 8571, 8831.
+Rover (ID 3) moving to location 8566, 8812.
+Rover (ID 3) moving to location 8579, 8822.
+Rover (ID 3) moving to location 7649, 7925.
+Rover (ID 3) moving to location 6915, 7136.
+Rover (ID 3) moving to location 6246, 6605.
+Rover (ID 3) moving to location 5993, 6543.
+Rover (ID 3) moving to location 5223, 6371.
+Rover (ID 3) moving to location 5014, 5986.
+Rover (ID 3) moving to location 0, 0.
+Rover (ID 3) at base. Sending results...
+Rover (ID 3) result: -92
+Rover (ID 3) result: -19
+Rover (ID 3) result: 41
+Rover (ID 3) result: -28
+Rover (ID 3) result: -14
+Rover (ID 3) result transmission complete.
+Rover (ID 3) docked.
+Rover (ID 6) moving to location 9994, 9697.
+Rover (ID 2) moving to location 6610, 6580.
+Rover (ID 1) moving to location 5013, 5438.
+Rover (ID 2) moving to location 6632, 6584.
+Rover (ID 6) scanning.
+Rover (ID 5) scanning.
+Rover (ID 1) moving to location 5011, 5438.
+Rover (ID 2) scanning.
+Rover (ID 4) moving to location 5680, 4905.
+Rover (ID 7) scanning.
+Rover (ID 5) moving to location 1196, 9863.
+Rover (ID 6) moving to location 9988, 9705.
+Rover (ID 4) moving to location 5663, 4924.
+Rover (ID 1) scanning.
+Rover (ID 6) moving to location 9994, 9689.
+Rover (ID 7) moving to location 7928, 6383.
+Rover (ID 4) moving to location 5664, 4925.
+Rover (ID 4) scanning.
+Rover (ID 7) scanning.
+Rover (ID 7) moving to location 7921, 6375.
+Rover (ID 1) moving to location 5021, 5424.
+Rover (ID 6) moving to location 0, 9670.
+Rover (ID 2) moving to location 6621, 6570.
+Rover (ID 6) scanning.
+Rover (ID 7) scanning.
+Rover (ID 4) moving to location 5677, 4917.
+Rover (ID 2) scanning.
+Rover (ID 3) deploying...
+Rover (ID 3) ready.
+Rover (ID 3) moving to location 8616, 8918.
+Rover (ID 6) moving to location 10000, 9688.
+Rover (ID 7) moving to location 7902, 6383.
+Rover (ID 6) moving to location 9998, 9679.
+Rover (ID 3) scanning.
+Rover (ID 2) moving to location 6615, 6561.
+Rover (ID 7) scanning.
+Rover (ID 1) moving to location 5035, 5440.
+Rover (ID 1) moving to location 5017, 5424.
+Rover (ID 7) moving to location 7887, 6365.
+Rover (ID 2) scanning.
+Rover (ID 1) moving to location 5032, 5407.
+Rover (ID 5) moving to location 1185, 9857.
+Rover (ID 6) moving to location 0, 9696.
+Rover (ID 3) moving to location 8601, 8923.
+Rover (ID 1) moving to location 5033, 5412.
+Rover (ID 6) scanning.
+Rover (ID 5) moving to location 1162, 9870.
+Rover (ID 6) scanning.
+Rover (ID 6) returning to base.
+Rover (ID 6) moving to location 9998, 9679.
+Rover (ID 6) moving to location 10000, 9688.
+Rover (ID 6) moving to location 0, 9670.
+Rover (ID 6) moving to location 9994, 9689.
+Rover (ID 6) moving to location 9988, 9705.
+Rover (ID 6) moving to location 9994, 9697.
+Rover (ID 6) moving to location 9991, 9706.
+Rover (ID 6) moving to location 9998, 9717.
+Rover (ID 6) moving to location 9986, 9714.
+Rover (ID 6) moving to location 9999, 9702.
+Rover (ID 6) moving to location 10000, 9683.
+Rover (ID 6) moving to location 8, 9684.
+Rover (ID 6) moving to location 18, 9673.
+Rover (ID 6) moving to location 36, 9669.
+Rover (ID 6) moving to location 46, 9676.
+Rover (ID 6) moving to location 25, 9652.
+Rover (ID 6) moving to location 40, 9662.
+Rover (ID 6) moving to location 25, 9662.
+Rover (ID 6) moving to location 17, 9679.
+Rover (ID 6) moving to location 0, 9655.
+Rover (ID 6) moving to location 9990, 9413.
+Rover (ID 6) moving to location 9042, 8565.
+Rover (ID 6) moving to location 8091, 8045.
+Rover (ID 6) moving to location 7225, 7066.
+Rover (ID 6) moving to location 6966, 6435.
+Rover (ID 6) moving to location 6509, 6136.
+Rover (ID 6) moving to location 6304, 5619.
+Rover (ID 6) moving to location 5900, 5193.
+Rover (ID 6) moving to location 0, 0.
+Rover (ID 6) at base. Sending results...
+Rover (ID 6) result: -82
+Rover (ID 6) result: 49
+Rover (ID 6) result: 46
+Rover (ID 6) result: -20
+Rover (ID 6) result: 72
+Rover (ID 6) result: 80
+Rover (ID 6) result: 80
+Rover (ID 6) result: 80
+Rover (ID 6) result transmission complete.
+Rover (ID 6) docked.
+Rover (ID 7) moving to location 7904, 6387.
+Rover (ID 2) moving to location 6597, 6555.
+Rover (ID 5) scanning.
+Rover (ID 5) returning to base.
+Rover (ID 5) moving to location 1185, 9857.
+Rover (ID 5) moving to location 1196, 9863.
+Rover (ID 5) moving to location 1208, 9865.
+Rover (ID 5) moving to location 1197, 9881.
+Rover (ID 5) moving to location 1196, 9859.
+Rover (ID 5) moving to location 1189, 9839.
+Rover (ID 5) moving to location 1182, 9825.
+Rover (ID 5) moving to location 1182, 9843.
+Rover (ID 5) moving to location 1172, 9864.
+Rover (ID 5) moving to location 645, 9017.
+Rover (ID 5) moving to location 392, 8641.
+Rover (ID 5) moving to location 0, 8380.
+Rover (ID 5) moving to location 9738, 8151.
+Rover (ID 5) moving to location 9475, 7528.
+Rover (ID 5) moving to location 9119, 6925.
+Rover (ID 5) moving to location 8437, 6221.
+Rover (ID 5) moving to location 7633, 5921.
+Rover (ID 5) moving to location 6819, 5848.
+Rover (ID 5) moving to location 5838, 5002.
+Rover (ID 5) moving to location 0, 0.
+Rover (ID 5) at base. Sending results...
+Rover (ID 5) result: 17
+Rover (ID 5) result: -66
+Rover (ID 5) result: 91
+Rover (ID 5) result transmission complete.
+Rover (ID 5) docked.
+Rover (ID 6) deploying...
+Rover (ID 6) ready.
+Rover (ID 6) moving to location 24, 9687.
+Rover (ID 6) scanning.
+Rover (ID 3) moving to location 8613, 8907.
+Rover (ID 6) scanning.
+Rover (ID 6) returning to base.
+Rover (ID 6) moving to location 0, 0.
+Rover (ID 6) at base. Sending results...
+Rover (ID 6) result: -82
+Rover (ID 6) result: -82
+Rover (ID 6) result transmission complete.
+Rover (ID 6) docked.
+Rover (ID 4) moving to location 5658, 4936.
+Rover (ID 7) scanning.
+Rover (ID 2) scanning.
+Rover (ID 6) scanning.
+Rover (ID 3) scanning.
+Rover (ID 6) deploying...
+Rover (ID 6) ready.
+Rover (ID 6) moving to location 47, 9699.
+Rover (ID 6) moving to location 32, 9687.
+Rover (ID 7) moving to location 7909, 6408.
+Rover (ID 3) moving to location 8618, 8888.
+Rover (ID 7) moving to location 7905, 6431.
+Rover (ID 4) moving to location 5677, 4915.
+Rover (ID 5) deploying...
+Rover (ID 5) ready.
+Rover (ID 5) moving to location 1158, 9855.
+Rover (ID 1) moving to location 5034, 5430.
+Rover (ID 6) moving to location 39, 9690.
+Rover (ID 6) moving to location 56, 9711.
+Rover (ID 3) scanning.
+Rover (ID 5) moving to location 1157, 9855.
+Rover (ID 6) scanning.
+Rover (ID 2) moving to location 6605, 6571.
+Rover (ID 4) scanning.
+Rover (ID 4) scanning.
+Rover (ID 4) returning to base.
+Rover (ID 4) moving to location 5658, 4936.
+Rover (ID 4) moving to location 5677, 4917.
+Rover (ID 4) moving to location 5664, 4925.
+Rover (ID 4) moving to location 5663, 4924.
+Rover (ID 4) moving to location 5680, 4905.
+Rover (ID 4) moving to location 5676, 4905.
+Rover (ID 4) moving to location 5698, 4892.
+Rover (ID 4) moving to location 5700, 4877.
+Rover (ID 4) moving to location 5698, 4877.
+Rover (ID 4) moving to location 5696, 4863.
+Rover (ID 4) moving to location 5712, 4864.
+Rover (ID 4) moving to location 5688, 4853.
+Rover (ID 4) moving to location 5704, 4872.
+Rover (ID 4) moving to location 5691, 4873.
+Rover (ID 4) moving to location 4952, 5706.
+Rover (ID 4) moving to location 5596, 5488.
+Rover (ID 4) moving to location 6025, 5224.
+Rover (ID 4) moving to location 5204, 6187.
+Rover (ID 4) moving to location 5936, 6095.
+Rover (ID 4) moving to location 5637, 5769.
+Rover (ID 4) moving to location 4989, 5060.
+Rover (ID 4) moving to location 0, 0.
+Rover (ID 4) at base. Sending results...
+Rover (ID 4) result: 52
+Rover (ID 4) result: 29
+Rover (ID 4) result: -78
+Rover (ID 4) result: 56
+Rover (ID 4) result: -70
+Rover (ID 4) result: 2
+Rover (ID 4) result: -45
+Rover (ID 4) result: -25
+Rover (ID 4) result: -25
+Rover (ID 4) result transmission complete.
+Rover (ID 4) docked.
+Rover (ID 5) scanning.
+Rover (ID 2) moving to location 6599, 6551.
+Rover (ID 3) moving to location 8625, 8907.
+Rover (ID 3) scanning.
+Rover (ID 7) moving to location 7881, 6450.
+Rover (ID 5) moving to location 1150, 9830.
+Rover (ID 6) moving to location 66, 9711.
+Rover (ID 3) moving to location 8616, 8913.
+Rover (ID 7) moving to location 7905, 6429.
+Rover (ID 5) moving to location 1148, 9806.
+Rover (ID 3) moving to location 8620, 8905.
+Rover (ID 4) deploying...
+Rover (ID 4) ready.
+Rover (ID 4) moving to location 5674, 4915.
+Rover (ID 4) moving to location 5669, 4904.
+Rover (ID 6) moving to location 58, 9725.
+Rover (ID 5) moving to location 1139, 9822.
+Rover (ID 3) scanning.
+Rover (ID 5) scanning.
+Rover (ID 3) scanning.
+Rover (ID 3) returning to base.
+Rover (ID 3) moving to location 8616, 8913.
+Rover (ID 3) moving to location 8625, 8907.
+Rover (ID 3) moving to location 8618, 8888.
+Rover (ID 3) moving to location 8613, 8907.
+Rover (ID 3) moving to location 8601, 8923.
+Rover (ID 3) moving to location 8616, 8918.
+Rover (ID 3) moving to location 0, 0.
+Rover (ID 3) at base. Sending results...
+Rover (ID 3) result: -82
+Rover (ID 3) result: -3
+Rover (ID 3) result: -100
+Rover (ID 3) result: -30
+Rover (ID 3) result: -95
+Rover (ID 3) result: -95
+Rover (ID 3) result transmission complete.
+Rover (ID 3) docked.
+Rover (ID 4) scanning.
+Rover (ID 4) moving to location 5677, 4919.
+Rover (ID 2) moving to location 6583, 6550.
+Rover (ID 1) scanning.
+Rover (ID 1) returning to base.
+Rover (ID 1) moving to location 5033, 5412.
+Rover (ID 1) moving to location 5032, 5407.
+Rover (ID 1) moving to location 5017, 5424.
+Rover (ID 1) moving to location 5035, 5440.
+Rover (ID 1) moving to location 5021, 5424.
+Rover (ID 1) moving to location 5011, 5438.
+Rover (ID 1) moving to location 5013, 5438.
+Rover (ID 1) moving to location 5028, 5440.
+Rover (ID 1) moving to location 5034, 5440.
+Rover (ID 1) moving to location 5031, 5448.
+Rover (ID 1) moving to location 5047, 5435.
+Rover (ID 1) moving to location 5071, 5432.
+Rover (ID 1) moving to location 5074, 5428.
+Rover (ID 1) moving to location 5054, 5431.
+Rover (ID 1) moving to location 5075, 5453.
+Rover (ID 1) moving to location 4747, 6440.
+Rover (ID 1) moving to location 5144, 6364.
+Rover (ID 1) moving to location 5960, 5904.
+Rover (ID 1) moving to location 5505, 5695.
+Rover (ID 1) moving to location 0, 0.
+Rover (ID 1) at base. Sending results...
+Rover (ID 1) result: -66
+Rover (ID 1) result: 32
+Rover (ID 1) result: -40
+Rover (ID 1) result: 72
+Rover (ID 1) result: -8
+Rover (ID 1) result transmission complete.
+Rover (ID 1) docked.
+Rover (ID 7) moving to location 7886, 6428.
+Rover (ID 6) scanning.
+Rover (ID 7) moving to location 7879, 6408.
+Rover (ID 7) scanning.
+Rover (ID 1) deploying...
+Rover (ID 1) ready.
+Rover (ID 1) moving to location 5030, 5427.
+Rover (ID 2) moving to location 6604, 6566.
+Rover (ID 3) deploying...
+Rover (ID 3) ready.
+Rover (ID 3) moving to location 8637, 8916.
+Rover (ID 7) moving to location 7902, 6384.
+Rover (ID 2) moving to location 6614, 6554.
+Rover (ID 7) scanning.
+Rover (ID 6) moving to location 53, 9702.
+Rover (ID 6) scanning.
+Rover (ID 7) moving to location 7902, 6367.
+Rover (ID 3) moving to location 8642, 8930.
+Rover (ID 7) scanning.
+Rover (ID 3) moving to location 8647, 8930.
+Rover (ID 6) moving to location 38, 9686.
+Rover (ID 1) scanning.
+Rover (ID 1) returning to base.
+Rover (ID 1) moving to location 0, 0.
+Rover (ID 1) at base. Sending results...
+Rover (ID 1) result: -48
+Rover (ID 1) result transmission complete.
+Rover (ID 1) docked.
+Rover (ID 2) scanning.
+Rover (ID 2) returning to base.
+Rover (ID 2) moving to location 6604, 6566.
+Rover (ID 2) moving to location 6583, 6550.
+Rover (ID 2) moving to location 6599, 6551.
+Rover (ID 2) moving to location 6605, 6571.
+Rover (ID 2) moving to location 6597, 6555.
+Rover (ID 2) moving to location 6615, 6561.
+Rover (ID 2) moving to location 6621, 6570.
+Rover (ID 2) moving to location 6632, 6584.
+Rover (ID 2) moving to location 6610, 6580.
+Rover (ID 2) moving to location 6630, 6561.
+Rover (ID 2) moving to location 6619, 6556.
+Rover (ID 2) moving to location 6611, 6576.
+Rover (ID 2) moving to location 6588, 6591.
+Rover (ID 2) moving to location 6599, 6576.
+Rover (ID 2) moving to location 6579, 6567.
+Rover (ID 2) moving to location 6587, 6585.
+Rover (ID 2) moving to location 6563, 6564.
+Rover (ID 2) moving to location 6568, 6565.
+Rover (ID 2) moving to location 6068, 5586.
+Rover (ID 2) moving to location 5893, 5423.
+Rover (ID 2) moving to location 5497, 4992.
+Rover (ID 2) moving to location 4852, 5223.
+Rover (ID 2) moving to location 5499, 4379.
+Rover (ID 2) moving to location 0, 0.
+Rover (ID 2) at base. Sending results...
+Rover (ID 2) result: -66
+Rover (ID 2) result: 21
+Rover (ID 2) result: 65
+Rover (ID 2) result: -57
+Rover (ID 2) result: -49
+Rover (ID 2) result: -12
+Rover (ID 2) result: 31
+Rover (ID 2) result transmission complete.
+Rover (ID 2) docked.
+Rover (ID 3) scanning.
+Rover (ID 3) returning to base.
+Rover (ID 3) moving to location 8642, 8930.
+Rover (ID 3) moving to location 8637, 8916.
+Rover (ID 3) moving to location 0, 0.
+Rover (ID 3) at base. Sending results...
+Rover (ID 3) result: -56
+Rover (ID 3) result transmission complete.
+Rover (ID 3) docked.
+Rover (ID 4) scanning.
+Rover (ID 4) returning to base.
+Rover (ID 4) moving to location 5669, 4904.
+Rover (ID 4) moving to location 5674, 4915.
+Rover (ID 4) moving to location 0, 0.
+Rover (ID 4) at base. Sending results...
+Rover (ID 4) result: -97
+Rover (ID 4) result: -100
+Rover (ID 4) result transmission complete.
+Rover (ID 4) docked.
+Rover (ID 5) scanning.
+Rover (ID 5) returning to base.
+Rover (ID 5) moving to location 1148, 9806.
+Rover (ID 5) moving to location 1150, 9830.
+Rover (ID 5) moving to location 1157, 9855.
+Rover (ID 5) moving to location 1158, 9855.
+Rover (ID 5) moving to location 0, 0.
+Rover (ID 5) at base. Sending results...
+Rover (ID 5) result: -98
+Rover (ID 5) result: 12
+Rover (ID 5) result: 12
+Rover (ID 5) result transmission complete.
+Rover (ID 5) docked.
+Rover (ID 6) scanning.
+Rover (ID 6) returning to base.
+Rover (ID 6) moving to location 53, 9702.
+Rover (ID 6) moving to location 58, 9725.
+Rover (ID 6) moving to location 66, 9711.
+Rover (ID 6) moving to location 56, 9711.
+Rover (ID 6) moving to location 39, 9690.
+Rover (ID 6) moving to location 32, 9687.
+Rover (ID 6) moving to location 47, 9699.
+Rover (ID 6) moving to location 0, 0.
+Rover (ID 6) at base. Sending results...
+Rover (ID 6) result: 80
+Rover (ID 6) result: -41
+Rover (ID 6) result: -91
+Rover (ID 6) result: -85
+Rover (ID 6) result: -95
+Rover (ID 6) result transmission complete.
+Rover (ID 6) docked.
+Rover (ID 7) scanning.
+Rover (ID 7) returning to base.
+Rover (ID 7) moving to location 7902, 6384.
+Rover (ID 7) moving to location 7879, 6408.
+Rover (ID 7) moving to location 7886, 6428.
+Rover (ID 7) moving to location 7905, 6429.
+Rover (ID 7) moving to location 7881, 6450.
+Rover (ID 7) moving to location 7905, 6431.
+Rover (ID 7) moving to location 7909, 6408.
+Rover (ID 7) moving to location 7904, 6387.
+Rover (ID 7) moving to location 7887, 6365.
+Rover (ID 7) moving to location 7902, 6383.
+Rover (ID 7) moving to location 7921, 6375.
+Rover (ID 7) moving to location 7928, 6383.
+Rover (ID 7) moving to location 7928, 6405.
+Rover (ID 7) moving to location 7918, 6425.
+Rover (ID 7) moving to location 7895, 6428.
+Rover (ID 7) moving to location 7885, 6408.
+Rover (ID 7) moving to location 7893, 6408.
+Rover (ID 7) moving to location 7870, 6414.
+Rover (ID 7) moving to location 7874, 6408.
+Rover (ID 7) moving to location 7897, 6420.
+Rover (ID 7) moving to location 7893, 6441.
+Rover (ID 7) moving to location 7875, 6458.
+Rover (ID 7) moving to location 7270, 5698.
+Rover (ID 7) moving to location 6446, 5096.
+Rover (ID 7) moving to location 5474, 5092.
+Rover (ID 7) moving to location 0, 0.
+Rover (ID 7) at base. Sending results...
+Rover (ID 7) result: -21
+Rover (ID 7) result: 85
+Rover (ID 7) result: -54
+Rover (ID 7) result: 60
+Rover (ID 7) result: 14
+Rover (ID 7) result: 67
+Rover (ID 7) result: -66
+Rover (ID 7) result: -2
+Rover (ID 7) result: -43
+Rover (ID 7) result: -65
+Rover (ID 7) result: -43
+Rover (ID 7) result: -70
+Rover (ID 7) result: -47
+Rover (ID 7) result: -47
+Rover (ID 7) result transmission complete.
+Rover (ID 7) docked.

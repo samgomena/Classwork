@@ -1,0 +1,123 @@
+== Programming Assignment ==
+
+For this assignment you will write a program that controls a set of rovers and
+sends them commands to navigate on the Martian surface where they take
+samples. Each rover performs several missions and each mission follows the
+same sequence: deploy, perform one or more moves and scans, then return to
+base and report the results. While on a mission each rover needs to remember
+the scan results, in the same order as they were taken, as well as remember
+the way to get back to the base. The scan results should be stored in a queue
+and the return instructions should be stored in a stack.
+
+The objective of this assignment is to learn how to implement and use both a
+queue and a stack. Since the objectives include learning how to implement a
+stack and a queue, you cannot use a premade stack or queue (e.g. the STL stack
+or queue classes).
+
+== Program Design ==
+
+Your program should use good design methodologies so you should have separate
+classes for each of the following:
+
+- rover -- This class represents the rover. Each rover has an ID (integer) as
+  well as an x, y coordinate to represent its current location relative to the
+  base. In addition, it needs to have the following public methods:
+
+    - void deploy(); -- this deploys a rover on a new mission
+    - void move(int x, int y) -- this moves a rover to the new x,y coordinates
+    - void corescan() -- this performs a core sample scan and stores the resuls
+    - void dock() -- this method returns to the base station and reports the results
+
+  Since you are not really on Mars and there aren't really rovers, your rover
+  class is actually just going to simulate the movements and actions by
+  printing messages on the screen. 
+
+  The "deploy" method will print the message "Rover (<ID>) deploying..."
+  followed by "Rover (<ID>) ready.". The string "Rover (<ID>)" should include
+  the actual ID of the rover.
+
+  For example, the deploy method does this:
+
+  	   void rover::deploy()
+	   {
+		printID();
+		cout << " deploying..." << endl;
+		printID();
+		cout << " ready." << endl;
+	   }
+
+  The "move" method changes the rover's x,y coordinates, stores the new
+  location on the stack, and prints a message that indicates the that rover
+  moved. The message is "Rover (<ID>) moving to location <x>, <y>.".
+
+  The "corescan" method prints a message "Rover (<ID>) scanning." then calls the
+  scandata class with the rover's current x, y location, and stores the result
+  in the results queue.
+    
+  The "dock" method prints "Rover (<ID>) returning to base." then uses the entries
+  from the stack to issue a sequence of moves to backtrack back to the
+  base. It needs to print out each move (just like the move method). Once at
+  the base the rover needs to print "Rover (<ID>) at base. Sending results...". Then
+  it needs to pull each of the results off of the queue and print them. When
+  all results are printed the rover needs to print "Rover (<ID>) result transmission
+  complete.". Finally, the "dock" method needs to print "Rover (<ID>) docked.".
+
+  Refer to the "expected.txt" file to make sure that your printed messages are
+  correct.
+
+- stack -- This class should implement a stack. It is used to store the
+  locations as the rover moves on a mission.
+
+- queue -- This class should implement a queue. It is used to store the scan
+  results.
+
+== Other Files ==
+
+I have provided a class called "scandata". This class contains all of the
+simulated scan data that the rover will read. There is a single method
+"getScandata(int x,int y)" that takes in an x, y coordinate and returns the
+scan data for that location. You will need to compile the scandata.cpp file
+into your application. You should NOT edit or alter the scandata.h or
+scandata.cpp files.
+
+I have also provided two test programs: teststack.cpp and testqueue.cpp. These
+are for your use. You are not required to use them but they will be helpful
+for developing and debugging your queue and stack classes.
+
+Finally, for your convenience I have provided a "makefile". If you name all of
+your files the same as I have then you can use the following make commands:
+
+  - make rovercontrol -- this builds the entire rovercontrol program
+  - make testrover -- this builds the rovercontrol program and tests it
+    against expected.txt
+  - make testqueue -- this builds the testqueue program and runs it
+  - make teststack -- this builds the teststack program and runs it
+
+Using the makefile is optional. You are welcome to modify it anyway you
+want. You do not need to turn in the makefile.
+
+== External Requirements ==
+
+- The main driver (rovercontrol.cpp) will provide a sequence of commands to a
+  set of rovers. Each rover needs to respond to the commands. Any number of
+  rovers can be active at the same time and the commands for different rovers
+  are interlaced.
+- Rover scan results should be reported, after docking, in the same order that
+  they were collected. You must use a queue to store these.
+- Each rover must keep track of the path it follows during its mission so it
+  can find its way home when the DOCK command is issued. You must use a stack
+  to store this.
+- The output from your program must match expected.txt exactly.
+
+== Internal Requirements ==
+
+- The program must use the supplied rovercontrol.cpp file, unmodified, as the
+  main driver.
+- Each rover must have its own queue and stack.
+- All of the scan results must be stored in a queue in each rover.
+- All of the route information must be stored in a stack in each rover.
+- No memory leaks.
+
+
+
+

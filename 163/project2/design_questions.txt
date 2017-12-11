@@ -1,0 +1,65 @@
+=== Design and Implementation Plan Questions ===
+
+Below are a few questions about how you will design your program and your
+implementation plan. It is crucial to have a reasonable design and
+implementation plan before you start your program. Without this, success is
+unlikely. The following questions will help guide you in your thinking and
+raise some important questions and issues. There is no single "right" answer
+to each of the questions but there are some "wrong" answers. Some designs and
+plans are better than others. The point here is for you to think about what
+you're going to do.
+
+Make a copy of this file and edit it, adding your answers then turn this
+document in.
+
+----------------------------------------------------------------------
+
+1) What classes to you intend to create? List each of the classes and provide
+a brief description of the role of that class. This list is not set in
+stone. As you implement your program, if you find that you need additional
+classes that are not in this list, or that something you listed here doesn't
+really fit, that's ok. The point is to start thinking about the high-level
+structure of your program.
+
+I plan to use the classes required to implement the program. That is:
+- Rover: this class will control the logic of the rover i.e. deploying, driving, scanning, returning home
+- stack: this class will hopefully be very similar to the STL implementation i.e. first-in, last-out with no memory-leaks
+- queue: following the stack this will attempt to mirror the STL implementation i.e. first-in, first-out and again no memory-leaks
+
+2) What class do you plan to implement first? Why?
+
+I plan to implement the stack and queue first. This is because I know I will need more time to debug them.
+
+3) Will you use an array or a linked list to implement the queue? Why? What
+about a stack and why?
+
+I plan to use a linked-list for both. This is because of the ease of growing. Perhaps I’ll have trouble with a linked-list and use an array, but at the moment I’m less comfortable with linked-lists which provides a good motivator to use them more.
+
+4) What type of data will be stored in the queue? What type of data will be
+stored in the stack?
+
+- stack: “… used to store the locations as the rover moves on a mission.”
+- queue: “… used to store the results.”
+
+5) Do you plan to have any private helper methods in your rover class?
+
+Yes, I will likely have methods to help manage the rovers queue and stack, along with any processing that needs to be done on each rover instances data
+
+6) How will you make sure that the queue doesn't crawl off the end of the
+array?
+
+As of right now, I don’t have to address this problem. If at some point I do, the array will have to “grow” dynamically.
+
+7) What is your testing strategy? Will you use the testqueue and teststack programs?
+
+Yes, I will assume these will test quicker than any method that I can come up with.
+
+8) What is your strategy for finding and addressing memory leaks? Will you get
+the whole program working first and then address memory leaks or will you
+check on memory leaks as you go?
+
+I will try and address memory leaks along the way, likely after the implementation and debugging of a feature.
+
+
+
+
