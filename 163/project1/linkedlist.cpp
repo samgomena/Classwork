@@ -68,10 +68,10 @@ void LinkedList::printSmallReport() {
     cout << endl << "\t\t\t\t\t\t\t------ Data Report ------\t\t\t\t\t\t\t" << endl;
     cout << "Total data points: " << size << endl << endl;
     cout << "Time Range:\t(" << head->nextTime->wd->getTime() << "-" << tail->nextTime->wd->getTime() << ")" << endl;
-    cout << "Time Min: " << time_min << "\nTime Max: " << time_max << "\n1% of temps: " << ((time_max - time_min) * 0.01) << endl << endl;
+    cout << "Time Min: " << time_min << "\nTime Max: " << time_max << "\n1% of times: " << ((time_max - time_min) * 0.01) << endl << endl;
 
     cout << "Temp Range:\t(" << head->nextTemp->wd->getTemp() << "-" << tail->nextTemp->wd->getTemp() << ")" << endl;
-    cout << "Temp Min: " << temp_min << "\nTemp Max: " << temp_max << "\n1% of times: " << ((temp_max - temp_min) * 0.01) << endl << endl;
+    cout << "Temp Min: " << temp_min << "\nTemp Max: " << temp_max << "\n1% of temps: " << ((temp_max - temp_min) * 0.01) << endl << endl;
 
     cout << "Wind Range:\t(" << head->nextWind->wd->getWind() << "-" << tail->nextWind->wd->getWind() << ")" << endl;
     cout << "Wind Min: " << wind_min << "\nWind Max: " << wind_max << "\n1% of winds: " << ((wind_max - wind_min) * 0.01) << endl << endl;
