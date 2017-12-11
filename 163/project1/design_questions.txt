@@ -1,0 +1,61 @@
+=== Design and Implementation Plan Questions ===
+
+Below are a few questions about how you will design your program and your
+implementation plan. It is crucial to have a reasonable design and
+implementation plan before you start your program. Without this, success is
+unlikely. The following questions will help guide you in your thinking and
+raise some important questions and issues. There is no single "right" answer
+to each of the questions but there are some "wrong" answers. Some designs and
+plans are better than others. The point here is for you to think about what
+you're going to do.
+
+Make a copy of this file and edit it, adding your answers then turn this
+document in.
+
+----------------------------------------------------------------------
+
+1) What classes do you intend to create? List each of the classes and provide
+a brief description of the role of that class. This list is not set in
+stone. As you implement your program, if you find that you need additional
+classes that are not in this list, or that something you listed here doesn't
+really fit, that's ok. The point is to start thinking about the high-level
+structure of your program.
+
+- datalogger class
+    This class will be the transactional agent for the linkedlist class. Once it gets data from weatherlog.cpp it will clean it (make sure it's formatted, not duplicated, etc.) and then push it to linkedlist.cpp which will handle the business of adding it.
+- linkedlist class
+    This class will set up and manage a linked list. The list will receive data from datalogger.cpp and then store it in a 3-chain linkedlist which will keep track of data in different orders based on time, temp, and speed.
+- weatherdata class
+    This class will be a wrapper for the actual data. I.e. datalogger will create `weatherData` objects and then push those objects to linkedlist.cpp which will store them in the linked list.
+
+2) What class do you plan to implement first? Why?
+
+I will implement enough code in datalogger to be able to receive data. I will likely then fully implement weatherdata.cpp as it will house many functions necessary for ordering our data.
+
+3) How do you plan to address the requirement of removing all of the records that
+have the same timestamp value? Will your strategy work if there are an odd
+number of records (e.g. 3) with the same timestamp value?
+
+I will likely address this with a for loop. While not temporally not ideal. It will be an easy and robust implementation. If time allows though, I would like to think of a better solution.
+
+
+4) One approach to finding the max (or min) values is to check each value as
+it is being inserted into the list. If the new value is larger than the
+current max (or smaller than the current minimum) then save that value as the
+new max (or min). This approach will not work for this program. Why not?
+
+I'm not sure why this approach will not work. However, if we have to traverse the list though it will potentially be a very time consuming task for large sizes of data.
+
+5) What is your testing strategy? Will you only use the given data file or
+will you create smaller data files to help focus your testing?
+
+Along with the given data file I will make another file with multiple duplicates (not timestamps though) of the data as well as some well calculated, very extraneous values that will hopefully test edge cases and very large data sizes.
+
+6) What is your strategy for finding and addressing memory leaks? Will you get
+the whole program working first and then address memory leaks or will you
+check on memory leaks as you go?
+
+I like to get the frame of the program in place and then address memory leaks as features are implemented. To check for the actual memory leaks I use valgrind. It's not perfect and I'm not sure what's going on with it half the time but in conjunction with GDB it's proven useful in the past.
+
+
+
