@@ -29,6 +29,9 @@ LinkedList::~LinkedList() {
     if(head) {
         destroy(head);
     }
+    delete head;
+    delete tail;
+    head = tail = NULL;
 }
 
 LinkedList::LinkedList(const LinkedList & copy_me) : size(copy_me.size), head(nullptr), tail(nullptr) {

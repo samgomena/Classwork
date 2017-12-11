@@ -22,3 +22,6 @@ clean:
 	$(info -- cleaning the directory -- )
 	rm -f *.o
 	rm -f app
+
+test:
+	valgrind --tool=memcheck --leak-check=full ./WeatherApp climatedata.txt
