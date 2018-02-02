@@ -1,0 +1,111 @@
+Director Goliss looks out her room's large window at the Martian
+landscape. Her room is the only one with a panoramic view of the building
+site. Directorship does have some priviledges. But the responsibilities are
+huge too. Large automated 'earth' mover and construction machines sit
+silently, scattered over the relatively flat area just outside of the
+preparation team's site. Up until this morning the robotic machines were
+running around the clock building the colony streets and buildings in
+preparation for the arrival of the full colony ships. She halted the machines
+this morning. The new from Van Halen wasn't good. 
+
+"What a waste of time," she says to herself. "Now we're going to have to start
+over."  Her eyes drop to the tablet she is holding in her hands. She reviews
+the message from last night. No change. Still bad news.
+
+"Well, time to tell the troops." She leaves her quarters, heading towards the
+common room.
+
+You wait with the rest of the crew in the common room getting ready for the
+Director's daily briefing. Conversation is lively and spirits are high. So far
+the progress for all teams, except food production, has been great. You gather
+from the discussions that many of the groups are ahead of schedule.
+
+The group quiets down when the Director walks in. She strides towards the
+front of the room. Paul, from Health, says something to her as she walks by
+and she smiles a response back to him. Samantha, from Communications,
+intercepts her. Something is bothering the wildly gesticulating communications
+scientist but you can't tell what she's saying from where you're sitting. You
+smile, it is Samantha. She's always high-strung. Maybe the baud rate back to
+Earth dropped by a few bits per second. In the middle of a particularly large
+hand gesture Director Goliss holds up her own hand to make Samantha stop. She
+smiles at her but then steps past her to get up to where she can start the
+meeting. Samantha plops back into her seat with a pout.
+
+"Good morning, everyone," she starts. "I see that you are all, well almost
+all," she glances towards Samantha, "are in a good mood. I can understand that
+based on the reports I've been seeing. Many of you are ahead of schedule. If
+you don't mind the pun I'll say that it's clear that 'Bon Jovi Rocks!'" A
+smattering of groans and chuckles ripples through the room.
+
+"First off I want to say Happy Birthday to our birthday boy today. Bryce,
+Happy Birthday." The shaggy haired man from HR stands up waving at
+everyone. He looks like a sterotypical 'surfer dude' from San Diego, his
+hometown. "Yo dudes!" He flashes a sly smile around the room. "Hey. Free cake
+today. It's on me!". 
+
+"All of the food is free here," Robert calls from across the room. Bryce
+shrugs and smiles, "Still doesn't change what I said. Free cake today, even if
+it is recyled." You all laugh, even the Director, as Bryce sits back down.
+
+"I also want to congratulate our software team on doing an excellent job on
+the weather software." She looks at you and makes small applause. Various
+utterances of "Good job" or "Way to go" come at you from others in the room.
+
+"I'm afraid that's where the good news ends. Some of you may have noticed that
+the building machines stopped this morning. Last night I received a message
+from Van Halen and it's not good. When the colony sites were planned they were
+based on projected weather patterns. The plans for buildings, roads, and
+infrastructure were highly tuned to the remotely observed patterns. When Van
+Halen started analysing the new weather data they discovered that the existing
+construction plans were not going to work." Many of the team members gasp at
+this news. 
+
+Vita, from the construction team, immediately jumps up. "What are we going to
+do? We need to have the buildings ready by the time the full colony ships
+arrive!"
+
+The Director waves Vita down with a calming gesture. "We have a plan. Van
+Halen is going to need to select a new location for the colony buildings. They
+are already working on it. Each 'city' is only 1 kilometer square so they
+think that they can find a location that is still relatively close to our
+current location. The only problem is that they don't have the geological data
+to make sure that the ground is structurally sound."
+
+You see a few people nodding in agreement.
+
+"We've got a bunch of rovers and they all have the requisite equipment to do
+the geological survey. Because of the critical timeline these are going to
+need to be directly controlled by Van Halen. They want to be able to tell each
+rover where to go and where to take samples. So this is where we need our
+software team again." She looks at you. "We are going to need to reprogram the
+rovers to perform the new task. I'll send you the details from Van Halen after
+this meeting. Will you be able to work on this right away?" You see everyone
+looking at you waiting for your response.
+
+"Yes. Of course," you reply. "I'll start as soon as I get the details." You
+are excited but you also feel a sense of responsibility.
+
+Samantha pipes us, "What if the software isn't finished in time? What are we
+going to do?" She asks the Director and then glares at you. Vita also looks in
+your direction. "I have to have the building robots started again. Right away!
+We have to know where to build."
+
+"Well, first of all, I have high confidence in the team. But secondly, we have
+to restart building in two weeks if we're going to have any chance at being
+ready.  So if the software doesn't work out, we'll just have to restart
+building with our best guesses. If it makes any difference, this is only
+effecting three colonies. us, Boston, and Surivor. The rest of them are fine
+as is."
+
+The Director continues, "So I think that's everything for today. I'll need
+each of the teams to start drawing up recovery plans for creating the new
+site. We can meet individually to go over them." She pauses for a few
+seconds. "Are there any questions?"
+
+You notice that the team's mood is much more serious now than when the meeting
+started. Vita mutters something about "two weeks". Everyone is looking a
+little nervous. Samantha starts to raise her hand to ask a question but
+changes her mind.
+
+"Ok. Then that's the meeting. I'll talk to each of you later."
+

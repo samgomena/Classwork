@@ -1,0 +1,88 @@
+== Programming Assignment ==
+
+For this assignment you will write a program that reads in the family data for
+the Martian colonies and stores that data in an accessible database. This
+database allows for a user to look up a family and its immediate friends. The
+program should store the data in a hashtable to ensure quick access time.
+
+The objective of this assignment is to learn how to implement and use a
+hashtable. Since this is the objective, you cannot use a premade hashtable
+(e.g. the STL map class).
+
+Note: there is an advanced version of this program (for no additional
+credit) that also adds the feature of finding ALL friends, friends of friends,
+etc. until a certain group size it met. 
+
+== Program Design ==
+
+Your program should use good design methodologies so you should have separate
+classes for each of the following:
+
+- family -- This class represents a family. Each family has a family ID
+  (guaranteed to be unique), a family name (not unique), a number of family
+  members, and a list of 0-3 friends. The friends are identified by their
+  associated family ID.
+
+- hashtable -- This is the data storage for family data. It is a hash table
+  that contains families. It supports the ability to lookup a family and an
+  ability to insert a family. (Remove is not needed for this assignment). For
+  debugging purposes, this class also needs to have a "dumpTable()" method
+  that will print out the contents of the hashtable.
+
+- familymgr -- This class is the interface to the main program for handing
+  family data. The family manager has a method to add families to the
+  database. It can also print a list of all known families. The primary
+  value of the family manager is that, given a family id, it can look up that
+  family and all of the friends of that family. This functionality is meant to
+  be used by the HR group to make housing assignments. The simple
+  functionality for this assignment takes a family and prints out only the
+  immediate friends. The advanced version will print the full transitive
+  closure of all friends from a given family up to a given group size limit.
+
+== Other Files ==
+
+I have provided two test programs: testfamily.cpp and testhashtable.cpp. These
+are for your use. You are not required to use them but they will be helpful
+for developing and debugging your classes.
+
+Finally, for your convenience I have provided a "makefile". If you name all of
+your files the same as I have then you can use the following makefile to
+simplify your building and testing.
+
+Using the makefile is optional. You are welcome to modify it anyway you
+want. You do not need to turn in the makefile.
+
+== External Requirements ==
+
+- The main driver (housinghelper.cpp) will add families to your family
+  manager. When all of the families have been added the driver program will
+  ask the family manager class to print out a list of all of the
+  families. After that, it calls the method to print out the family and
+  immediate friends for a few families.
+- The output from your program must match expected.txt exactly.
+
+
+== Internal Requirements ==
+
+- The program must use the supplied housinghelper.cpp file, unmodified, as the
+  main driver.
+- The program must store all families in a hashtable.
+- The hashtable must use linked list chaining to deal with hash
+  collisions. New items should be added to the front of the linked list.
+- The hashtable hashing function should use the method discussed in the book
+  and in class. That is:
+  
+  s[0] + s[1]*32 + s[2]*32^2 + s[3]*32^3 + ... s[n-1]*32^n-1
+
+  Hint: when calculating the hash value keep in mind each of these things:
+  1) Use the ASCII values of the letters (e.g. "A" = 65).
+  2) The hash index needs to be an unsigned integer (e.g. size_t).
+  3) Apply the modulus operator AFTER summing and multiplying all of the numbers.
+- The hashtable hash function must use Horner's rule to refactor the
+  calculation to make it more efficient (you cannot use the pow() function or
+  anything else like it).
+- The hashtable array size should be 7877 elements (that is a prime number).
+- You do not need to resize the table.
+- The should be no memory leaks.
+- All "string" data should be stored as char* variables. DO NOT USE
+  std::string.

@@ -1,0 +1,88 @@
+== Programming Assignment ==
+
+For this assignment you will write a program that creates a tree of
+"plants". Each plant is the result of an exeperiment. I have provided the main
+driver program that is responsible for running each of the experiments but you
+will need to create a tree for storing the results.
+
+The objective of this assignment is to learn how to implement and use a binary
+tree (not a binary search tree). Since this is the objective, you cannot use a
+premade classes.
+
+Each plant, in this assignment, has three important factors that determine how
+well the plant can be used to generate enough food for the colony. The three
+factors are the growth rate, nutritional value, and water requirements. The
+higher a score for any of these factors, the more desireable the plant
+is. Each plant has been genetically modified so that when it reproduces it
+creates exactly two new plants. The new plants have different values for each
+of the important factors. This assignment runs a couple of experiments with
+different starting plants. Each experiment starts with a plant and then finds
+the children for that plant. Then it finds the children for each of those, and
+so on. As it finds the children it stores them in a binary tree with the
+starting plant as the root. The experiment has a depth limit and only runs the
+specified number of generations.
+
+When all of the reproduction is done (for the specified number of
+generations), the program searches the result tree to find the best plant for
+each of the given factors.
+
+The output of the program is the full reproduction tree and a display of the
+best of each of the factors.
+
+== Program Design ==
+
+Your program should use good design methodologies so you should have separate
+classes for each of the following:
+
+- plant -- This class represents a plant. Each plant has an ID as well as a
+  growth rate factor, nutritional value factor, and water requirement
+  factor. The plant class should have these data members. The plant ID follows
+  the format "Plant ??-??-??" where the first two digits are the growth value,
+  the second two are the nutritional value, and the third two are the water
+  requirements value.
+
+- planttree -- This is a tree that holds the plant data. Each non-leaf node in
+  this tree will have exactly two children. The children are not sorted in any
+  way. The planttree class has a method for setting the root of the tree as
+  well as setting the children for a given node. See the experiments.cpp file
+  to see what the method signature is for each of these.
+
+- treenode -- this will be a class (or struct, your choice) to hold a plant
+  object and the two children pointers.
+
+== Other Files ==
+
+I have provided two test programs: testplant.cpp and testtree.cpp. These
+are for your use. You are not required to use them but they will be helpful
+for developing and debugging your classes.
+
+Finally, for your convenience I have provided a "makefile". If you name all of
+your files the same as I have then you can use the makefile to simplify your
+building and testing.
+
+Using the makefile is optional. You are welcome to modify it anyway you
+want. You do not need to turn in the makefile.
+
+== External Requirements ==
+
+- The main driver (experiments.cpp) will run a series of experiments with a
+  couple different starting plants. The output from your program must
+  match expected.txt exactly.
+
+
+== Internal Requirements ==
+
+- The program must use the supplied experiments.cpp file, unmodified, as the
+  main driver.
+- The program must use a binary tree, that you implement, to store the
+  experiment results. All results should be stored in the tree before it is
+  printed and before the best plants are found.
+- The plant class should not have any pointers to other plant classes in it.
+- The planttree nodes should not contain parent pointers. That is, each node
+  in the tree should only have two pointers -- one for left and one for right.
+- The should be no memory leaks or memory errors (as repoted by valgrind)
+- All "string" data should be stored as char* variables. DO NOT USE
+  std::string. 
+- Any classes that contain pointers as data members must have a copy
+  constructor, assignment operator, and destructor.
+
