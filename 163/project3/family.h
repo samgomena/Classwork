@@ -5,15 +5,17 @@
 
 class family {
 private:
-    char * _id;
-    char * _name;
+    char* _id;
+    char* _name;
     int _num_fam_mems;
-    char *_fam_list[3] = {nullptr, nullptr, nullptr};
+    char* _fam_list[3] = {nullptr, nullptr, nullptr};
 
 public:
     family();
     family(char *, char *, int);
     ~family();
+    family(const family &copy_fam);
+    family& operator=(const family&);
 
     const char *getId() const;
     const char *getName() const;

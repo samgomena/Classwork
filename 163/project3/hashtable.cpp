@@ -5,62 +5,67 @@
 using namespace std;
 
 HashTable::HashTable() : _size(0) {
-    table = new Node *[TABLE_SIZE];
+    table = new Node* [TABLE_SIZE];
 
-    for (int i = 0; i < TABLE_SIZE; i++)
-        table[i] = new Node;
+//    for (int i = 0; i < TABLE_SIZE; i++)
+//        table[i] = new Node;
 }
 
 HashTable::~HashTable() {
-    int i;
-    for(i = 0; i < TABLE_SIZE; i++) {
-        Node * head = table[i];
-        Node * curr;
-        while(head) {
-            curr = head->getNext();
-//            head->next = NULL; // This was here and I don't think it works properly
-            head = nullptr;
-            delete head;
-            head = curr;
-        }
+    for(int i = 0; i < TABLE_SIZE; i++) {
+        Node* head = table[i];
+        destroyCollisions(head);
     }
-    //delete the array
+    // delete the array
     delete [] table;
+    table = nullptr;
 }
 
-void HashTable::insert(const char * key, const family aData) {
-    //calculate the insertion position (the index of the array)
-    unsigned long long idx = calculateIndex(key);
-    //create a new node to hold data
-    Node * newNode = new Node(aData);
-
-    if (table[idx]) {
-        newNode->setNext(table[idx]);
-        table[idx] = newNode;
-    } else {
-        table[idx] = newNode;
+bool HashTable::destroyCollisions(Node* curr) {
+    if(!curr) {
+        return true;
     }
+    destroyCollisions(curr->getNext());
+    delete curr;
+    curr = nullptr;
+    return true;
+}
+
+void HashTable::insert(const char * key, const family fam_data) {
+    // calculate the insertion position (the index of the array)
+    unsigned long long idx = calculateIndex(key);
+    // create a new node to hold data
+    Node* newNode = new Node(fam_data);
+
+//    if(table[idx]) {
+//        newNode->setNext(table[idx]);
+//        table[idx] = newNode;
+//    } else {
+//        table[idx] = newNode;
+//    }
+    newNode->setNext(table[idx]);
+    table[idx] = newNode;
     _size++;
 }
 
-bool HashTable::retrieve(char const * const key, Node& aData) const {
-    //calculate the retrieval position (the index of the array)
+bool HashTable::retrieve(char const * const key, Node& fam_data) const {
+    // calculate the retrieval position (the index of the array)
     unsigned long long idx = calculateIndex(key);
 
-    //search for the data in the chain (linked list)
+    // search for the data in the chain (linked list)
     Node * curr = table[idx];
 
     while(curr) {
-        char *id = 0;
         if(strcmp(key, curr->getItem().getId()) == 0) {
-            //find match and return the data
-            aData = curr->getItem();
+            // Match found; return it's data
+            fam_data = curr->getItem();
             return true;
         }
         else
+            // Continue traversing
             curr = curr->getNext();
     }
-    //data is not in the table
+    // data is not in the table
     return false;
 }
 
@@ -79,12 +84,12 @@ unsigned long long HashTable::calculateIndex(const char *const key) const {
     return hash % TABLE_SIZE;
 }
 
-void HashTable::dumpOne(char const *const key) const {
+void HashTable::dumpOne(const char *const key) const {
 
     unsigned long long idx = calculateIndex(key);
 
     Node *curr = table[idx];
-    while (curr->getNext()) {
+    while (curr) {
         if(strcmp(key, curr->getItem().getId()) == 0) {
             cout << "Family ID: " << curr->getItem().getId() << endl;
             cout << "  Name: " << curr->getItem().getName() << "\n  Members: " << curr->getItem().getMembers() << "\n  Friends: ";
@@ -97,11 +102,12 @@ void HashTable::dumpOne(char const *const key) const {
 }
 
 void HashTable::dumpMates(const char *const key) const {
-
     unsigned long long idx = calculateIndex(key);
     int i;
     Node *curr = table[idx];
-    while (curr->getNext()) {
+
+    cout << endl;
+    while(curr) {
         if(strcmp(key, curr->getItem().getId()) == 0) {
             cout << "== Friends (1 level) ==" << endl;
             for(i = 0; i < curr->getItem().getMembers(); i++) {

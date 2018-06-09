@@ -16,11 +16,13 @@ public:
     HashTable();
     ~HashTable();
 
-    void insert(const char * key, const family aData);
-    bool retrieve(char const * const key, Node& aData)const;
+    void insert(const char * key, const family fam_data);
+    bool retrieve(char const * const key, Node& fam_data)const;
     void dumpOne(char const *const key) const;
     void dumpMates(char const *const key) const;
     void dumpTable() const;
+
+    bool destroyCollisions(Node* curr);
 };
 
 #endif

@@ -13,21 +13,20 @@ familymgr::~familymgr() {
 }
 
 void familymgr::addFamily(family fam) {
-    const char *famId = fam.getId();
-    hashTable->insert(famId, fam);
+//    const char *famId = fam.getId();
+//    hashTable->insert(famId, fam);
+    hashTable->insert(fam.getId(), fam);
 }
 
 void familymgr::printAllFamilies() {
     hashTable->dumpTable();
 }
 
-void familymgr::printSmallCircle(const char * familyId) {
+void familymgr::printSmallCircle(const char* familyId) {
     Node familyData;
 
     if (hashTable->retrieve(familyId, familyData)) {
-
-        const char *id = familyData.getItem().getId();
-        cout << "Printing family and immediate friends " << id <<  "\n== Family ==" << endl;
+        cout << "Printing family and immediate friends " << familyData.getItem().getId() <<  "\n== Family ==" << endl;
         hashTable->dumpOne(familyId);
         hashTable->dumpMates(familyId);
     }

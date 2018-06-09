@@ -88,10 +88,10 @@ int main(int argc,char** argv)
 	}
 	infile.close();
 
-	familyMgr.printAllFamilies();
+//	familyMgr.printAllFamilies();
 //	familyMgr.printGroup("Smith001");
-	familyMgr.printSmallCircle("Smith001");
-	familyMgr.printSmallCircle("Hall001");
+//	familyMgr.printSmallCircle("Smith001");
+//	familyMgr.printSmallCircle("Hall001");
 	familyMgr.printSmallCircle("Noel003");
     }
 
