@@ -3,7 +3,10 @@ import numpy as np
 from time import perf_counter
 from functools import wraps
 
+from selection_sort import selection_sort
+from merge_sort import merge_sort
 
+# Deprecate this?
 def time_it(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -14,55 +17,6 @@ def time_it(func):
         return func_value
     return wrapper
 
-def selection_sort(m):
-    list_len = len(m)
-    for i in range(list_len):
-        min = i
-        for j in range(i+1, list_len):
-            if m[j] < m[min]:
-                min = j
-        
-        # Swap lowest found and element at i 
-        m[i], m[min] = m[min], m[i]
-    return m
-
-
-def merge_sort(m):
-    list_len = len(m)
-    
-    if list_len <= 1:
-        return m
-
-    # Recursive case. First, divide the list into equal-sized sublists
-    # consisting of the first half and second half of the list.
-    # This assumes lists start at index 0.
-    middle = list_len // 2
-    # print(f"len: {list_len}\nmiddle: {middle}")
-    left, right = m[:middle], m[middle:]
-    # print(f"left: {left}\nright: {right}")
-    # return 
-    # Recursively sort both sublists.
-    left = merge_sort(left)
-    right = merge_sort(right)
-
-    # Then merge the now-sorted sublists.
-    return merge(left, right)
-
-def merge(left, right):
-    merged = []
-
-    while left and right:
-        if left[0] <= right[0]:
-            merged.append(left.pop(0))
-        else:
-            merged.append(right.pop(0))
-
-    while left:
-        merged.append(left.pop(0))
-    while right:
-        merged.append(right.pop(0))
-    
-    return merged
 
 def gen_rand_arr(size=1_000, min=1, max=1000):
     return list(np.random.randint(min, max, size))
