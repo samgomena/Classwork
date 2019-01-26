@@ -1,5 +1,8 @@
-wget https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip | unzip
+wget https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip
+unzip chromedriver_linux64.zip
+
+ls -alh
 
 pip install -r requirements.txt
 
-python sort_testing.py
+python benchmark.py
