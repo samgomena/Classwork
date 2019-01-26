@@ -1,8 +1,9 @@
 language: python
 
 script:
-  - chmod u+x $TRAVIS_BUILD_DIR/350/build.sh
-  - $TRAVIS_BUILD_DIR/350/build.sh
+  - cd 350
+  - chmod u+x build.sh
+  - build.sh
 
 matrix:
   include:
