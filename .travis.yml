@@ -2,11 +2,8 @@ language: python
 
 cache: pip
 
-install:
-  - pip install -r requirements.txt
-
 script:
-  python sort_testing.py
+  ./350/build.sh
 
 matrix:
   include:
@@ -21,9 +18,4 @@ matrix:
     - python: 3.7
       dist: xenial
       sudo: true
-
-# Perform manual install of 3.6 for OS X
-before_install:
-    cd 350
-    wget https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip | unzip
 
