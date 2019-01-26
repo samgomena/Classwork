@@ -1,9 +1,8 @@
 language: python
 
-cache: pip
-
 script:
-  ./350/build.sh
+  chmod u+x $TRAVIS_BUILD_DIR/350/build.sh
+  ./$TRAVIS_BUILD_DIR/350/build.sh
 
 matrix:
   include:
