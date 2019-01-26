@@ -24,5 +24,6 @@ matrix:
 
 # Perform manual install of 3.6 for OS X
 before_install:
+    cd 350
     wget https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip | unzip
 
