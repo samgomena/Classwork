@@ -1,10 +1,22 @@
 
+import argparse
 import numpy as np
 from time import perf_counter
 from functools import wraps
 
 from selection_sort import selection_sort
 from merge_sort import merge_sort
+
+parser = argparse.ArgumentParser(description='Benchmark sorting algorithms.')
+
+parser.add_argument("-m", "--max-time", 
+                    type=int,
+                    default=5,
+                    dest="max_time",
+                    action="store",
+                    help="Maximum number of seconds to let each sort algo run for")
+
+args = parser.parse_args()
 
 # Deprecate this?
 def time_it(func):
@@ -27,7 +39,7 @@ def test_em(func, arr):
     return perf_counter() - start
 
 def time_test_it(func, min_arr_size=1_000, increase_arr_size_by=5_000, max_time_allowed=120):
-    # Update `arr_size` as our test continues
+    # Update `arr_size` as our test progresses
     arr_size = min_arr_size
     
     rand_arr = gen_rand_arr(arr_size)
@@ -42,8 +54,8 @@ def time_test_it(func, min_arr_size=1_000, increase_arr_size_by=5_000, max_time_
 
 def main():
     max_time = 6
-    time_test_it(merge_sort, max_time_allowed=max_time)
-    time_test_it(selection_sort, max_time_allowed=max_time)
+    time_test_it(merge_sort, max_time_allowed=args.max_time)
+    time_test_it(selection_sort, max_time_allowed=args.max_time)
 
 if __name__ == "__main__":
     main()

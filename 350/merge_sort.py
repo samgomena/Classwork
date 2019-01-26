@@ -2,6 +2,13 @@
 __author__ = "sgomena"
 
 def merge_sort(m):
+    """
+    This functions sorts a list m using an implementation of the merge sort algorithm.
+
+    :param m: An `np.array` of "random" integers
+    :return: A sorted representation of `m`
+    :rtype: np.array
+    """
     list_len = len(m)
     
     if list_len <= 1:
