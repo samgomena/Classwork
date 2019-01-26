@@ -1,0 +1,28 @@
+language: python
+
+cache: pip
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  python sort_testing.py
+
+matrix:
+  include:
+
+    # Tests Python 3.6 on Ubuntu Trusty
+    - python: 3.6
+      dist: trusty
+      sudo: true
+
+    # Tests Python 3.6 and 3.7 on Ubuntu Xenial
+    - python: 3.6
+    - python: 3.7
+      dist: xenial
+      sudo: true
+
+# Perform manual install of 3.6 for OS X
+before_install:
+    wget https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip | unzip
+
