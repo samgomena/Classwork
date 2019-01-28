@@ -57,12 +57,7 @@ def time_test_it(func, min_arr_size=1_000, increase_arr_size_by=5_000, max_time_
 
 def main():
     max_iter_dict = {}
-
-    # name, size, time = time_test_it(merge_sort, max_time_allowed=args.max_time)
-    # name, size, time = time_test_it(selection_sort, max_time_allowed=args.max_time)
-    # name, size, time = time_test_it(radix_sort, max_time_allowed=args.max_time)
-    # max_iter_dict[name] = [size, time]
-
+    
     for sort_func in [merge_sort, selection_sort, radix_sort]:
         name, size, time = time_test_it(sort_func, max_time_allowed=args.max_time)
         max_iter_dict[name] = [size, time]
