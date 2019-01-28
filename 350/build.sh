@@ -5,4 +5,4 @@ ls -alh
 
 pip install -r requirements.txt
 
-python benchmark.py
+python benchmark.py --max-time=60
