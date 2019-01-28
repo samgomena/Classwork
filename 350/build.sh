@@ -5,4 +5,4 @@ ls -alh
 
 pip install -r requirements.txt
 
-python benchmark.py --max-time=60
+python benchmark.py --increase-size-by=10000 --max-time=60

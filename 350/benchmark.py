@@ -17,6 +17,13 @@ parser.add_argument("-m", "--max-time",
                     action="store",
                     help="Maximum number of seconds to let each sort algo run for")
 
+parser.add_argument("-i", "--increase-size-by", 
+                    type=int,
+                    default=10_000,
+                    dest="increase_by",
+                    action="store",
+                    help="Amount to increase the array by on each subsequent run")
+
 args = parser.parse_args()
 
 # Deprecate this?
@@ -57,9 +64,9 @@ def time_test_it(func, min_arr_size=1_000, increase_arr_size_by=5_000, max_time_
 
 def main():
     max_iter_dict = {}
-    
+
     for sort_func in [merge_sort, selection_sort, radix_sort]:
-        name, size, time = time_test_it(sort_func, max_time_allowed=args.max_time)
+        name, size, time = time_test_it(sort_func, increase_arr_size_by=args.increase_by, max_time_allowed=args.max_time)
         max_iter_dict[name] = [size, time]
 
 
