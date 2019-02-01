@@ -10,12 +10,19 @@ from radix_sort import radix_sort
 
 parser = argparse.ArgumentParser(description='Benchmark sorting algorithms.')
 
+parser.add_argument("-t", "--total-time", 
+                    type=int,
+                    default=30,
+                    dest="total_time",
+                    action="store",
+                    help="Maximum number of seconds to let each sort algo run for")
+
 parser.add_argument("-m", "--max-time", 
                     type=int,
                     default=5,
                     dest="max_time",
                     action="store",
-                    help="Maximum number of seconds to let each sort algo run for")
+                    help="Maximum number of seconds to let each individual run on the sort algo run for")
 
 parser.add_argument("-i", "--increase-size-by", 
                     type=int,
@@ -23,6 +30,13 @@ parser.add_argument("-i", "--increase-size-by",
                     dest="increase_by",
                     action="store",
                     help="Amount to increase the array by on each subsequent run")
+
+parser.add_argument("-v", "--verbose", 
+                    type=bool,
+                    default=false,
+                    dest="verbose",
+                    action="store",
+                    help="Print extended output to stdout")
 
 args = parser.parse_args()
 
@@ -46,18 +60,27 @@ def test_em(func, arr):
     func(arr)
     return perf_counter() - start
 
-def time_test_it(func, min_arr_size=1_000, increase_arr_size_by=5_000, max_time_allowed=120):
+def time_test_it(func, min_arr_size=1_000, increase_arr_size_by=5_000, max_time_allowed_per_algo=120, max_time_allowed_per_run=None):
     # Update `arr_size` as our test progresses
     arr_size = min_arr_size
+    total_run_time = 0.0
     
     rand_arr = gen_rand_arr(arr_size)
     time = test_em(func, rand_arr)
+    total_run_time += time
     print(f"{func.__name__}([{arr_size:,}]) took {time}s")
 
-    while time < max_time_allowed:
+    while total_run_time < max_time_allowed_per_algo:
         arr_size += increase_arr_size_by
         rand_arr = gen_rand_arr(arr_size)
+        
         time = test_em(func, rand_arr)
+        total_run_time += time
+        
+        # Not sure about this yet
+        if time > max_time_allowed_per_algo:
+            break
+        
         print(f"{func.__name__}([{arr_size:,}]) took {time}s")
 
     return func.__name__, arr_size, time
