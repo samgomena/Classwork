@@ -33,7 +33,7 @@ parser.add_argument("-i", "--increase-size-by",
 
 parser.add_argument("-v", "--verbose", 
                     type=bool,
-                    default=false,
+                    default=False,
                     dest="verbose",
                     action="store",
                     help="Print extended output to stdout")
@@ -89,7 +89,11 @@ def main():
     max_iter_dict = {}
 
     for sort_func in [merge_sort, selection_sort, radix_sort]:
-        name, size, time = time_test_it(sort_func, increase_arr_size_by=args.increase_by, max_time_allowed=args.max_time)
+        name, size, time = time_test_it(sort_func, 
+                                        increase_arr_size_by=args.increase_by, 
+                                        max_time_allowed_per_algo=args.total_time, 
+                                        max_time_allowed_per_run=args.max_time
+                                        )
         max_iter_dict[name] = [size, time]
 
 
