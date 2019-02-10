@@ -10,6 +10,21 @@ from radix_sort import radix_sort
 
 parser = argparse.ArgumentParser(description='Benchmark sorting algorithms.')
 
+parser.add_argument("--min-arr-size", 
+                    type=int,
+                    default=0,
+                    dest="min_arr_size",
+                    action="store",
+                    help="Minimum size of an array that will be sorted")
+
+parser.add_argument("--max-arr-size", 
+                    type=int,
+                    default=50_000,
+                    dest="max_arr_size",
+                    action="store",
+                    help="Maximum size of an array that will be sorted")
+
+
 parser.add_argument("-t", "--total-time", 
                     type=int,
                     default=30,
@@ -38,62 +53,59 @@ parser.add_argument("-v", "--verbose",
                     action="store",
                     help="Print extended output to stdout")
 
-args = parser.parse_args()
+class Benchmark:
+    def __init__(self, func, args):
+        self.func = func
+        self.args = args
 
-# Deprecate this?
-def time_it(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        start = perf_counter()
-        func_value = func(*args, **kwargs)
-        delta = perf_counter() - start
-        print(f"{func.__name__} took {delta}s to run")
-        return func_value
-    return wrapper
-
-
-def gen_rand_arr(size=1_000, min=1, max=1000):
-    return list(np.random.randint(min, max, size))
-
-def test_em(func, arr):
-    start = perf_counter()
-    func(arr)
-    return perf_counter() - start
-
-def time_test_it(func, min_arr_size=1_000, increase_arr_size_by=5_000, max_time_allowed_per_algo=120, max_time_allowed_per_run=None):
-    # Update `arr_size` as our test progresses
-    arr_size = min_arr_size
-    total_run_time = 0.0
     
-    rand_arr = gen_rand_arr(arr_size)
-    time = test_em(func, rand_arr)
-    total_run_time += time
-    print(f"{func.__name__}([{arr_size:,}]) took {time}s")
+    @staticmethod
+    def gen_rand_arr(size=1_000, min=1, max=1000):
+        return list(np.random.randint(min, max, size))
 
-    while total_run_time < max_time_allowed_per_algo:
-        arr_size += increase_arr_size_by
-        rand_arr = gen_rand_arr(arr_size)
+    @staticmethod
+    def test_em(func, arr):
+        start = perf_counter()
+        func(arr)
+        return perf_counter() - start
+
+    def time_test_it(self, max_time_allowed_per_run=None):
+        # Update `arr_size` as our test progresses
+        arr_size = self.args.min_arr_size
+        total_run_time = 0.0
         
-        time = test_em(func, rand_arr)
+        rand_arr = self.gen_rand_arr(arr_size)
+        time = self.test_em(self.func, rand_arr)
         total_run_time += time
         
-        # Not sure about this yet
-        if time > max_time_allowed_per_algo:
-            break
-        
-        print(f"{func.__name__}([{arr_size:,}]) took {time}s")
+        if self.args.verbose:
+            print(f"{self.func.__name__}([{arr_size:,}]) took {time}s")
 
-    return func.__name__, arr_size, time
+        while total_run_time < self.args.max_time:
+            arr_size += self.args.increase_by
+            rand_arr = self.gen_rand_arr(arr_size)
+            
+            time = self.test_em(self.func, rand_arr)
+            total_run_time += time
+            
+            # Not sure about this yet
+            if time > self.args.max_time:
+                break
+            
+            if self.args.verbose:
+                print(f"{self.func.__name__}([{arr_size:,}]) took {time}s")
+
+        return self.func.__name__, arr_size, time
 
 def main():
     max_iter_dict = {}
 
-    for sort_func in [merge_sort, selection_sort, radix_sort]:
-        name, size, time = time_test_it(sort_func, 
-                                        increase_arr_size_by=args.increase_by, 
-                                        max_time_allowed_per_algo=args.total_time, 
-                                        max_time_allowed_per_run=args.max_time
-                                        )
+    args = parser.parse_args()
+
+    for sort_func in [merge_sort, selection_sort, radix_sort, sorted]:
+        # Create a new benchmark for each `sort_func`
+        benchmark = Benchmark(sort_func, args)
+        name, size, time = benchmark.time_test_it()
         max_iter_dict[name] = [size, time]
 
 
