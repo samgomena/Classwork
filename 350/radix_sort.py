@@ -42,7 +42,8 @@ def get_num_digit(n):
     return i
 
 def radix_sort(m):
-    max_value = max(m)
+    # If statement in case array is empty
+    max_value = max(m) if m else 0
     num_digits = get_num_digit(max_value)
     # num_digits = int(len(str(max_value)))
     # O(k(n+k))

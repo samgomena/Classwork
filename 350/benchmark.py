@@ -1,8 +1,10 @@
 
 import argparse
-import numpy as np
-from time import perf_counter
-from functools import wraps
+import chartify
+import pandas as pd
+from numpy.random import randint
+from time import time, perf_counter
+from datetime import datetime
 
 from selection_sort import selection_sort
 from merge_sort import merge_sort
@@ -46,22 +48,23 @@ parser.add_argument("-i", "--increase-size-by",
                     action="store",
                     help="Amount to increase the array by on each subsequent run")
 
-parser.add_argument("-v", "--verbose", 
-                    type=bool,
+parser.add_argument("-v", "--verbose",
                     default=False,
                     dest="verbose",
-                    action="store",
+                    action="store_true",
                     help="Print extended output to stdout")
+
 
 class Benchmark:
     def __init__(self, func, args):
+        # self.df = pd.DataFrame(columns=["size", "time"])
+        self.pseudo_df = []
         self.func = func
         self.args = args
 
-    
     @staticmethod
-    def gen_rand_arr(size=1_000, min=1, max=1000):
-        return list(np.random.randint(min, max, size))
+    def gen_rand_arr(size=1_000, _min=1, _max=1000):
+        return list(randint(_min, _max, size))
 
     @staticmethod
     def test_em(func, arr):
@@ -69,48 +72,91 @@ class Benchmark:
         func(arr)
         return perf_counter() - start
 
-    def time_test_it(self, max_time_allowed_per_run=None):
+    def time_test_it(self):
         # Update `arr_size` as our test progresses
         arr_size = self.args.min_arr_size
         total_run_time = 0.0
         
         rand_arr = self.gen_rand_arr(arr_size)
-        time = self.test_em(self.func, rand_arr)
-        total_run_time += time
+        runtime = self.test_em(self.func, rand_arr)
+        total_run_time += runtime
         
         if self.args.verbose:
-            print(f"{self.func.__name__}([{arr_size:,}]) took {time}s")
+            print(f"{self.func.__name__}([{arr_size:,}]) took {runtime}s")
 
+        # Stop benchmarking once we've hit our runtime limit
         while total_run_time < self.args.max_time:
             arr_size += self.args.increase_by
             rand_arr = self.gen_rand_arr(arr_size)
             
-            time = self.test_em(self.func, rand_arr)
-            total_run_time += time
-            
-            # Not sure about this yet
-            if time > self.args.max_time:
-                break
+            runtime = self.test_em(self.func, rand_arr)
+            total_run_time += runtime
             
             if self.args.verbose:
-                print(f"{self.func.__name__}([{arr_size:,}]) took {time}s")
+                print(f"{self.func.__name__}([{arr_size:,}]) took {runtime}s")
 
-        return self.func.__name__, arr_size, time
+            self.pseudo_df.append([self.func.__name__, arr_size, runtime, datetime.fromtimestamp(time()).strftime('%c')])
+
+            # Stop benchmarking if we've hit our runtime limit
+            if runtime > self.args.max_time:
+                break
+    
+    def get_data(self):
+        return pd.DataFrame(self.pseudo_df, columns=["name", "size", "runtime", "datetime"])
+
 
 def main():
-    max_iter_dict = {}
 
     args = parser.parse_args()
 
+    df = pd.DataFrame(columns=["name", "size", "runtime", "datetime"])
+
+    # Test our three sorting functions and the `sorted` builtin as a baseline
     for sort_func in [merge_sort, selection_sort, radix_sort, sorted]:
         # Create a new benchmark for each `sort_func`
         benchmark = Benchmark(sort_func, args)
-        name, size, time = benchmark.time_test_it()
-        max_iter_dict[name] = [size, time]
+        benchmark.time_test_it()
+        benched_df = benchmark.get_data()
+        print(benched_df.head())
+        df = df.append(benched_df, ignore_index=True)
 
+    print(df.head(20))
 
-    for k, v in max_iter_dict.items():
-        print(f"{k}:\n\tmax time spent: {v[1]:0.5f}\n\tmax array size: {v[0]:,}")
+    # ch = chartify.Chart(blank_labels=True, x_axis_type='datetime')
+    # ch.set_title("Line charts - Grouped by color")
+    # ch.plot.line(
+    #     data_frame=df,
+    #     x_column='datetime',
+    #     y_column='size',
+    #     color_column='name',
+    #     line_width=1,
+    # )
+
+    # Plot the data
+    ch = chartify.Chart(blank_labels=True)
+    ch.plot.scatter(
+        data_frame=df,
+        x_column='runtime',
+        y_column='size',
+        color_column='name',
+    )
+    ch.style.color_palette.reset_palette_order()
+
+    ch.plot.text(
+        data_frame=df,
+        # TODO: Switch x and y column so its runtime vs array size
+        x_column='runtime',
+        y_column='size',
+        text_column='name',
+        color_column='name',
+        x_offset=1,
+        y_offset=-1,
+        font_size='10pt')
+    ch.set_title("Text")
+    ch.set_subtitle("Labels for specific observations.")
+
+    ch.save("./benchmark.png", "png")
+
 
 if __name__ == "__main__":
     main()
