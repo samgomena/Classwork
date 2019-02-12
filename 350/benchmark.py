@@ -42,9 +42,16 @@ parser.add_argument("-m", "--max-time",
                     action="store",
                     help="Maximum number of seconds to let each individual run on the sort algo run for")
 
+# parser.add_argument("-r", "--runs",
+#                     type=int,
+#                     default=10,
+#                     dest="runs",
+#                     action="store",
+#                     help="Number of times to run each algo, regardless of array size of time")
+
 parser.add_argument("-i", "--increase-size-by", 
                     type=int,
-                    default=10_000,
+                    default=7_500,
                     dest="increase_by",
                     action="store",
                     help="Amount to increase the array by on each subsequent run")
@@ -67,7 +74,7 @@ class Benchmark:
         return list(randint(_min, _max, size))
 
     @staticmethod
-    def test_em(func, arr):
+    def time_it(func, arr):
         start = perf_counter()
         func(arr)
         return perf_counter() - start
@@ -76,20 +83,21 @@ class Benchmark:
         # Update `arr_size` as our test progresses
         arr_size = self.args.min_arr_size
         total_run_time = 0.0
+        runs = 0
         
         rand_arr = self.gen_rand_arr(arr_size)
-        runtime = self.test_em(self.func, rand_arr)
+        runtime = self.time_it(self.func, rand_arr)
         total_run_time += runtime
         
         if self.args.verbose:
             print(f"{self.func.__name__}([{arr_size:,}]) took {runtime}s")
 
         # Stop benchmarking once we've hit our runtime limit
-        while total_run_time < self.args.max_time:
+        while total_run_time < self.args.total_time:  # or runs < self.args.runs:
             arr_size += self.args.increase_by
             rand_arr = self.gen_rand_arr(arr_size)
             
-            runtime = self.test_em(self.func, rand_arr)
+            runtime = self.time_it(self.func, rand_arr)
             total_run_time += runtime
             
             if self.args.verbose:
@@ -97,9 +105,11 @@ class Benchmark:
 
             self.pseudo_df.append([self.func.__name__, arr_size, runtime, datetime.fromtimestamp(time()).strftime('%c')])
 
-            # Stop benchmarking if we've hit our runtime limit
-            if runtime > self.args.max_time:
+            # Stop benchmarking if we've hit a single runs limit
+            if runtime > self.args.max_time:  # or runs > self.args.runs:
                 break
+
+            runs += 1
     
     def get_data(self):
         return pd.DataFrame(self.pseudo_df, columns=["name", "arr_size", "runtime", "datetime"])
