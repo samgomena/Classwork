@@ -3,6 +3,7 @@ import argparse
 import chartify
 import pandas as pd
 from numpy.random import randint
+from numpy import float64
 from time import time, perf_counter
 from datetime import datetime
 
@@ -57,7 +58,6 @@ parser.add_argument("-v", "--verbose",
 
 class Benchmark:
     def __init__(self, func, args):
-        # self.df = pd.DataFrame(columns=["size", "time"])
         self.pseudo_df = []
         self.func = func
         self.args = args
@@ -102,58 +102,44 @@ class Benchmark:
                 break
     
     def get_data(self):
-        return pd.DataFrame(self.pseudo_df, columns=["name", "size", "runtime", "datetime"])
+        return pd.DataFrame(self.pseudo_df, columns=["name", "arr_size", "runtime", "datetime"])
 
 
 def main():
 
     args = parser.parse_args()
 
-    df = pd.DataFrame(columns=["name", "size", "runtime", "datetime"])
+    df = pd.DataFrame(columns=["name", "arr_size", "runtime", "datetime"])
 
     # Test our three sorting functions and the `sorted` builtin as a baseline
     for sort_func in [merge_sort, selection_sort, radix_sort, sorted]:
         # Create a new benchmark for each `sort_func`
         benchmark = Benchmark(sort_func, args)
         benchmark.time_test_it()
+
         benched_df = benchmark.get_data()
-        print(benched_df.head())
         df = df.append(benched_df, ignore_index=True)
 
-    print(df.head(20))
-
-    # ch = chartify.Chart(blank_labels=True, x_axis_type='datetime')
-    # ch.set_title("Line charts - Grouped by color")
-    # ch.plot.line(
-    #     data_frame=df,
-    #     x_column='datetime',
-    #     y_column='size',
-    #     color_column='name',
-    #     line_width=1,
-    # )
+    # Convert array size object to float64 for reasons unknown
+    # See: https://stackoverflow.com/questions/28277137/how-to-convert-datatypeobject-to-float64-in-python
+    df["arr_size"] = df["arr_size"].astype(float64)
 
     # Plot the data
     ch = chartify.Chart(blank_labels=True)
     ch.plot.scatter(
         data_frame=df,
-        x_column='runtime',
-        y_column='size',
+        x_column='arr_size',
+        y_column='runtime',
         color_column='name',
     )
     ch.style.color_palette.reset_palette_order()
 
-    ch.plot.text(
-        data_frame=df,
-        # TODO: Switch x and y column so its runtime vs array size
-        x_column='runtime',
-        y_column='size',
-        text_column='name',
-        color_column='name',
-        x_offset=1,
-        y_offset=-1,
-        font_size='10pt')
-    ch.set_title("Text")
-    ch.set_subtitle("Labels for specific observations.")
+    ch.set_title("Comparison of different sorting algorithms with varying array sizes")
+    ch.set_subtitle("Comparisons made between self-implemented merge, "
+                    "selection, and radix sort with python's builtin sorted")
+    ch.axes.set_yaxis_label("Time in seconds to sort the array")
+    ch.axes.set_xaxis_label("Size of the random array")
+    ch.set_legend_location('top_right')
 
     ch.save("./benchmark.png", "png")
 
