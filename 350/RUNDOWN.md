@@ -2,9 +2,9 @@
 
 #### Overview
 
-Starting with a requirement to analyze three algorithms: merge sort, selection sort, and a third of our choice
-the analysis would then be to run each sorting algorithm on arrays of various lengths and measure the amount of time
-it took for them to sort them.
+Starting with a requirement to analyze three algorithms: merge sort, selection sort, and a third of our choice.
+Analysis was then performed by temporally benchmarking each sorting algorithm on arrays of increasing size while measuring 
+the amount of time it took to sort them.
 
 Before talking about the results, we should clarify the testing procedure.
 
