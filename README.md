@@ -1,4 +1,1 @@
-## Repo to house my classwork.
-
-#### TODOs:
-##### Retroactively add previously taken classes (maybe?).
+## This repo houses most of my classwork from Portland State Univerity.
