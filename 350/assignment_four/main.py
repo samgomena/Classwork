@@ -21,22 +21,33 @@ parser.add_argument("-c", "--cumulative",
 
 
 def normalize_name(name):
-    return name.replace('.', ' ').capitalize()
+    return name.replace('.', ' ').title()
 
 
-def print_mst_steps(mst):
+def print_mst_steps(name, mst):
+    """
+    Helper function to print the steps taken by an mst algorithm to generate an MST.
+
+    It is meant to consume the output of `prim` and `kruskal`
+
+    :return: A tuple of the form (starting node, list of steps taken in traversal)
+    :return: Nothing
+    :rtype: None
+    """
     starting_node, mst_steps = mst
 
     total_distance = sum([edge[2] for edge in mst_steps])
     cumulative_distance = 0
 
-    print(f"Starting traversal at {normalize_name(starting_node)}", end="\n\n")
+    print(f"{normalize_name(name)}'s algorithm started traversal at {normalize_name(starting_node)}", end="\n\n")
 
     for edge_travelled in mst_steps:
-        print(f"Travelled {cumulative_distance} so far")
+        print(f"Moved from {normalize_name(edge_travelled[0])} -> {normalize_name(edge_travelled[1])}")
+        print(f"\t(travelled {cumulative_distance} so far)")
         cumulative_distance += edge_travelled[2]
 
-    print(f"Total distance traveled was {total_distance}", end="\n\n")
+    print()
+    print(f"Total distance traveled using {normalize_name(name)}'s was {total_distance}", end="\n\n")
 
 
 def main():
@@ -44,18 +55,15 @@ def main():
 
     graph = Graph()
 
-    # graph.load_graph_from_file(args.graph_file)
-    graph.load_graph_from_file("./test/test_pairs_1.txt")
+    # Defaults to city_pairs.txt
+    graph.load_graph_from_file(args.graph_file)
 
     prim_starting_node, prim_mst = prim(graph)
-    assert len(prim_mst) == len(set([edge[1] for edge in prim_mst])), f"Oops, looks like you visited a city twice"
-
     kruskal_starting_node, kruskal_mst = kruskal(graph)
 
     if args.show_cumulative:
-        print_mst_steps(prim(graph))
-        # print_mst_steps((prim_starting_node, prim_mst))
-        print_mst_steps((kruskal_starting_node, kruskal_mst))
+        print_mst_steps("prim", (prim_starting_node, prim_mst))
+        print_mst_steps("kruskal", (kruskal_starting_node, kruskal_mst))
 
 
 if __name__ == '__main__':

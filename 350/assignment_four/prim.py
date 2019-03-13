@@ -1,5 +1,14 @@
+from graph import Graph
 
-def prim(graph):
+
+def prim(graph: Graph):
+    """
+    This function implements Prim's minimum spanning tree algorithm.
+
+    :param graph: An instance of `Graph` initialized with a graph.
+    :return: A tuple of the form (starting node, list of steps taken in traversal)
+    :rtype: tuple(str, list)
+    """
     visited = set()
 
     # Store tree as a list to preserve order
@@ -29,7 +38,6 @@ def prim(graph):
 
         # Add it to the MST
         minimum_spanning_tree.append(min_edge)
-        # minimum_spanning_tree.append((min_edge[1], min_edge[2]))
 
         # Update visited set with it 
         visited.add(min_edge[1])

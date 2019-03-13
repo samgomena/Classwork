@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 wget https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip
 export PATH=$PATH:./chromedriver
