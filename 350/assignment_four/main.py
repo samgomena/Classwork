@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 
 from graph import Graph
 from prim import prim
+from kruskal import kruskal
 
 parser = ArgumentParser(description='Calculate minimum spanning trees with different algorithms')
 
@@ -23,29 +24,38 @@ def normalize_name(name):
     return name.replace('.', ' ').capitalize()
 
 
+def print_mst_steps(mst):
+    starting_node, mst_steps = mst
+
+    total_distance = sum([edge[2] for edge in mst_steps])
+    cumulative_distance = 0
+
+    print(f"Starting traversal at {normalize_name(starting_node)}", end="\n\n")
+
+    for edge_travelled in mst_steps:
+        print(f"Travelled {cumulative_distance} so far")
+        cumulative_distance += edge_travelled[2]
+
+    print(f"Total distance traveled was {total_distance}", end="\n\n")
+
+
 def main():
     args = parser.parse_args()
 
     graph = Graph()
 
     # graph.load_graph_from_file(args.graph_file)
-    graph.load_graph_from_file("./test/test_pairs_2.txt")
+    graph.load_graph_from_file("./test/test_pairs_1.txt")
 
-    starting_node, prim_mst = prim(graph)
-    total_weight = sum([edge[2] for edge in prim_mst])
-
+    prim_starting_node, prim_mst = prim(graph)
     assert len(prim_mst) == len(set([edge[1] for edge in prim_mst])), f"Oops, looks like you visited a city twice"
 
-    print(f"Starting graph traversal at {normalize_name(starting_node)}")
-    print(prim_mst)
+    kruskal_starting_node, kruskal_mst = kruskal(graph)
 
     if args.show_cumulative:
-        total_distance = 0
-        for edge_travelled in prim_mst:
-            print(total_distance)
-            total_distance += edge_travelled[2]
-
-    print(f"Total distance traveled was {total_weight}")
+        print_mst_steps(prim(graph))
+        # print_mst_steps((prim_starting_node, prim_mst))
+        print_mst_steps((kruskal_starting_node, kruskal_mst))
 
 
 if __name__ == '__main__':

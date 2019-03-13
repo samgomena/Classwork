@@ -51,9 +51,25 @@ class Graph(object):
                 vertices_list.update(set(self.get_adjacent_vertices(vertex)))
             return vertices_list
 
+    @staticmethod
+    def _remove_duplicate_edges(edge_list):
+        minimum_edges = []
+        for v1, v2, weight in edge_list:
+            if (v2, v1, weight) in edge_list and (v2, v1, weight) not in minimum_edges:
+                minimum_edges.append((v1, v2, weight))
+        return minimum_edges
+
+    def get_all_edges(self):
+        edges = []
+        for vertex in self.get_vertices():
+            edges.extend(self.get_edges(vertex))
+        return self._remove_duplicate_edges(edges)
+
     def get_edges(self, v1):
-        edges = self.graph.get(v1).items()
-        return [(v1, v2, weight) for v2, weight in edges]
+        # edges = self.graph.get(v1).items()
+        edges = self.graph.get(v1).keys()
+        # return [(v1, v2, weight) for v2, weight in edges]
+        return [self.get_edge(v1, v2) for v2 in edges]
 
     def get_edge(self, v1, v2):
         return v1, v2, self.graph.get(v1).get(v2)
