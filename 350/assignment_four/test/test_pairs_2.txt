@@ -1,0 +1,16 @@
+a b 5
+a c 7
+a e 2
+b a 5
+b d 6
+b e 3
+c a 7
+c d 4
+c e 4
+d b 6
+d c 4
+d e 5
+e a 2
+e b 3
+e c 4
+e d 5
