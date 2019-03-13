@@ -42,7 +42,7 @@ The algorithms and their theoretical worst, average, and best complexities:
 Given the theoretical complexities of the three self-implemented algorithms it's clear that radix sort should run the quickest, 
 followed by merge sort, and then selection sort.
 And an empirical analysis of their respective run times leads us to the same conclusion as seen in the 
-[graph](./benchmark.png) of their run times.
+[graph](benchmark.png) of their run times.
 
 Due to time constraints and available computing power, the graph isn't very populated with data points but I think there 
 are enough to still see where each function begins to trend to.
