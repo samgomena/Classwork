@@ -1,0 +1,37 @@
+language: python
+
+script:
+  - cd 350
+  - chmod u+x assignment_four/build.sh
+  - ./build.sh
+
+jobs:
+  include:
+    - stage: "Test Assignment Two"
+      script:
+        - cd 350
+        - chmod u+x assignment_two/build.sh
+        - ./assignment_two/build.sh
+
+      # Tests Python 3.6 and 3.7 on Ubuntu Xenial
+      python:
+        - 3.6
+        - 3.7
+      # 16.04
+      dist: xenial
+      sudo: true
+
+    - stage: "Test Assignment Four"
+      script:
+        - cd 350
+        - chmod u+x assignment_four/build.sh
+        - ./assignment_four/build.sh
+
+      # Tests Python 3.6 and 3.7 on Ubuntu Xenial
+      python:
+      - 3.6
+      - 3.7
+      # 16.04
+      dist: xenial
+      sudo: true
+
