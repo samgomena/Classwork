@@ -9,9 +9,9 @@ jobs:
   include:
     - stage: "Test Assignment Two"
       script:
-        - cd 350
-        - chmod u+x assignment_two/build.sh
-        - ./assignment_two/build.sh
+        - cd 350/assignment_two
+        - chmod u+x build.sh
+        - ./build.sh
 
       # Tests Python 3.6 and 3.7 on Ubuntu Xenial
       python:
@@ -23,9 +23,9 @@ jobs:
 
     - stage: "Test Assignment Four"
       script:
-        - cd 350
-        - chmod u+x assignment_four/build.sh
-        - ./assignment_four/build.sh
+        - cd 350/assignment_four
+        - chmod u+x build.sh
+        - ./build.sh
 
       # Tests Python 3.6 and 3.7 on Ubuntu Xenial
       python:
