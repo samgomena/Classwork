@@ -1,0 +1,386 @@
+gomenas@ultron:~$ ls
+backups  Documents  Music  Pictures  public_html  Templates      Videos
+Desktop  Downloads  opt    Public    smb_files    test_file.txt  ycm_build
+gomenas@ultron:~$ cd Documents
+gomenas@ultron:~/Documents$ ls
+299_202_backups    Classwork  repos              tmp
+299_202_backups_1  frupal     shell_testing_300
+gomenas@ultron:~/Documents$ mkdir cs320
+gomenas@ultron:~/Documents$ ls
+299_202_backups    Classwork  frupal  shell_testing_300
+299_202_backups_1  cs320      repos   tmp
+gomenas@ultron:~/Documents$ cd cs320/
+gomenas@ultron:~/Documents/cs320$ chmod 700 .
+gomenas@ultron:~/Documents/cs320$ haskell --version
+haskell: command not found
+gomenas@ultron:~/Documents/cs320$ hs --version
+hs: command not found
+gomenas@ultron:~/Documents/cs320$ cat ~mpj/get-lab1
+    cp ~mpj/public_html/cs320/lab1-draft.txt .
+    cp ~mpj/public_html/cs320/Pic.lhs .
+    cp ~mpj/public_html/cs320/Prop.lhs .
+    cp ~mpj/public_html/cs320/PropScratch.lhs .
+gomenas@ultron:~/Documents/cs320$ source ~mpj/get-lab1
+gomenas@ultron:~/Documents/cs320$ ls
+lab1-draft.txt  Pic.lhs  Prop.lhs  PropScratch.lhs
+gomenas@ultron:~/Documents/cs320$ cat *.lhs | wc -l
+726
+gomenas@ultron:~/Documents/cs320$ cat P
+Pic.lhs          Prop.lhs         PropScratch.lhs  
+gomenas@ultron:~/Documents/cs320$ cat Prop.lhs | wc -l
+257
+gomenas@ultron:~/Documents/cs320$ hugs --version
+__   __ __  __  ____   ___      _________________________________________
+||   || ||  || ||  || ||__      Hugs 98: Based on the Haskell 98 standard
+||___|| ||__|| ||__||  __||     Copyright (c) 1994-2005
+||---||         ___||           World Wide Web: http://haskell.org/hugs
+||   ||                         Bugs: http://hackage.haskell.org/trac/hugs
+||   || Version: September 2006 _________________________________________
+
+Warning: unknown toggle `-'; ignoring.
+Warning: unknown toggle `v'; ignoring.
+ERROR: ignoring obsolete -e option.
+Haskell 98 mode: Restart with command line option -98 to enable extensions
+
+Type :? for help
+Hugs> 1 + 2
+3
+Hugs> 3 ^ 4
+81
+Hugs> 3 ** 4
+81.0
+Hugs> 4 `div` 2
+2
+Hugs> 4 // 2
+ERROR - Undefined variable "//"
+Hugs> 4 / 2
+2.0
+Hugs> div 4 2
+2
+Hugs> max 6 5 2
+ERROR - Cannot infer instance
+*** Instance   : Num (a -> b)
+*** Expression : max 6 5 2
+
+Hugs> max 6 5
+6
+Hugs> max 6 3 + 2
+8
+Hugs> if True then "Hello" else "World"
+"Hello"
+Hugs> if False then "Hello" else "World"
+"World"
+Hugs> import
+ERROR - Syntax error in expression (unexpected keyword "import")
+Hugs> "hello, world"
+"hello, world"
+Hugs> "hello, world" ++ 
+ERROR - Syntax error in expression (unexpected end of input)
+Hugs> "hello, world" ++ "!"
+"hello, world!"
+Hugs> "hello, world" ++ replicate 20 "!"
+ERROR - Type error in application
+*** Expression     : "hello, world" ++ replicate 20 "!"
+*** Term           : "hello, world"
+*** Type           : String
+*** Does not match : [[Char]]
+
+Hugs> "hello, world" ++ replicate 20 '!'
+"hello, world!!!!!!!!!!!!!!!!!!!!"
+Hugs> length "hello, world"
+12
+Hugs> reverse "hello, world"
+"dlrow ,olleh"
+Hugs> [] == False
+ERROR - Type error in application
+*** Expression     : [] == False
+*** Term           : []
+*** Type           : [a]
+*** Does not match : Bool
+
+Hugs> [] && False
+ERROR - Type error in application
+*** Expression     : [] && False
+*** Term           : []
+*** Type           : [a]
+*** Does not match : Bool
+
+Hugs> Bool([]) && False
+ERROR - Undefined data constructor "Bool"
+Hugs> [1, 2, 3, 4]
+[1,2,3,4]
+Hugs> [1, False]
+ERROR - Cannot infer instance
+*** Instance   : Num Bool
+*** Expression : [1,False]
+
+Hugs> [1, "false"]
+ERROR - Cannot infer instance
+*** Instance   : Num [Char]
+*** Expression : [1,"false"]
+
+Hugs> [1, "false", False]
+ERROR - Type error in list
+*** Expression     : [1,"false",False]
+*** Term           : False
+*** Type           : Bool
+*** Does not match : [Char]
+
+Hugs> 1 : []
+[1]
+Hugs> [] : 1
+ERROR - Cannot infer instance
+*** Instance   : Num [[a]]
+*** Expression : [] : 1
+
+Hugs> 2 : 1 : []
+[2,1]
+Hugs> 2 : [1] : []
+ERROR - Cannot infer instance
+*** Instance   : Num [a]
+*** Expression : 2 : [1] : []
+
+Hugs> 4 : [3, 2, 1]
+[4,3,2,1]
+Hugs> "H" : ["e", "l", "l", "o]
+ERROR - Improperly terminated string
+Hugs> "H" : ["e", "l", "l", "o"]
+["H","e","l","l","o"]
+Hugs> reverse (4:[3,2,1])
+[1,2,3,4]
+Hugs> reverse [ 1..100]
+[100,99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60,59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
+Hugs> take 5 (reverse [1..100])
+[100,99,98,97,96]
+Hugs> sum [1..10]
+55
+Hugs> product [1..10]
+3628800
+Hugs> product [1..20]
+2432902008176640000
+Hugs> (1, 2)
+(1,2)
+Hugs> (1, 2) ++ (3, 4)
+ERROR - Type error in application
+*** Expression     : (1,2) ++ (3,4)
+*** Term           : (3,4)
+*** Type           : (b,c)
+*** Does not match : [a]
+
+Hugs> (1, 2, 3)
+(1,2,3)
+Hugs> :load Prop
+Prop> :e
+ERROR - Hugs is not configured to use an editor
+Prop> :e vim
+ERROR - Hugs is not configured to use an editor
+Prop> FALSE
+FALSE
+Prop> NOT FALSE
+NOT FALSE
+Prop> AND FALSE TRUE
+AND FALSE TRUE
+Prop> AND NOT NOT
+ERROR - Type error in application
+*** Expression     : AND NOT NOT
+*** Term           : NOT
+*** Type           : Prop -> Prop
+*** Does not match : Prop
+
+Prop> picTree (NOT (VAR "A"))
+NOT
+ | 
+ A 
+
+Prop> picTree (AND (OR (VAR "A") TRUE) (NOT TRUE))
+    AND    
+  .------. 
+  |      | 
+ OR     NOT
+.---.    | 
+|   |  TRUE
+A TRUE     
+
+Prop> eval (AND FALSE ( NOT TRUE)) [("A", True)]
+ERROR - Type error in application
+*** Expression     : eval (AND FALSE (NOT TRUE)) [("A",True)]
+*** Term           : [("A",True)]
+*** Type           : [([Char],Bool)]
+*** Does not match : Prop
+
+Prop> eval [] (AND FALSE ( NOT TRUE))
+False
+Prop> eval [("A"< FALSE)] (AND FALSE ( NOT "A"))
+ERROR - Type error in application
+*** Expression     : NOT "A"
+*** Term           : "A"
+*** Type           : String
+*** Does not match : Prop
+
+Prop> eval [("A", FALSE)] (AND FALSE ( NOT "A"))
+ERROR - Type error in application
+*** Expression     : NOT "A"
+*** Term           : "A"
+*** Type           : String
+*** Does not match : Prop
+
+Prop> eval [("A", True)] (AND (OR (VAR "A") TRUE) (NOT TRUE))
+False
+Prop> truthTable (AND (VAR "A") (VAR "B"))
+  A   |   B   |      
+------+-------+------
+False | False | False
+------+-------+------
+False | True  | False
+------+-------+------
+True  | False | False
+------+-------+------
+True  | True  | True 
+
+Prop> :l propScratch
+ERROR - Unable to open file "propScratch"
+Hugs> :l propScratch.lhs
+ERROR - Unable to open file "propScratch.lhs"
+Hugs> :l PropScratch
+PropScratch> :e
+ERROR - Hugs is not configured to use an editor
+PropScratch> :evi
+Command not recognised.  Type :? for help
+PropScratch> :r
+PropScratch> a
+VAR "A"
+PropScratch> b
+VAR "B"
+PropScratch> c
+VAR "C"
+PropScratch> d
+VAR "D"
+PropScratch> :r
+PropScratch> listProps ex0
+ERROR - Undefined variable "ex0"
+PropScratch> :r
+PropScratch> listProps ex0
+ERROR - Type error in application
+*** Expression     : listProps ex0
+*** Term           : ex0
+*** Type           : Prop
+*** Does not match : [Prop]
+
+PropScratch> listProps [ex0]
+1) AND (OR (VAR "A") TRUE) (NOT (VAR "B"))
+
+PropScratch> :r
+ERROR "./PropScratch.lhs":18 - Program line next to comment
+Prop> :r
+ERROR "./PropScratch.lhs":21 - Syntax error in expression (unexpected `;', possibly due to bad layout)
+Prop> :r
+PropScratch> noramlize env0 ex1
+ERROR - Undefined variable "noramlize"
+PropScratch> normalize env0 ex1
+[AND (OR (VAR "A") (NOT (VAR "B"))) (OR (NOT (VAR "A")) (VAR "B")),AND (OR TRUE (NOT (VAR "B"))) (OR (NOT (VAR "A")) (VAR "B")),AND (OR TRUE (NOT FALSE)) (OR (NOT (VAR "A")) (VAR "B")),AND (OR TRUE TRUE) (OR (NOT (VAR "A")) (VAR "B")),AND TRUE (OR (NOT (VAR "A")) (VAR "B")),AND TRUE (OR (NOT TRUE) (VAR "B")),AND TRUE (OR FALSE (VAR "B")),AND TRUE (OR FALSE FALSE),AND TRUE FALSE,FALSE]
+PropScratch> picTree normalize env0 ex1
+ERROR - Type error in application
+*** Expression     : picTree normalize env0 ex1
+*** Term           : picTree
+*** Type           : e -> Pic
+*** Does not match : a -> b -> c -> d
+
+PropScratch> picTree (normalize env0 ex1)
+ERROR - Cannot infer instance
+*** Instance   : Tree [Prop]
+*** Expression : picTree (normalize env0 ex1)
+
+PropScratch> picTrees (normalize env0 ex1)
+         AND               AND           
+       .------.          .------.        
+       |      |          |      |        
+      OR     OR         OR     OR        
+      .--.   .--.      .---.   .--.      
+      |  |   |  |      |   |   |  |      
+      A NOT NOT B    TRUE NOT NOT B      
+         |   |             |   |         
+         B   A             B   A         
+                                         
+         (1)               (2)           
+                                         
+                                         
+          AND                 AND        
+       .--------.          .-------.     
+       |        |          |       |     
+      OR       OR         OR      OR     
+     .----.    .--.      .----.   .--.   
+     |    |    |  |      |    |   |  |   
+   TRUE  NOT  NOT B    TRUE TRUE NOT B   
+          |    |                  |      
+        FALSE  A                  A      
+                                         
+          (3)                 (4)        
+                                         
+                                         
+   AND            AND            AND     
+  .----.        .-----.        .------.  
+  |    |        |     |        |      |  
+TRUE  OR      TRUE   OR      TRUE    OR  
+      .--.           .--.           .---.
+      |  |           |  |           |   |
+     NOT B          NOT B         FALSE B
+      |              |                   
+      A            TRUE          (7)     
+                                         
+   (5)            (6)                    
+                                         
+                                         
+      AND               AND        FALSE 
+   .-------.           .----.            
+   |       |           |    |      (10)  
+ TRUE     OR         TRUE FALSE          
+        .-----.                          
+        |     |         (9)              
+      FALSE FALSE                        
+                                         
+      (8)                                
+
+PropScratch> picTrees (normalize [] ex1)
+   AND     
+ .------.  
+ |      |  
+OR     OR  
+.--.   .--.
+|  |   |  |
+A NOT NOT B
+   |   |   
+   B   A   
+           
+   (1)     
+
+PropScratch> props
+ERROR - Cannot find "show" function for:
+*** Expression : props
+*** Of type    : [String] -> [Prop]
+
+PropScratch> picTrees take 10 (props ["A"])
+ERROR - Type error in application
+*** Expression     : picTrees take 10 (props ["A"])
+*** Term           : picTrees
+*** Type           : [e] -> Pic
+*** Does not match : a -> b -> c -> d
+
+PropScratch> picTrees (take 10 (props ["A"]))
+TRUE     A      NOT       OR           AND   
+                 |       .----.       .----. 
+ (1)    (2)    TRUE      |    |       |    | 
+                       TRUE TRUE    TRUE TRUE
+                (3)                          
+                          (4)          (5)   
+                                             
+                                             
+  FALSE    NOT     OR        AND       NOT   
+            |     .---.     .---.       |    
+   (6)      A     |   |     |   |      NOT   
+                  A TRUE    A TRUE      |    
+           (7)                        TRUE   
+                   (8)       (9)             
+                                      (10)   
+
+PropScratch> 
+

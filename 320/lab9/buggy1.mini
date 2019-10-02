@@ -1,0 +1,4 @@
+boolean x;
+while (!x)
+ int x;
+x = 7;

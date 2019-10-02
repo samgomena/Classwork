@@ -1,0 +1,701 @@
+-----------------------------------------------------------------
+CS 320 Principles of Programming Languages            Spring 2019
+
+Lab 6: OOP and dynamic dispatch in Python
+-----------------------------------------------------------------
+Goals for this lab:
+
+* Explore basic concepts of object-oriented classes including
+  encapsulation of state and dynamic dispatch.
+
+* Write simple programs using Python classes.
+
+-----------------------------------------------------------------
+In this lab, we will be looking at techniques for working
+with list data structures of the kind that might be defined
+in Haskell using an algebraic datatype definition that looks
+something like the following:
+
+   data List a = Nil | Cons a (List a)
+
+But instead of Haskell, the implementation language that we will
+be using here is Python.  And instead of functional programming,
+we will be focused on the use of object-oriented programming
+methods, and most specifically on the use of a technique called
+"dynamic dispatch".
+
+[Python, of course, includes built-in support for a slightly
+different form of lists, but we will not be using those in
+the following exercises.  One way to think of the lists that
+we work with here is as a particular form of tree structure in
+which each non-leaf node has exactly one value and one subtree
+associated with it.  The techniques that we will explore here
+extend naturally to other, more varied forms of tree structure
+that do not have built-in equivalents in Python.]
+
+-----
+STEP 1: Getting started
+
+Your starting point for these exercises is the following code,
+included with the lab materials in the file "list.py" (not to
+be confused with "lists.py" from the previous lab).  The file
+starts with the definition of two "classes" that correspond
+to the two constructors in the Haskell code above:
+
+  class Nil:
+      """ Represents an empty list. """
+      pass
+
+  class Cons:
+      """ Represents a non-empty list. """
+      def __init__(self, head, tail):
+          self.head = head
+          self.tail = tail
+
+The two declarations begin with the "class" keyword, followed
+by the name of the class and a colon; the body of each class
+is then written as a suitably indented list of statements and
+definitions.  In both cases, we have started the class definition
+with a documentation string, written between triples of double
+quotes.  This is a standard method for embedding documentation
+in a Python class definition (it is also commonly used at the
+start of function definitions in Python).
+
+A Nil object doesn't have any fields, so it doesn't need any
+special initialization; the "pass" statement in the definition
+above is a simple no-op, mostly equivalent to writing an empty
+block like {} in a C or C++ program.  Once the Nil class has been
+defined, we can create objects of the class using an expression
+of the form Nil(); in other words, the class name behaves like
+a function that can be called to create new objects.  In Java
+and C++, you might do something similar by using an expression
+of the form "new Nil()".
+
+A Cons object has two fields, which we will refer to as head
+and tail.  To ensure that these are set to appropriate values
+when a new object is created, we include a definition for the
+__init__ method in the declaration for the Cons class:
+
+- Names like __init__ that begin and end with double underscores
+  typically have special uses in Python and should generally
+  be avoided in user-specific code (unless you are wanting to
+  use the associated special features, of course).
+
+- The __init__ code in this example is used to add an initial
+  head and tail field to each Cons object at the point where
+  it is created.  The three parameters to __init__ specify:
+
+  - self: a reference to the object that is being created
+  - head: the initial value for the head of the new list
+  - tail: the initial value for the tail of the new list
+
+  Given this definition, we can construct a new list from
+  a given head h and tail t by using Cons(h, t); again, the
+  class Cons behaves like a function that creates objects.
+  Behind the scenes, each call like this will allocate a
+  new object, and then pass that object, as well as the values
+  for h and t, as the arguments to the __init__ method.
+
+- __init__ is our first example of a "method", each of which
+  takes (a reference to) an associated object as its first
+  argument.  By convention, most Python programmers use the
+  name "self" for the first argument (in a similar way to the
+  way that "this" is used in Java and C++).  However, "self"
+  is not a keyword in Python, and it is technically possible
+  to use a different name if you prefer.  The self parameter
+  is important because it allows us to access the fields (and,
+  soon, the methods) of an object.  This is why the code in
+  the definition of __init__ uses assignments like "self.head =
+  head" to set the "head" attribute of the "self" object on the
+  left hand side to the value that is currently referenced by
+  the variable "head" on the right hand side.  Unlike Java and
+  C++, you cannot just write "head" by itself in a method and
+  expect that to be treated as shorthand for "self.head"; the
+  former will always be treated as a variable reference, while
+  the latter is the form you must use to access an attribute.
+
+The last few lines of list.py include some simple code for use
+in testing:
+
+  alist = Cons(1, Cons(2, Cons(3, Nil())))
+  blist = Cons(4, Cons(5, Cons(6, Cons(7, Nil()))))
+
+  print(alist)
+  print(blist)
+
+In particular, this code creates two new list values and then
+attempts to print the resulting lists.  Unfortunately, if you
+run this (using "python3 list.py") you will find that the result
+is not very informative.  What does the information that is
+displayed tell us?  And, even if the machine does not show us,
+could you draw a diagram to show the data structure that is
+built by the assignments to alist and blist in the code above?
+
+-----
+STEP 2: Printing string representations of lists
+
+In general, you can construct a printable string representation
+for a value v in Python by using a function call of the form
+str(v): for example, str(3) == '3'.  But what string will the
+Python system generate for a new, user-defined class like the
+Nil and Cons examples introduced above?  If you followed the
+instructions above, you've seen that, by default, it only shows
+information about the main object and it doesn't display any
+details about the fields/attributes of that object.
+
+We can override this default behavior by adding an implementation
+for a method called __str__ to each of the new classes.
+(Note that this is another example of a special name, marked
+by the double underscores at the beginning and the end.)
+More specifically, the __str__ method is expected to return a
+"string representation" of the associated object.  It is up to
+the programmer to decide exactly what information this should
+include, but in the following we will arrange for it to show
+the main values that were used to construct the object.
+
+To accomplish this, add the following method definitions to
+the body of the Nil class (you can delete the "pass" at this
+point):
+
+    def __str__(self):
+        return 'Nil()'
+
+And insert the following code into the Cons class:
+
+    def __str__(self):
+        return 'Cons(' + str(self.head) + ', ' + str(self.tail) + ')'
+
+Each of these definitions should seem reasonable enough, but
+there is an important detail to understand here.  Internally,
+when you write "str(v)" in a program (or when you write
+"print(v)"), the Python system will determine that it needs to
+call __str__(v).  But exactly which version of __str__ should
+it use?  The code above shows two possible implementations, and
+also suggests a very natural general rule: if v is an object
+of class C, then a call of the form __str__(v) should use the
+implementation for __str__ that was included in the definition
+of C.
+
+This is exactly the process of "dynamic dispatch" that is the
+focus of our attention in these exercises.  The "dispatch"
+part of this name refers to the process of calling a function.
+The "dynamic" part of the name is an acknowledgement that
+decision about which piece of code should be called will be
+made dynamically, that is, when the program runs.  In general,
+it is not possible for us to determine statically which version
+of __str__ will be used.  In the recursive call str(self.tail)
+at end of the Cons definition above, for example, we cannot
+know in general which version of __str__ will be called:
+instead, we will have to wait until the program is executed,
+and then choose whichever version of __str__ is appropriate
+give the type of value referenced by self.tail.  Because Python
+is dynamically typed, it is even possible that self.tail will
+be something other than a Nil or a Cons object; but so long as
+that object also has a __str__ method, it will still be possible
+for the Python system to generate a suitable output string.
+
+Run the new version of list.py with the added implementations of
+__str__; the resulting output should now show you more clearly
+how each of alist and blist was constructed.  As a quick sanity
+check, modify the definitions of alist and blist and rerun the
+program, making sure that the new output properly reflects the
+changes that you have made.
+
+-----
+STEP 3: Constructing lists programmatically ("synthesis")
+
+The definitions of alist and blist given above use calls to Cons
+and Nil to build specific list structures.  But we can also use
+the procedural programming features of Python to construct list
+values programmatically, that is, by using code to generate
+list structures from some other input data value.
+
+The following code, for example, should be added to the end of
+list.py:
+
+  def nums(lo, hi):
+      return Cons(lo, nums(lo+1, hi)) if lo < hi else Nil()
+
+  print(nums(0,5))
+
+Now, when you run this, you should see a list with the numbers
+from 0 up to but not including 5.  If you change either of those
+values, then you should see a corresponding change in the output.
+
+Exercise: Write a new Python function such that powers2(n)
+will return a list containing the first n powers of 2.  [Hint:
+This might be a little bit trickier than you expect at first
+glance; don't be afraid to use an auxiliary (additional)
+function definition in your answer if that helps to make the
+task a bit easier ...]
+
+-----
+STEP 4: A user-defined method for calculating the length of
+a list
+
+We have already seen that it is possible to add or customize
+the behavior of a class by adding new method implementations.
+The __str__ example shown above has special significance in
+Python because of the way it is used in the implementation of
+the str() function.  However, it is also possible for us to add
+our own methods.  Your next task, for example, is to add the
+following method implementations to the Nil and Cons classes
+(one in each; you should be able to figure out which is which!)
+
+    def length(self):
+        """ There are no elements in an empty list. """
+        return 0
+
+    def length(self):
+        """ Count the elements in this list.  """
+        return 1 + self.tail.length()
+
+Each of these definitions includes a documentation string.
+More importantly, each one also includes the "self" argument
+that is required for any method definition.  The last line,
+however, reveals another important detail: although we write
+"length(self)" at the start of the definition, calls to this
+method, are written in the form "obj.length()".  This syntax
+places special emphasis on the first argument of the method call
+by moving it outside the parentheses and writing it instead in
+front of the period that precedes the method name.  In fact,
+Python treats methods as object attributes, just like other
+fields, so "obj.length()" is really the same as "(obj.length)()",
+and we can refer to a method like this without specifying any
+argument values by writing just "obj.length".
+
+In an expression of the form "obj.length()", the "obj" portion
+is sometimes described as the receiver and the "length()"
+portion is similarly referred to as a message.  In this way,
+we can think of "obj.length()", not as a function call, but
+as sending a message to an object and, in this case, waiting
+for that object to respond by sending back the length of the
+associated list.
+
+You can see this syntax in the following test code, which can
+be used to calculate the lengths of the alist and blist values
+that we are using as running examples:
+
+  print(alist.length())
+  print(blist.length())
+
+Note that the code we have written here relies on some
+assumptions:
+
+1) The values alist and blist have been constructed using a
+suitable combination of Cons and Nil calls.
+
+2) The length() method works correctly because we have included
+a suitable implementation in each of the Nil and Cons classes.
+
+If we were to modify the definitions of alist or blist to
+use another class instead of Nil or Cons, or if we were to
+remove the implementation of the length() method in either
+or both of those classes, then the Python interpreter would
+still load our program but it would trigger an error when the
+program is executed.  Examples like this demonstrate both the
+flexibility that Python's dynamic typing provides, as well as
+its potential for hidden bugs that may go undetected for some
+time if a program is not thoroughly tested.
+
+Exercise: Add an append method to the code in list.py such that
+xs.append(ys) will return a list containing all the elements from
+xs followed by all of the elements from ys.  The following two
+lines of code might be useful for testing your implementation:
+
+  print(alist.append(blist))
+  print(blist.append(alist))
+
+[Hint: You do not actually need to copy all the elements in ys
+when you are creating the result list.  If you try to append a
+Nil list onto the front of any other list ys, for example, then
+you can just return ys directly.]
+
+-----
+STEP 5: Getting hooked on infix operators!
+
+Perhaps you would prefer to be able to write list appends using
+a syntax that looks more like "xs + ys" than "xs.append(ys)"?
+Python makes this possible by providing special functions that
+serve as hooks to the standard infix operators.  Internally,
+Python actually treats an expression of the form "x + y" as
+a call of the form "x.__add__(y)".  When we write a standard
+expression like "1 + 2", for example, Python actually interprets
+that as if we were sending a message "__add__(2)" to the number
+1, which would obviously just produce the result 3.  But if x
+is something other than a number, then Python will use dynamic
+dispatch to look for a suitable __add__ method for x.
+
+Exercise: Given this information, modify your implementation of
+list append so that it uses + for list append instead of the
+original ".append()" syntax.  In particular, this means that
+you should be able to modify your testing code to look something
+like the following:
+
+  print(alist + blist)
+  print(blist + alist)
+
+[Aside: What happens if you try to print out the values of
+1 + blist or alist + 2?   What would happen if you were to
+execute the following two lines:
+
+  print((alist + blist).length())
+  print(alist + blist.length())
+
+?]
+
+-----
+STEP 6: Higher-order functions
+
+The term "higher-order function" is used to refer to a function
+that takes another function as an input, or that returns a
+function as its output.  Classic examples of this are the
+"map" and "filter" functions, which originated in functional
+programming, but are now also provided in many other languages.
+Our next task is to implement these functions for our list type.
+
+The general idea here is that "list.map(f)" will return a new
+list by applying the function f to each value in the receiver
+list.  For example, we could define a square function explicitly
+or use an anonymous (lambda) expression to create a function
+that we can map across an arbitrary list of numbers:
+
+  def square(x):
+      return x * x
+
+  print(alist.map(square))
+  print(alist.map(lambda x: x+1))
+
+If alist contains the numbers 1, 2, and 3, for example, then the
+first of these calls should display a list containing 1, 4, and
+9, while the second should produce a list containing 2, 3, and 4.
+
+In a similar way, "list.filter(p)" should return a new list
+that is a subsequence of the original list that include all
+(and only) those value that satisfy the predicate p (i.e., the
+values v for which p(v) is True).  For example, we might define:
+
+  def isEven(x):
+      return (x % 2) == 0
+
+  print(alist.filter(isEven))
+  print(alist.filter(lambda x: not(isEven(x))))
+
+In this case, the first call to print will return a list
+containing just 2, while the second will print a list containing
+only 1 and 3 (in that order).
+
+Exercise: Implement the map and filter operations on lists, and
+test your implementations to make sure they perform as expected.
+(In particular, make sure that the order of the output lists
+is the same as the order of the inputs.)  [Hint: Use recursive
+method definition rather than iteration to traverse the input
+lists; in many ways, your implementations will follow similar
+patterns to what you have done in previous exercises.]
+
+-----
+STEP 7: Accumulating parameters
+
+The implementation of the length method in Step 4 used a very
+common pattern for recursive computations on lists:  To find
+the length of a nonempty list, we first make a recursive call
+to find the length of the tail, and then add one to that to
+determine the length of the full list.
+
+The following definition shows an alternative approach that
+uses an "accumulating" parameter to keeps track of the number
+of elements that have been calculated so far:
+
+    def lengthAcc(self, a):      # in Nil
+        return a
+
+    def lengthAcc(self, a):      # in Cons
+        return self.tail.lengthAcc(a)
+
+The idea here is that a call of the form "list.lengthAcc(0)"
+will return the length of the given list.  (More generally,
+a call "list.lengthAcc(n)" will return the same value as the
+expression "n + list.length()"; in practice, however, we will
+probably only be interested in using this function with an
+initial value n = 0.)
+
+[Aside: Why do we care about this?  The following answer goes
+beyond the scope of the current course, but may still be of
+interest to some of you in answering this question.  The main
+reason is that, in some languages, it is possible to produce
+very efficient implementations for functions that are defined
+using accumulating parameters by using an optimization called
+"tail call elimination".  The original length implementation
+requires a sequence of function calls to navigate to the end
+of a list, and then performs a sequence of "1+" operations as
+each of those calls returns.  By comparison, the accumulating
+parameter version can be compiled into a simple loop, using a
+local variable to track the value of the accumulating parameter.]
+
+Exercise: Add two new methods, sumAcc and revOnto, to the Nil
+and Cons classes so that you can evaluate expressions of the
+following forms:
+
+- list.sumAcc(n) to calculate the sum of the elements in the
+  given list of numbers, plus the value of n used in the
+  initial call.  (In practice, of course, this is likely to be
+  of most use with an initial value n=0.)
+
+- list1.revOnto(list2) to calculate the result of reversing the
+  values in list1 onto the front of the values in list2.
+  For example, if list1 contains the values 1, 2, and 3, and if
+  list2 contains the values 4, 5, and 6, then the final result
+  in this case will contain 3, 2, 1, 4, 5, and 6 in that order.
+  (Once again, in practice, this is operations is likely to be
+  most useful when list2 is empty, in which case it will just
+  compute the reverse of list1.)
+
+Of course, you should be sure to add some test cases to your
+program to check that it is working correctly ...
+
+-----
+STEP 8: Introducing a common "base class"
+
+The accumulating parameter functions introduced in the last
+step are useful, but they can also be frustrating because we
+always have to specify an initial value for the extra parameter.
+Of course, we could fix that by defining some methods that do
+this for us automatically:
+
+    def length(self):
+        return self.lengthAcc(0)
+
+    def sum(self):
+        return self.sumAcc(0)
+
+    def reverse(self):
+        return self.revOnto(Nil())
+
+But which class should we put these in?  Clearly, these
+definitions should (and will) work with both Nil and Cons nodes.
+But it would not be a good idea to duplicate code by putting one
+copy of these definitions in each class: that kind of approach
+is likely to create problems down the road, making our programs
+harder to maintain.
+
+A better approach is to put the definitions above in a new
+List class and then modify the definitions of Nil and Cons
+so that they automatically "inherit" those methods from List.
+(If you were wondering whether the List type on the left of the
+Haskell data definition would ever show up to join Nil and Cons,
+now you have your answer!)
+
+To accomplish this, add your definition of the new List class at
+the start of list.py, before the definitions of Nil and Cons.
+And then modify the first lines in the definitions of the
+latter classes so that they include List as a "super class",
+as in the following:
+
+    class Nil(List):
+        ...
+
+    class Cons(List):
+        ...
+
+These changes rely on an detail about dynamic dispatch that
+we have not discussed previously.  When you use an expression
+of the form "obj.m()", the Python system will initially try to
+find a method called "m" in the class corresponding to "obj".
+But if that search is unsuccessful, then it will look to see
+if that class has a super class ... and if so, then it will
+continue searching for "m" in the super class (and then in
+any super classes of that, and so on, until either it finds an
+implementation or runs out of super classes).  In our current
+example, this means that a call like "alist.reverse()" may
+initially start looking for an implementation of "reverse()"
+in the Cons class (assuming that alist is a non-empty list).
+But if/when that fails, it will continue to look for an
+implementation of that method in the List class, at which
+point it will find the common/shared implementation that we
+placed there and proceed to calculate the reverse of alist.
+
+Exercise: Make the changes described above to your version
+of list.py, and test your code to make sure that everything
+is working correctly.
+
+-----
+STEP 9: Prettier lists
+
+All this time, we've been looking at lists that are displayed
+using a notation that looks something like:
+
+   Cons(a, Cons(b, Cons(c, ... Nil())))
+
+Wouldn't it be nice if we could use a more compact notation
+where the same list would look something like the following?
+
+   [a, b, c, ...]
+
+Exercise: Modify the code in list.py to make this change in
+the way that List values are displayed.  To begin, I recommend
+that you eliminate the earlier definitions of __str__ in the
+Nil and Cons classes, and instead add the following in the
+List class:
+
+    def __str__(self):
+        return '[' + self.commaElements() + ']'
+
+The idea here is that self.commaElements() will return a string
+that shows all of the elements of the given list with a single
+comma between each adjacent pair of elements.  Of course,
+now you will also have to implement a suitable commaElements()
+method ... and perhaps you will also find that it is useful to
+introduce at least one additional "helper" method to make that
+task a little easier.  Remember that dynamic dispatch is your
+friend: if you need to do one thing when a certain list is Nil,
+and another when that list is a Cons, then consider adding a
+new method and providing a different implementation in each of
+the two classes.
+
+-----
+STEP 10: Equality for all lists!
+
+How can we determine whether two given lists are equal or not?
+If we were doing this in Haskell, and using the definition of
+the list type that was given at the start above, then we might
+write something like the following:
+
+> eqList Nil         Nil         = True
+> eqList (Cons x xs) (Cons y ys) = x==y && eqList xs ys
+> eqList _           _           = False
+
+In other words, two lists are equal if: either they are both
+Nil; or else if they are both nonempty, with the same head and
+with equal tails.  In all other cases, the two lists must not
+be equal.
+
+How can we implement an operation like this with objects in
+Python instead of the Haskell pattern matching code shown above?
+The answer is to use a technique called "double dispatch",
+which gets its name from the use of two separate uses of
+dynamic dispatch.  If the input lists are "self" and "other",
+then we can start by using a dynamic dispatch to distinguish
+between the cases where self is Nil and where self is Cons.
+After that, we perform a second dynamic dispatch, this time
+based on the type of other.  Expressed as a flowchart, the
+algorithm we want to use might look something like the following:
+
+                                 |
+                                 V
+            self .-------------------------------. self
+             Nil |                               | Cons
+                 |                               |
+                 V                               V
+   other .---------------. other   other .---------------. other
+     Nil |               | Cons      Nil |               | Cons
+         |               |               |               |
+         V               V               V               V
+    return True     return False     return False     compare
+                                                    heads & tails
+
+The test in the lower left of this flowchart can be performed by
+a method that determines whether a given list (in this case, other)
+is equal to Nil.
+
+    def eqNil(self):         # put this in the List class
+        return False
+
+    def eqNil(self):         # put this in the Nil class
+        return True
+
+In a similar, but also more complicated manner, the test on the
+lower right of the flowchart can be implemented by using a method
+to see if a given list (in this case, other) is equal to another
+list (in this case, self) that is known to be a Cons list.  
+
+    def eqCons(other, self): # put this in the List class
+        return False
+
+    def eqCons(other, self): # put this in the Cons class
+        return self.head==other.head and self.tail==other.tail
+
+[Note that, for consistency with the diagram above, I have
+broken the standard convention here of referring to the first
+method parameter as "self".  This is not critical, but helps
+us to keep track of which parameters are which in the lower
+section of the flowchart.]
+
+Finally, we can implement the main equality operation (using
+the method name __eq__ so that Python will use this code when
+performing tests using the == operation on our list objects):
+
+    def __eq__(self, other)  # put this in the Nil class
+        return other.eqNil() # check that other is Nil too
+
+    def __eq__(self, other)  # put this in the Cons class
+        return other.eqCons(self)
+
+Exercise: Add the code above to your copy of list.py.  The
+listings above show all the code you need, so you could just
+copy and paste the code and proceed to testing.  But this is
+clearly the most complicated example that we have seen so far
+in these exercises, so I would encourage you to work through it
+carefully---so that you could reconstruct it for yourself if
+necessary, without looking at the code above.  This will not
+be an easy task, and you may benefit by tracing some examples
+by hand.  But once you have understood this, then you will have
+mastered the power of dynamic dispatch!
+
+-----
+STEP 11: Zipping along!
+
+Taking inspiration again from functional programming, we have
+seen that Haskell provides a zip function for combining the
+elements of two lists in a pairwise fashion:
+
+> zip                        :: List a -> List b -> List (a, b)
+> zip (Cons x xs) (Cons y ys) = Cons (x, y) (zip xs ys)
+> zip _           _           = []
+
+The same function can also be defined using multiple case
+expressions:
+
+> zip as bs = case as of
+>               Nil       -> Nil
+>               Cons x xs -> case bs of
+>                              Nil       -> Nil
+>                              Cons y ys -> Cons (x, y) (zip xs ys)
+
+Can we also implement this operation with the Lists that we
+have been using in these exercises?  Well, if we couldn't,
+then it wouldn't really be fair to set the following exercise
+would it? :-)
+
+Exercise: Modify your code in list.py to include support
+for a zip operation with the same behavior as the Haskell
+implementation shown above.  You could start by adding the
+following method definition in both the Nil and Cons classes so
+that you can at least run some simple tests.  But you will have
+to make some changes to get this working properly in all cases.
+
+    def zip(self, other):
+        return self
+
+Some examples that you might want to use in your tests:
+
+  print(nums(0,6).zip(nums(1,7)))
+  print(nums(0,6).zip(nums(0,3)))
+  print(nums(0,3).zip(nums(0,6)))
+
+which should produce the following outputs:
+
+  [(0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6)]
+  [(0, 0), (1, 1), (2, 2)]
+  [(0, 0), (1, 1), (2, 2)]
+
+[Aside: If you follow the structure of the second Haskell
+definition for zip given above, then you'll see that there are
+only two case constructs.  As such, this example should be a
+little easier than the equality example in the previous step,
+which required three cases (corresponding to the three decision
+points in the flowchart).  Then again, double dispatch can
+still be mind bending if you're seeing it for the first time.
+Maybe you'll have new appreciation for pattern matching in
+Haskell by the time you've completed these exercises! :-)]
+
+-----------------------------------------------------------------

@@ -1,0 +1,34 @@
+digraph AST {
+node [shape=box style=filled fontname=Courier];
+0[label="Block" fillcolor="lightblue"];0 -> 1[label=" 0", fontcolor="gray"];
+1[label="VarDecl\n(1, 1)" fillcolor="lightblue"];1 -> 2[label=" type", fontcolor="gray"];
+2[label="int" fillcolor="lightblue"];1 -> 3[label=" 0", fontcolor="gray"];
+3[label="Id(\"i\")\n(5, 1)" fillcolor="lightsalmon"];1 -> 4[label=" 1", fontcolor="gray"];
+4[label="Id(\"t\")\n(8, 1)" fillcolor="lightsalmon"];0 -> 5[label=" 1", fontcolor="gray"];
+5[label="ExprStmt\n(1, 2)" fillcolor="lightblue"];5 -> 6[label=" exp", fontcolor="gray"];
+6[label="Assignment\n(3, 2)" fillcolor="lightsalmon"];6 -> 7[label=" lhs", fontcolor="gray"];
+7[label="Id(\"i\")\n(1, 2)" fillcolor="lightsalmon"];6 -> 8[label=" rhs", fontcolor="gray"];
+8[label="IntLit(0)\n(5, 2)" fillcolor="lightsalmon"];0 -> 9[label=" 2", fontcolor="gray"];
+9[label="ExprStmt\n(1, 3)" fillcolor="lightblue"];9 -> 10[label=" exp", fontcolor="gray"];
+10[label="Assignment\n(3, 3)" fillcolor="lightsalmon"];10 -> 11[label=" lhs", fontcolor="gray"];
+11[label="Id(\"t\")\n(1, 3)" fillcolor="lightsalmon"];10 -> 12[label=" rhs", fontcolor="gray"];
+12[label="IntLit(0)\n(5, 3)" fillcolor="lightsalmon"];0 -> 13[label=" 3", fontcolor="gray"];
+13[label="While\n(1, 4)" fillcolor="lightblue"];13 -> 14[label=" test", fontcolor="gray"];
+14[label="Lt\n(9, 4)" fillcolor="lightsalmon"];14 -> 15[label=" left", fontcolor="gray"];
+15[label="Id(\"i\")\n(8, 4)" fillcolor="lightsalmon"];14 -> 16[label=" right", fontcolor="gray"];
+16[label="IntLit(10)\n(10, 4)" fillcolor="lightsalmon"];13 -> 17[label=" body", fontcolor="gray"];
+17[label="Block" fillcolor="lightblue"];17 -> 18[label=" 0", fontcolor="gray"];
+18[label="ExprStmt\n(3, 5)" fillcolor="lightblue"];18 -> 19[label=" exp", fontcolor="gray"];
+19[label="Assignment\n(5, 5)" fillcolor="lightsalmon"];19 -> 20[label=" lhs", fontcolor="gray"];
+20[label="Id(\"i\")\n(3, 5)" fillcolor="lightsalmon"];19 -> 21[label=" rhs", fontcolor="gray"];
+21[label="Add\n(9, 5)" fillcolor="lightsalmon"];21 -> 22[label=" left", fontcolor="gray"];
+22[label="Id(\"i\")\n(7, 5)" fillcolor="lightsalmon"];21 -> 23[label=" right", fontcolor="gray"];
+23[label="IntLit(1)\n(11, 5)" fillcolor="lightsalmon"];17 -> 24[label=" 1", fontcolor="gray"];
+24[label="ExprStmt\n(3, 6)" fillcolor="lightblue"];24 -> 25[label=" exp", fontcolor="gray"];
+25[label="Assignment\n(5, 6)" fillcolor="lightsalmon"];25 -> 26[label=" lhs", fontcolor="gray"];
+26[label="Id(\"t\")\n(3, 6)" fillcolor="lightsalmon"];25 -> 27[label=" rhs", fontcolor="gray"];
+27[label="Add\n(9, 6)" fillcolor="lightsalmon"];27 -> 28[label=" left", fontcolor="gray"];
+28[label="Id(\"t\")\n(7, 6)" fillcolor="lightsalmon"];27 -> 29[label=" right", fontcolor="gray"];
+29[label="Id(\"i\")\n(11, 6)" fillcolor="lightsalmon"];0 -> 30[label=" 4", fontcolor="gray"];
+30[label="Print\n(1, 8)" fillcolor="lightblue"];30 -> 31[label=" exp", fontcolor="gray"];
+31[label="Id(\"t\")\n(7, 8)" fillcolor="lightsalmon"];}
