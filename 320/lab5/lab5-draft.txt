@@ -1,0 +1,203 @@
+-----------------------------------------------------------------
+CS 320 Principles of Programming Languages            Spring 2019
+
+Lab 5: Procedural Programming in Python
+-----------------------------------------------------------------
+Goals for this lab:
+
+* Develop practical skills for writing and executing Python
+  programs.
+
+* Write simple Python programs involving strings, lists, sets,
+  maps, iterators, and file I/O.
+
+* Gain practical experience writing programs using the
+  procedural paradigm.  (i.e., if you already know about the OOP
+  features of Python, do *not* use them in these exercises! :-)
+
+-----------------------------------------------------------------
+Each of the following sections has an associated file with some
+exercises for you to complete.
+
+The necessary Python background for these exercises is in the
+Python tutorial at https://docs.python.org/3/tutorial/ and in
+the library documentation at https://docs.python.org/3/library/.
+Specific sections to read (or skim) are listed with each of the
+exercise sets.
+
+Some of this material may be an easy review if you are already
+familiar with Python.  But if you are seeing it for the first
+time (or if it has been a while since you last used it), then
+expect to take some time to find and understand the material;
+you may also find it useful to take notes of relevant details
+as you work through the exercises.
+
+Acknowledgement: These exercises are taken from Google's Python
+class (https://developers.google.com/edu/python/).  If you want
+additional background, you may want to look at the relevant
+sections of that class, and even watch the associated videos.
+Be aware however, that:
+
+- You are not expected to become an expert in using Python as
+  a result of working through these exercises; do not allow
+  yourself to be overly distracted by a deep dive into Python
+  details!
+
+- The Google class uses Python 2.X rather than the Python 3.X
+  that we are using here; there are some minor differences
+  and incompatibilities.
+
+Useful tip:  You can sometimes find useful information
+about which operations a given value v supports by using a
+command of the form dir(v) to display a listing ("directory")
+of the associated operation names.  For example, dir([1,2,3])
+includes an operation called 'count' in its output.  If you then
+use a command like help([1,2,3].count), you will often see a
+"documentation string" that provides a brief summary of what the
+function does.  (In your own code, you can write documentation
+strings as the first line in a given function definition,
+beginning and ending the string with three adjacent double
+quote characters, as in the example """this is a doc string""".)
+
+-----------------------------------------------------------------
+STRINGS:
+
+Exercises in: strings.py
+Test using:   python3 strings.py
+References:   Tutorial 3.1.2 Strings
+              Tutorial 4.1 if statements
+              Tutorial 4.6 Defining Functions
+              Library 4.7.1 String Methods
+Google class: If needed: "Python Strings", Video 1.1
+
+Quick reference of operations on strings:
+
+ len(str)        # return the length of the specified string
+ str1 + str2     # concatenate strings
+ str * n         # make a new string with n copies of given string
+ x in str        # determine if x appears in the given string
+ str[i]          # return the ith element in str (starts at i=0)
+ str[-i]         # return the ith element from the end of str
+ str[i:]         # the "slice" of str starting at index i
+ str[:j]         # the "slice" of str up to but not including index j
+ str[i:j]        # the "slice" of str from index i up to (not including) j
+ str1.find(str2) # find the position of str2 in str1 (ore return -1)
+
+-----------------------------------------------------------------
+LISTS:
+
+Exercises in: lists.py
+Test using:   python3 lists.py
+References:   Tutorial 3.1.3 Lists
+              Tutorial 4.2 for statements
+              Tutorial 4.3 The range() Function
+              Tutorial 5.1 More on Lists (but not subsections)
+              Tutorial 5.3 Tuples and Sequences
+Google class: If needed: "Lists and Sorting", Video 1.2
+
+Quick reference of operations on lists:  Lists support the same
+operations as strings, but because they are mutable, they also
+support some additional operations that perform "destructive"
+updates on list structures:
+
+ list.append(x) # add x to the end of the given list
+ list1 += list2 # append elements in list2 to list1
+ list.pop()     # delete and return last element
+ list.pop(i)    # delete and return element i from the given list
+ list.reverse() # reverse the elements in the given list
+ list.sort()    # sort the elements in the given list
+
+Note also that the slice operations on lists return new lists
+and do not modify the original lists.  In particular, list[:]
+creates a fresh copy of the given list.
+
+-----------------------------------------------------------------
+GRAPHS:
+
+The final exercise is to implement a breadth-first search
+algorithm on graphs, using the same representation and
+techniques as in the depth-first search and strongly connected
+components examples that were described in the lecture.
+The code for the latter is included with these lab materials
+in the file scc.py, and you can add your implementation (and
+tests) for the breadth-first search to the end of that file.
+
+A breadth-first search takes a graph and a vertex that will
+be the starting point for the search within that graph.
+It produces a list containing all of the vertices that can
+be reached from the starting point.  If a vertex v can be
+reached from the starting point by a path with n edges, and
+if it always takes more than n steps to reach another vertex
+w, then v will appear at an earlier position in the result
+list than w.  In particular, this implies that the starting
+vertex will appear at the beginning of the result list.
+If two distinct vertices v and w can each be reached after
+n steps, but not with any shorter path, then the order in
+which v and w are listed in the result is not specified;
+v can come before or after w.
+
+If you are not familiar with this algorithm, then it is
+strongly recommended that you draw some example graphs on a
+piece of paper and try to understand what output you should
+expect as the result of a breadth-first search in each case.
+Of course, you are welcome to ask for help if you have any
+questions!  Drawing pictures of graphs like this is also
+likely to be independently useful when you are checking the
+results of your testing.
+
+The standard implementation of this algorithm uses a queue
+data structure to keep track of the vertices that are known
+to be reachable from the starting node, but have not yet been
+fully visited.  The following outline sketches the beginnings
+of a possible implementation for this algorithm ... but it
+also includes a big gap that you will need to fill!
+
+def bfs(graph, start):
+    visited = []      # records the places we have been
+    queue   = [start] # records the places yet to visit
+
+    # Basic algorithm: Extract vertices from the front of
+    # the queue and add their neighbors to the end of the
+    # queue (if those vertices have not been seen before).
+    # Add vertices to the visited list in the order that
+    # they are visited.
+
+    return visited
+
+Test your implementation to ensure that it is working
+correctly.  You may use the "graph" and "other" examples
+that are defined in scc.py for this; don't forget that you
+may be able to obtain multiple tests for a given graph by
+varying the choice of the starting point that you use.
+
+[Note: The code above suggests using a Python list to
+represent a queue data structure.  With that choice, we can
+add new elements using queue.append(x) and remove elements
+with queue.pop(0).  Python actually provides a more efficient
+implementation of queues (see Tutorial 5.1.2); which you are
+welcome (but not required) to use in your solution.]
+
+-----------------------------------------------------------------
+DICTIONARIES AND FILES:  OPTIONAL EXTRAS
+
+If you complete all of the other exercises during the lab
+(unlikely unless you already have a lot of Python experience),
+then you may enjoy tackling the following additional exercises.
+At this point in the class, however, you are not expected to be
+familiar with any of the details for these exercises that were
+not already covered in the lecture or in earlier exercises.
+
+Exercises in: wordcount.py
+              mimic.py
+Test using:   python3 <filename>
+References:   Tutorial 5.4 Sets
+              Tutorial 5.5 Dictionaries
+              Tutorial 5.6 Looping Techniques
+              Tutorial 5.7 More on Conditions
+              Tutorial 6.1 Modules
+              Tutorial 6.1.1 Executing Modules as scripts
+              Tutorial 7.2 Reading and Writing Files
+              Tutorial 7.2.1 Methods of File Objects
+Google class: If needed: "Dicts and Files", Video 1.3
+
+-----------------------------------------------------------------

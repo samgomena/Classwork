@@ -1,0 +1,139 @@
+-----------------------------------------------------------------
+CS 320 Principles of Programming Languages            Spring 2019
+Lab 2
+-----------------------------------------------------------------
+Goals for this lab:
+
+* Use context-free grammars to describe the syntax of simple
+  programming languages.
+
+* Develop practical skills in writing grammars; working with
+  derivations, sentences, and parse trees; and testing for
+  ambiguity.
+
+* Build experience working in a Haskell environment.
+
+-----------------------------------------------------------------
+Outline:
+
+- Getting started:  Linux Lab logins required.  Open up a
+  terminal window.
+
+    cd cs320   # or whatever directory name you've chosen
+               # (should include files from Lab 1)
+
+    cat ~mpj/get-lab2      # if you want to read the commands
+    source ~mpj/get-lab2
+
+- Many of the comments about Haskell from the start of Lab 1
+  apply here too.
+
+- Start "script lab2notes.txt"
+  Avoid running programs that write special characters to
+  the screen (e.g., text editors) while running script;
+  those characters will be captured along with all of the
+  other input/output.
+
+- If you prefer, you can just copy and paste the text from your
+  terminal window in to a file at the end of the session ... so
+  long as you don't forget to do that and/or don't clear the
+  buffer before then.  In that case, it might be a good idea to
+  make sure that your terminal window does not have a limit on
+  the number of lines that it saves.
+
+-----------------------------------------------------------------
+- "The Grammar Toolkit"
+
+- Start "hugs GrammarScratch".
+
+- In a separate window, open up GrammarScratch.lhs.
+  Explain examples at the top of the file, highlighting
+  details of basic syntax used to describe grammars in
+  these examples.
+
+- Mention additional documentation in GrammarToolkit.lhs,
+  but no expectation that you will read or modify the code
+  in that file.
+
+- Create a grammar for the example used in the lecture:
+  "E -> n ; E -> E + E ; E -> E * E ; E -> ( E )"
+
+- Explain and demonstrate each of the functions listed in
+  the reference section of GrammarScratch.lhs.
+
+  * Explain naming conventions:
+      "s" suffix (or lack thereof)
+      "lang", "tree" prefixes
+
+  * May need wide windows; mention key sequences for
+    increasing/decreasing font size.
+
+- Construct some sample derivations.
+
+- Discuss properties of parse trees, and distinction
+  between parse trees and abstract syntax trees.
+
+- Demonstrate that the grammar is ambiguous (emphasize that
+  we only need to find one example to do this).
+
+- Rewrite grammar to eliminate ambiguity.
+  -                                             "A -> n"
+  -                       "P -> A * P ; P -> A ; A -> n"
+  - "E -> P + E ; E -> P ; P -> A * P ; P -> A ; A -> n"
+  - "E -> P + E ; E -> P ; P -> A * P ; P -> A ; A -> n; A -> ( E )"
+
+- :q out of Hugs, exit shell, script saved in a file called
+  "lab2notes.txt"
+
+- Copy and paste terminal session into a text file as an
+  alternative way to keep a record of your work.
+
+-----------------------------------------------------------------
+- Lab exercise:
+
+  This exercise is inspired by a classic problem in parsing and
+  programming language design that is known as the "Dangling
+  Else" (look on Wikipedia, for more information about this,
+  for example).  It is included here as a warm up for working
+  with the GrammarToolkit.
+
+  Consider the following grammar, modeled on the syntax of a
+  typical imperative programming language that allows the "else"
+  portion of an "if" statement to be omitted if no action is
+  required when the condition is false.
+
+      S -> if e then S else S
+      S -> if e then S
+      S -> other
+
+  [For the purposes of this grammar, we use terminal symbols
+  "e" and "other" as placeholders for expressions and (other
+  forms of) statement, respectively; in a real language, these
+  would actually be defined by nonterminals.]
+
+  Show that this grammar is ambiguous by finding *two* examples
+  of sentences in the language defined by this grammar, each
+  of which has two distinct parse trees.  Draw diagrams to
+  illustrate the corresponding **derivations*** showing the
+  parse tree structure at each step in the process.  (As such,
+  a complete solution to this exercise will show four such
+  derivations.)
+
+- [Use the last 10 minutes of the lab to present key components
+  of a solution ... and to explain the practical significance of
+  this example.   We may not be able to present a full solution
+  in this time, but will share some additional notes after all
+  the labs are over.]
+
+-----------------------------------------------------------------
+- Use additional lab time to begin Homework 2:
+
+  - Encouraged to focus on Questions 2 and 3, and to make use of
+    the grammar toolkit for this.
+
+  - Ask for help if you get stuck --- that's why we're here!
+
+  - Be sure to observe the policies for academic integrity that
+    are stated in the syllabus.
+
+-----------------------------------------------------------------

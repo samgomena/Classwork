@@ -1,0 +1,1886 @@
+Script started on 2019-04-10 14:04:57-0700
+]0;gomenas@quark: ~/Documents/cs320/lab2[01;32mgomenas@quark[00m:[01;34m~/Documents/cs320/lab2[00m$ hg[KugsGr[K[K Grammars[KScratch.lhs 
+__   __ __  __  ____   ___      _________________________________________
+||   || ||  || ||  || ||__      Hugs 98: Based on the Haskell 98 standard
+||___|| ||__|| ||__||  __||     Copyright (c) 1994-2005
+||---||         ___||           World Wide Web: http://haskell.org/hugs
+||   ||                         Bugs: http://hackage.haskell.org/trac/hugs
+||   || Version: September 2006 _________________________________________
+
+Haskell 98 mode: Restart with command line option -98 to enable extensions
+
+Type :? for help
+GrammarScratch> [KGrammarScratch> g1
+"A -> a A ; A ->"
+GrammarScratch> g2
+"E -> num ; E -> E + E; E -> - E ; E -> ( E )"
+GrammarScratch> brackets
+"B -> ; B -> [ B ]"
+GrammarScratch> :l
+Hugs> :r
+Hugs> :l GrammarScratch.lhs 
+GrammarScratch> :r
+GrammarScratch> er
+ERROR - Undefined variable "er"
+GrammarScratch> eg
+ERROR - Undefined variable "eg"
+GrammarScratch> :r
+GrammarScratch> eg
+ERROR - Undefined variable "eg"
+GrammarScratch> :r
+GrammarScratch> eg
+ERROR - Undefined variable "eg"
+GrammarScratch> readGrammar g1
+Grammar [("A",[Terminal "a",NonTerm "A"]),("A",[])]
+GrammarScratch> readGrammar g1[K6
+Grammar [("P",[NonTerm "N",Terminal "&",NonTerm "P"]),("P",[NonTerm "N"]),("N",[Terminal "~",NonTerm "N"]),("N",[Terminal "t"])]
+GrammarScratch> readGrammar g6[1@p[C[1@r[1@i[1@n[1@t[1@G[C[1@r[1@a[1@m[1@m[1@a[C[1@r[1@ [1@([C[C[C[C[C[C[C[C[C[C[C[C[C[C)
+1) P -> N & P
+2) P -> N
+3) N -> ~ N
+4) N -> t
+
+GrammarScratch> :r
+GrammarScratch> eg
+ERROR - Undefined variable "eg"
+GrammarScratch> eq
+"E -> n ; E -> E + E ; E -> E * E ; E -> ( E )"
+GrammarScratch> :r
+GrammarScratch> printGrammar (R[KreadGrammar eg)
+1) E -> n
+2) E -> E + E
+3) E -> E * E
+4) E -> ( E )
+
+GrammarScratch> grammar eg
+1) E -> n
+2) E -> E + E
+3) E -> E * E
+4) E -> ( E )
+
+GrammarScratch> derivationTrre[K[Keee[K 2 [K3[K[K2 eg
+                                                                                              E                                                                                                                                
+                                                                                              |                                                                                                                                
+ .-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------.                       
+ |                                           |                                                                                       |                                                                 |                       
+ n                                         E + E                                                                                   E * E                                                             ( E )                     
+                                             |                                                                                       |                                                                 |                       
+       .-----------------------------------------------------------------------------.         .-----------------------------------------------------------------------------.         .---------------------------------.     
+       |         |           |           |         |         |           |           |         |         |           |           |         |         |           |           |         |         |           |           |     
+     n + E   E + E + E   E * E + E   ( E ) + E   E + n   E + E + E   E + E * E   E + ( E )   n * E   E + E * E   E * E * E   ( E ) * E   E * n   E * E + E   E * E * E   E * ( E )   ( n )   ( E + E )   ( E * E )   ( ( E ) ) 
+
+GrammarScratch> derivationTree 2 eg[K[Kg1
+         A    
+         |    
+      .------.
+      |      |
+     a A      
+      |       
+   .-----.    
+   |     |    
+ a a A   a    
+
+GrammarScratch> derivationTree 2 g1eg[1P eg1 eg
+           E               
+           |               
+ .---------------------.   
+ |     |       |       |   
+ n   E + E   E * E   ( E ) 
+
+GrammarScratch> sentences 16 eg
+1) E
+2) n
+3) E + E
+4) E * E
+5) ( E )
+6) n + E
+7) E + E + E
+8) E * E + E
+9) ( E ) + E
+10) E + n
+11) E + E + E
+12) E + E * E
+13) E + ( E )
+14) n * E
+15) E + E * E
+16) E * E * E
+
+GrammarScratch> sentences 16 eg[1P eg[1P eg1 eg0 eg0 eg0 eg
+1) E
+2) n
+3) E + E
+4) E * E
+5) ( E )
+6) n + E
+7) E + E + E
+8) E * E + E
+9) ( E ) + E
+10) E + n
+11) E + E + E
+12) E + E * E
+13) E + ( E )
+14) n * E
+15) E + E * E
+16) E * E * E
+17) ( E ) * E
+18) E * n
+19) E * E + E
+20) E * E * E
+21) E * ( E )
+22) ( n )
+23) ( E + E )
+24) ( E * E )
+25) ( ( E ) )
+26) n + n
+27) n + E + E
+28) n + E * E
+29) n + ( E )
+30) n + E + E
+31) E + E + E + E
+32) E * E + E + E
+33) ( E ) + E + E
+34) E + n + E
+35) E + E + E + E
+36) E + E * E + E
+37) E + ( E ) + E
+38) E + E + n
+39) E + E + E + E
+40) E + E + E * E
+41) E + E + ( E )
+42) n * E + E
+43) E + E * E + E
+44) E * E * E + E
+45) ( E ) * E + E
+46) E * n + E
+47) E * E + E + E
+48) E * E * E + E
+49) E * ( E ) + E
+50) E * E + n
+51) E * E + E + E
+52) E * E + E * E
+53) E * E + ( E )
+54) ( n ) + E
+55) ( E + E ) + E
+56) ( E * E ) + E
+57) ( ( E ) ) + E
+58) ( E ) + n
+59) ( E ) + E + E
+60) ( E ) + E * E
+61) ( E ) + ( E )
+62) n + n
+63) E + E + n
+64) E * E + n
+65) ( E ) + n
+66) n + E + E
+67) E + E + E + E
+68) E * E + E + E
+69) ( E ) + E + E
+70) E + n + E
+71) E + E + E + E
+72) E + E * E + E
+73) E + ( E ) + E
+74) E + E + n
+75) E + E + E + E
+76) E + E + E * E
+77) E + E + ( E )
+78) n + E * E
+79) E + E + E * E
+80) E * E + E * E
+81) ( E ) + E * E
+82) E + n * E
+83) E + E + E * E
+84) E + E * E * E
+85) E + ( E ) * E
+86) E + E * n
+87) E + E * E + E
+88) E + E * E * E
+89) E + E * ( E )
+90) n + ( E )
+91) E + E + ( E )
+92) E * E + ( E )
+93) ( E ) + ( E )
+94) E + ( n )
+95) E + ( E + E )
+96) E + ( E * E )
+97) E + ( ( E ) )
+98) n * n
+99) n * E + E
+100) n * E * E
+101) n * ( E )
+102) n + E * E
+103) E + E + E * E
+104) E * E + E * E
+105) ( E ) + E * E
+106) E + n * E
+107) E + E + E * E
+108) E + E * E * E
+109) E + ( E ) * E
+110) E + E * n
+111) E + E * E + E
+112) E + E * E * E
+113) E + E * ( E )
+114) n * E * E
+115) E + E * E * E
+116) E * E * E * E
+117) ( E ) * E * E
+118) E * n * E
+119) E * E + E * E
+120) E * E * E * E
+121) E * ( E ) * E
+122) E * E * n
+123) E * E * E + E
+124) E * E * E * E
+125) E * E * ( E )
+126) ( n ) * E
+127) ( E + E ) * E
+128) ( E * E ) * E
+129) ( ( E ) ) * E
+130) ( E ) * n
+131) ( E ) * E + E
+132) ( E ) * E * E
+133) ( E ) * ( E )
+134) n * n
+135) E + E * n
+136) E * E * n
+137) ( E ) * n
+138) n * E + E
+139) E + E * E + E
+140) E * E * E + E
+141) ( E ) * E + E
+142) E * n + E
+143) E * E + E + E
+144) E * E * E + E
+145) E * ( E ) + E
+146) E * E + n
+147) E * E + E + E
+148) E * E + E * E
+149) E * E + ( E )
+150) n * E * E
+151) E + E * E * E
+152) E * E * E * E
+153) ( E ) * E * E
+154) E * n * E
+155) E * E + E * E
+156) E * E * E * E
+157) E * ( E ) * E
+158) E * E * n
+159) E * E * E + E
+160) E * E * E * E
+161) E * E * ( E )
+162) n * ( E )
+163) E + E * ( E )
+164) E * E * ( E )
+165) ( E ) * ( E )
+166) E * ( n )
+167) E * ( E + E )
+168) E * ( E * E )
+169) E * ( ( E ) )
+170) ( n + E )
+171) ( E + E + E )
+172) ( E * E + E )
+173) ( ( E ) + E )
+174) ( E + n )
+175) ( E + E + E )
+176) ( E + E * E )
+177) ( E + ( E ) )
+178) ( n * E )
+179) ( E + E * E )
+180) ( E * E * E )
+181) ( ( E ) * E )
+182) ( E * n )
+183) ( E * E + E )
+184) ( E * E * E )
+185) ( E * ( E ) )
+186) ( ( n ) )
+187) ( ( E + E ) )
+188) ( ( E * E ) )
+189) ( ( ( E ) ) )
+190) n + n + E
+191) n + E + E + E
+192) n + E * E + E
+193) n + ( E ) + E
+194) n + E + n
+195) n + E + E + E
+196) n + E + E * E
+197) n + E + ( E )
+198) n + n * E
+199) n + E + E * E
+200) n + E * E * E
+201) n + ( E ) * E
+202) n + E * n
+203) n + E * E + E
+204) n + E * E * E
+205) n + E * ( E )
+206) n + ( n )
+207) n + ( E + E )
+208) n + ( E * E )
+209) n + ( ( E ) )
+210) n + n + E
+211) n + E + E + E
+212) n + E * E + E
+213) n + ( E ) + E
+214) n + E + n
+215) n + E + E + E
+216) n + E + E * E
+217) n + E + ( E )
+218) n + E + E + E
+219) E + E + E + E + E
+220) E * E + E + E + E
+221) ( E ) + E + E + E
+222) E + n + E + E
+223) E + E + E + E + E
+224) E + E * E + E + E
+225) E + ( E ) + E + E
+226) E + E + n + E
+227) E + E + E + E + E
+228) E + E + E * E + E
+229) E + E + ( E ) + E
+230) E + E + E + n
+231) E + E + E + E + E
+232) E + E + E + E * E
+233) E + E + E + ( E )
+234) n * E + E + E
+235) E + E * E + E + E
+236) E * E * E + E + E
+237) ( E ) * E + E + E
+238) E * n + E + E
+239) E * E + E + E + E
+240) E * E * E + E + E
+241) E * ( E ) + E + E
+242) E * E + n + E
+243) E * E + E + E + E
+244) E * E + E * E + E
+245) E * E + ( E ) + E
+246) E * E + E + n
+247) E * E + E + E + E
+248) E * E + E + E * E
+249) E * E + E + ( E )
+250) ( n ) + E + E
+251) ( E + E ) + E + E
+252) ( E * E ) + E + E
+253) ( ( E ) ) + E + E
+254) ( E ) + n + E
+255) ( E ) + E + E + E
+256) ( E ) + E * E + E
+257) ( E ) + ( E ) + E
+258) ( E ) + E + n
+259) ( E ) + E + E + E
+260) ( E ) + E + E * E
+261) ( E ) + E + ( E )
+262) n + n + E
+263) E + E + n + E
+264) E * E + n + E
+265) ( E ) + n + E
+266) E + n + n
+267) E + n + E + E
+268) E + n + E * E
+269) E + n + ( E )
+270) n + E + E + E
+271) E + E + E + E + E
+272) E * E + E + E + E
+273) ( E ) + E + E + E
+274) E + n + E + E
+275) E + E + E + E + E
+276) E + E * E + E + E
+277) E + ( E ) + E + E
+278) E + E + n + E
+279) E + E + E + E + E
+280) E + E + E * E + E
+281) E + E + ( E ) + E
+282) E + E + E + n
+283) E + E + E + E + E
+284) E + E + E + E * E
+285) E + E + E + ( E )
+286) n + E * E + E
+287) E + E + E * E + E
+288) E * E + E * E + E
+289) ( E ) + E * E + E
+290) E + n * E + E
+291) E + E + E * E + E
+292) E + E * E * E + E
+293) E + ( E ) * E + E
+294) E + E * n + E
+295) E + E * E + E + E
+296) E + E * E * E + E
+297) E + E * ( E ) + E
+298) E + E * E + n
+299) E + E * E + E + E
+300) E + E * E + E * E
+301) E + E * E + ( E )
+302) n + ( E ) + E
+303) E + E + ( E ) + E
+304) E * E + ( E ) + E
+305) ( E ) + ( E ) + E
+306) E + ( n ) + E
+307) E + ( E + E ) + E
+308) E + ( E * E ) + E
+309) E + ( ( E ) ) + E
+310) E + ( E ) + n
+311) E + ( E ) + E + E
+312) E + ( E ) + E * E
+313) E + ( E ) + ( E )
+314) n + E + n
+315) E + E + E + n
+316) E * E + E + n
+317) ( E ) + E + n
+318) E + n + n
+319) E + E + E + n
+320) E + E * E + n
+321) E + ( E ) + n
+322) n + E + E + E
+323) E + E + E + E + E
+324) E * E + E + E + E
+325) ( E ) + E + E + E
+326) E + n + E + E
+327) E + E + E + E + E
+328) E + E * E + E + E
+329) E + ( E ) + E + E
+330) E + E + n + E
+331) E + E + E + E + E
+332) E + E + E * E + E
+333) E + E + ( E ) + E
+334) E + E + E + n
+335) E + E + E + E + E
+336) E + E + E + E * E
+337) E + E + E + ( E )
+338) n + E + E * E
+339) E + E + E + E * E
+340) E * E + E + E * E
+341) ( E ) + E + E * E
+342) E + n + E * E
+343) E + E + E + E * E
+344) E + E * E + E * E
+345) E + ( E ) + E * E
+346) E + E + n * E
+347) E + E + E + E * E
+348) E + E + E * E * E
+349) E + E + ( E ) * E
+350) E + E + E * n
+351) E + E + E * E + E
+352) E + E + E * E * E
+353) E + E + E * ( E )
+354) n + E + ( E )
+355) E + E + E + ( E )
+356) E * E + E + ( E )
+357) ( E ) + E + ( E )
+358) E + n + ( E )
+359) E + E + E + ( E )
+360) E + E * E + ( E )
+361) E + ( E ) + ( E )
+362) E + E + ( n )
+363) E + E + ( E + E )
+364) E + E + ( E * E )
+365) E + E + ( ( E ) )
+366) n * n + E
+367) n * E + E + E
+368) n * E * E + E
+369) n * ( E ) + E
+370) n * E + n
+371) n * E + E + E
+372) n * E + E * E
+373) n * E + ( E )
+374) n + E * E + E
+375) E + E + E * E + E
+376) E * E + E * E + E
+377) ( E ) + E * E + E
+378) E + n * E + E
+379) E + E + E * E + E
+380) E + E * E * E + E
+381) E + ( E ) * E + E
+382) E + E * n + E
+383) E + E * E + E + E
+384) E + E * E * E + E
+385) E + E * ( E ) + E
+386) E + E * E + n
+387) E + E * E + E + E
+388) E + E * E + E * E
+389) E + E * E + ( E )
+390) n * E * E + E
+391) E + E * E * E + E
+392) E * E * E * E + E
+393) ( E ) * E * E + E
+394) E * n * E + E
+395) E * E + E * E + E
+396) E * E * E * E + E
+397) E * ( E ) * E + E
+398) E * E * n + E
+399) E * E * E + E + E
+400) E * E * E * E + E
+401) E * E * ( E ) + E
+402) E * E * E + n
+403) E * E * E + E + E
+404) E * E * E + E * E
+405) E * E * E + ( E )
+406) ( n ) * E + E
+407) ( E + E ) * E + E
+408) ( E * E ) * E + E
+409) ( ( E ) ) * E + E
+410) ( E ) * n + E
+411) ( E ) * E + E + E
+412) ( E ) * E * E + E
+413) ( E ) * ( E ) + E
+414) ( E ) * E + n
+415) ( E ) * E + E + E
+416) ( E ) * E + E * E
+417) ( E ) * E + ( E )
+418) n * n + E
+419) E + E * n + E
+420) E * E * n + E
+421) ( E ) * n + E
+422) E * n + n
+423) E * n + E + E
+424) E * n + E * E
+425) E * n + ( E )
+426) n * E + E + E
+427) E + E * E + E + E
+428) E * E * E + E + E
+429) ( E ) * E + E + E
+430) E * n + E + E
+431) E * E + E + E + E
+432) E * E * E + E + E
+433) E * ( E ) + E + E
+434) E * E + n + E
+435) E * E + E + E + E
+436) E * E + E * E + E
+437) E * E + ( E ) + E
+438) E * E + E + n
+439) E * E + E + E + E
+440) E * E + E + E * E
+441) E * E + E + ( E )
+442) n * E * E + E
+443) E + E * E * E + E
+444) E * E * E * E + E
+445) ( E ) * E * E + E
+446) E * n * E + E
+447) E * E + E * E + E
+448) E * E * E * E + E
+449) E * ( E ) * E + E
+450) E * E * n + E
+451) E * E * E + E + E
+452) E * E * E * E + E
+453) E * E * ( E ) + E
+454) E * E * E + n
+455) E * E * E + E + E
+456) E * E * E + E * E
+457) E * E * E + ( E )
+458) n * ( E ) + E
+459) E + E * ( E ) + E
+460) E * E * ( E ) + E
+461) ( E ) * ( E ) + E
+462) E * ( n ) + E
+463) E * ( E + E ) + E
+464) E * ( E * E ) + E
+465) E * ( ( E ) ) + E
+466) E * ( E ) + n
+467) E * ( E ) + E + E
+468) E * ( E ) + E * E
+469) E * ( E ) + ( E )
+470) n * E + n
+471) E + E * E + n
+472) E * E * E + n
+473) ( E ) * E + n
+474) E * n + n
+475) E * E + E + n
+476) E * E * E + n
+477) E * ( E ) + n
+478) n * E + E + E
+479) E + E * E + E + E
+480) E * E * E + E + E
+481) ( E ) * E + E + E
+482) E * n + E + E
+483) E * E + E + E + E
+484) E * E * E + E + E
+485) E * ( E ) + E + E
+486) E * E + n + E
+487) E * E + E + E + E
+488) E * E + E * E + E
+489) E * E + ( E ) + E
+490) E * E + E + n
+491) E * E + E + E + E
+492) E * E + E + E * E
+493) E * E + E + ( E )
+494) n * E + E * E
+495) E + E * E + E * E
+496) E * E * E + E * E
+497) ( E ) * E + E * E
+498) E * n + E * E
+499) E * E + E + E * E
+500) E * E * E + E * E
+501) E * ( E ) + E * E
+502) E * E + n * E
+503) E * E + E + E * E
+504) E * E + E * E * E
+505) E * E + ( E ) * E
+506) E * E + E * n
+507) E * E + E * E + E
+508) E * E + E * E * E
+509) E * E + E * ( E )
+510) n * E + ( E )
+511) E + E * E + ( E )
+512) E * E * E + ( E )
+513) ( E ) * E + ( E )
+514) E * n + ( E )
+515) E * E + E + ( E )
+516) E * E * E + ( E )
+517) E * ( E ) + ( E )
+518) E * E + ( n )
+519) E * E + ( E + E )
+520) E * E + ( E * E )
+521) E * E + ( ( E ) )
+522) ( n ) + n
+523) ( n ) + E + E
+524) ( n ) + E * E
+525) ( n ) + ( E )
+526) ( n + E ) + E
+527) ( E + E + E ) + E
+528) ( E * E + E ) + E
+529) ( ( E ) + E ) + E
+530) ( E + n ) + E
+531) ( E + E + E ) + E
+532) ( E + E * E ) + E
+533) ( E + ( E ) ) + E
+534) ( E + E ) + n
+535) ( E + E ) + E + E
+536) ( E + E ) + E * E
+537) ( E + E ) + ( E )
+538) ( n * E ) + E
+539) ( E + E * E ) + E
+540) ( E * E * E ) + E
+541) ( ( E ) * E ) + E
+542) ( E * n ) + E
+543) ( E * E + E ) + E
+544) ( E * E * E ) + E
+545) ( E * ( E ) ) + E
+546) ( E * E ) + n
+547) ( E * E ) + E + E
+548) ( E * E ) + E * E
+549) ( E * E ) + ( E )
+550) ( ( n ) ) + E
+551) ( ( E + E ) ) + E
+552) ( ( E * E ) ) + E
+553) ( ( ( E ) ) ) + E
+554) ( ( E ) ) + n
+555) ( ( E ) ) + E + E
+556) ( ( E ) ) + E * E
+557) ( ( E ) ) + ( E )
+558) ( n ) + n
+559) ( E + E ) + n
+560) ( E * E ) + n
+561) ( ( E ) ) + n
+562) ( n ) + E + E
+563) ( E + E ) + E + E
+564) ( E * E ) + E + E
+565) ( ( E ) ) + E + E
+566) ( E ) + n + E
+567) ( E ) + E + E + E
+568) ( E ) + E * E + E
+569) ( E ) + ( E ) + E
+570) ( E ) + E + n
+571) ( E ) + E + E + E
+572) ( E ) + E + E * E
+573) ( E ) + E + ( E )
+574) ( n ) + E * E
+575) ( E + E ) + E * E
+576) ( E * E ) + E * E
+577) ( ( E ) ) + E * E
+578) ( E ) + n * E
+579) ( E ) + E + E * E
+580) ( E ) + E * E * E
+581) ( E ) + ( E ) * E
+582) ( E ) + E * n
+583) ( E ) + E * E + E
+584) ( E ) + E * E * E
+585) ( E ) + E * ( E )
+586) ( n ) + ( E )
+587) ( E + E ) + ( E )
+588) ( E * E ) + ( E )
+589) ( ( E ) ) + ( E )
+590) ( E ) + ( n )
+591) ( E ) + ( E + E )
+592) ( E ) + ( E * E )
+593) ( E ) + ( ( E ) )
+594) n + E + n
+595) E + E + E + n
+596) E * E + E + n
+597) ( E ) + E + n
+598) E + n + n
+599) E + E + E + n
+600) E + E * E + n
+601) E + ( E ) + n
+602) n * E + n
+603) E + E * E + n
+604) E * E * E + n
+605) ( E ) * E + n
+606) E * n + n
+607) E * E + E + n
+608) E * E * E + n
+609) E * ( E ) + n
+610) ( n ) + n
+611) ( E + E ) + n
+612) ( E * E ) + n
+613) ( ( E ) ) + n
+614) n + n + E
+615) n + E + E + E
+616) n + E * E + E
+617) n + ( E ) + E
+618) n + E + n
+619) n + E + E + E
+620) n + E + E * E
+621) n + E + ( E )
+622) n + E + E + E
+623) E + E + E + E + E
+624) E * E + E + E + E
+625) ( E ) + E + E + E
+626) E + n + E + E
+627) E + E + E + E + E
+628) E + E * E + E + E
+629) E + ( E ) + E + E
+630) E + E + n + E
+631) E + E + E + E + E
+632) E + E + E * E + E
+633) E + E + ( E ) + E
+634) E + E + E + n
+635) E + E + E + E + E
+636) E + E + E + E * E
+637) E + E + E + ( E )
+638) n * E + E + E
+639) E + E * E + E + E
+640) E * E * E + E + E
+641) ( E ) * E + E + E
+642) E * n + E + E
+643) E * E + E + E + E
+644) E * E * E + E + E
+645) E * ( E ) + E + E
+646) E * E + n + E
+647) E * E + E + E + E
+648) E * E + E * E + E
+649) E * E + ( E ) + E
+650) E * E + E + n
+651) E * E + E + E + E
+652) E * E + E + E * E
+653) E * E + E + ( E )
+654) ( n ) + E + E
+655) ( E + E ) + E + E
+656) ( E * E ) + E + E
+657) ( ( E ) ) + E + E
+658) ( E ) + n + E
+659) ( E ) + E + E + E
+660) ( E ) + E * E + E
+661) ( E ) + ( E ) + E
+662) ( E ) + E + n
+663) ( E ) + E + E + E
+664) ( E ) + E + E * E
+665) ( E ) + E + ( E )
+666) n + n + E
+667) E + E + n + E
+668) E * E + n + E
+669) ( E ) + n + E
+670) E + n + n
+671) E + n + E + E
+672) E + n + E * E
+673) E + n + ( E )
+674) n + E + E + E
+675) E + E + E + E + E
+676) E * E + E + E + E
+677) ( E ) + E + E + E
+678) E + n + E + E
+679) E + E + E + E + E
+680) E + E * E + E + E
+681) E + ( E ) + E + E
+682) E + E + n + E
+683) E + E + E + E + E
+684) E + E + E * E + E
+685) E + E + ( E ) + E
+686) E + E + E + n
+687) E + E + E + E + E
+688) E + E + E + E * E
+689) E + E + E + ( E )
+690) n + E * E + E
+691) E + E + E * E + E
+692) E * E + E * E + E
+693) ( E ) + E * E + E
+694) E + n * E + E
+695) E + E + E * E + E
+696) E + E * E * E + E
+697) E + ( E ) * E + E
+698) E + E * n + E
+699) E + E * E + E + E
+700) E + E * E * E + E
+701) E + E * ( E ) + E
+702) E + E * E + n
+703) E + E * E + E + E
+704) E + E * E + E * E
+705) E + E * E + ( E )
+706) n + ( E ) + E
+707) E + E + ( E ) + E
+708) E * E + ( E ) + E
+709) ( E ) + ( E ) + E
+710) E + ( n ) + E
+711) E + ( E + E ) + E
+712) E + ( E * E ) + E
+713) E + ( ( E ) ) + E
+714) E + ( E ) + n
+715) E + ( E ) + E + E
+716) E + ( E ) + E * E
+717) E + ( E ) + ( E )
+718) n + E + n
+719) E + E + E + n
+720) E * E + E + n
+721) ( E ) + E + n
+722) E + n + n
+723) E + E + E + n
+724) E + E * E + n
+725) E + ( E ) + n
+726) n + E + E + E
+727) E + E + E + E + E
+728) E * E + E + E + E
+729) ( E ) + E + E + E
+730) E + n + E + E
+731) E + E + E + E + E
+732) E + E * E + E + E
+733) E + ( E ) + E + E
+734) E + E + n + E
+735) E + E + E + E + E
+736) E + E + E * E + E
+737) E + E + ( E ) + E
+738) E + E + E + n
+739) E + E + E + E + E
+740) E + E + E + E * E
+741) E + E + E + ( E )
+742) n + E + E * E
+743) E + E + E + E * E
+744) E * E + E + E * E
+745) ( E ) + E + E * E
+746) E + n + E * E
+747) E + E + E + E * E
+748) E + E * E + E * E
+749) E + ( E ) + E * E
+750) E + E + n * E
+751) E + E + E + E * E
+752) E + E + E * E * E
+753) E + E + ( E ) * E
+754) E + E + E * n
+755) E + E + E * E + E
+756) E + E + E * E * E
+757) E + E + E * ( E )
+758) n + E + ( E )
+759) E + E + E + ( E )
+760) E * E + E + ( E )
+761) ( E ) + E + ( E )
+762) E + n + ( E )
+763) E + E + E + ( E )
+764) E + E * E + ( E )
+765) E + ( E ) + ( E )
+766) E + E + ( n )
+767) E + E + ( E + E )
+768) E + E + ( E * E )
+769) E + E + ( ( E ) )
+770) n + n * E
+771) n + E + E * E
+772) n + E * E * E
+773) n + ( E ) * E
+774) n + E * n
+775) n + E * E + E
+776) n + E * E * E
+777) n + E * ( E )
+778) n + E + E * E
+779) E + E + E + E * E
+780) E * E + E + E * E
+781) ( E ) + E + E * E
+782) E + n + E * E
+783) E + E + E + E * E
+784) E + E * E + E * E
+785) E + ( E ) + E * E
+786) E + E + n * E
+787) E + E + E + E * E
+788) E + E + E * E * E
+789) E + E + ( E ) * E
+790) E + E + E * n
+791) E + E + E * E + E
+792) E + E + E * E * E
+793) E + E + E * ( E )
+794) n * E + E * E
+795) E + E * E + E * E
+796) E * E * E + E * E
+797) ( E ) * E + E * E
+798) E * n + E * E
+799) E * E + E + E * E
+800) E * E * E + E * E
+801) E * ( E ) + E * E
+802) E * E + n * E
+803) E * E + E + E * E
+804) E * E + E * E * E
+805) E * E + ( E ) * E
+806) E * E + E * n
+807) E * E + E * E + E
+808) E * E + E * E * E
+809) E * E + E * ( E )
+810) ( n ) + E * E
+811) ( E + E ) + E * E
+812) ( E * E ) + E * E
+813) ( ( E ) ) + E * E
+814) ( E ) + n * E
+815) ( E ) + E + E * E
+816) ( E ) + E * E * E
+817) ( E ) + ( E ) * E
+818) ( E ) + E * n
+819) ( E ) + E * E + E
+820) ( E ) + E * E * E
+821) ( E ) + E * ( E )
+822) n + n * E
+823) E + E + n * E
+824) E * E + n * E
+825) ( E ) + n * E
+826) E + n * n
+827) E + n * E + E
+828) E + n * E * E
+829) E + n * ( E )
+830) n + E + E * E
+831) E + E + E + E * E
+832) E * E + E + E * E
+833) ( E ) + E + E * E
+834) E + n + E * E
+835) E + E + E + E * E
+836) E + E * E + E * E
+837) E + ( E ) + E * E
+838) E + E + n * E
+839) E + E + E + E * E
+840) E + E + E * E * E
+841) E + E + ( E ) * E
+842) E + E + E * n
+843) E + E + E * E + E
+844) E + E + E * E * E
+845) E + E + E * ( E )
+846) n + E * E * E
+847) E + E + E * E * E
+848) E * E + E * E * E
+849) ( E ) + E * E * E
+850) E + n * E * E
+851) E + E + E * E * E
+852) E + E * E * E * E
+853) E + ( E ) * E * E
+854) E + E * n * E
+855) E + E * E + E * E
+856) E + E * E * E * E
+857) E + E * ( E ) * E
+858) E + E * E * n
+859) E + E * E * E + E
+860) E + E * E * E * E
+861) E + E * E * ( E )
+862) n + ( E ) * E
+863) E + E + ( E ) * E
+864) E * E + ( E ) * E
+865) ( E ) + ( E ) * E
+866) E + ( n ) * E
+867) E + ( E + E ) * E
+868) E + ( E * E ) * E
+869) E + ( ( E ) ) * E
+870) E + ( E ) * n
+871) E + ( E ) * E + E
+872) E + ( E ) * E * E
+873) E + ( E ) * ( E )
+874) n + E * n
+875) E + E + E * n
+876) E * E + E * n
+877) ( E ) + E * n
+878) E + n * n
+879) E + E + E * n
+880) E + E * E * n
+881) E + ( E ) * n
+882) n + E * E + E
+883) E + E + E * E + E
+884) E * E + E * E + E
+885) ( E ) + E * E + E
+886) E + n * E + E
+887) E + E + E * E + E
+888) E + E * E * E + E
+889) E + ( E ) * E + E
+890) E + E * n + E
+891) E + E * E + E + E
+892) E + E * E * E + E
+893) E + E * ( E ) + E
+894) E + E * E + n
+895) E + E * E + E + E
+896) E + E * E + E * E
+897) E + E * E + ( E )
+898) n + E * E * E
+899) E + E + E * E * E
+900) E * E + E * E * E
+901) ( E ) + E * E * E
+902) E + n * E * E
+903) E + E + E * E * E
+904) E + E * E * E * E
+905) E + ( E ) * E * E
+906) E + E * n * E
+907) E + E * E + E * E
+908) E + E * E * E * E
+909) E + E * ( E ) * E
+910) E + E * E * n
+911) E + E * E * E + E
+912) E + E * E * E * E
+913) E + E * E * ( E )
+914) n + E * ( E )
+915) E + E + E * ( E )
+916) E * E + E * ( E )
+917) ( E ) + E * ( E )
+918) E + n * ( E )
+919) E + E + E * ( E )
+920) E + E * E * ( E )
+921) E + ( E ) * ( E )
+922) E + E * ( n )
+923) E + E * ( E + E )
+924) E + E * ( E * E )
+925) E + E * ( ( E ) )
+926) n + ( n )
+927) n + ( E + E )
+928) n + ( E * E )
+929) n + ( ( E ) )
+930) n + E + ( E )
+931) E + E + E + ( E )
+932) E * E + E + ( E )
+933) ( E ) + E + ( E )
+934) E + n + ( E )
+935) E + E + E + ( E )
+936) E + E * E + ( E )
+937) E + ( E ) + ( E )
+938) E + E + ( n )
+939) E + E + ( E + E )
+940) E + E + ( E * E )
+941) E + E + ( ( E ) )
+942) n * E + ( E )
+943) E + E * E + ( E )
+944) E * E * E + ( E )
+945) ( E ) * E + ( E )
+946) E * n + ( E )
+947) E * E + E + ( E )
+948) E * E * E + ( E )
+949) E * ( E ) + ( E )
+950) E * E + ( n )
+951) E * E + ( E + E )
+952) E * E + ( E * E )
+953) E * E + ( ( E ) )
+954) ( n ) + ( E )
+955) ( E + E ) + ( E )
+956) ( E * E ) + ( E )
+957) ( ( E ) ) + ( E )
+958) ( E ) + ( n )
+959) ( E ) + ( E + E )
+960) ( E ) + ( E * E )
+961) ( E ) + ( ( E ) )
+962) n + ( n )
+963) E + E + ( n )
+964) E * E + ( n )
+965) ( E ) + ( n )
+966) n + ( E + E )
+967) E + E + ( E + E )
+968) E * E + ( E + E )
+969) ( E ) + ( E + E )
+970) E + ( n + E )
+971) E + ( E + E + E )
+972) E + ( E * E + E )
+973) E + ( ( E ) + E )
+974) E + ( E + n )
+975) E + ( E + E + E )
+976) E + ( E + E * E )
+977) E + ( E + ( E ) )
+978) n + ( E * E )
+979) E + E + ( E * E )
+980) E * E + ( E * E )
+981) ( E ) + ( E * E )
+982) E + ( n * E )
+983) E + ( E + E * E )
+984) E + ( E * E * E )
+985) E + ( ( E ) * E )
+986) E + ( E * n )
+987) E + ( E * E + E )
+988) E + ( E * E * E )
+989) E + ( E * ( E ) )
+990) n + ( ( E ) )
+991) E + E + ( ( E ) )
+992) E * E + ( ( E ) )
+993) ( E ) + ( ( E ) )
+994) E + ( ( n ) )
+995) E + ( ( E + E ) )
+996) E + ( ( E * E ) )
+997) E + ( ( ( E ) ) )
+998) n * n + E
+999) n * E + E + E
+1000) n * E * E + E
+
+GrammarScratch> sentences 1000 eg[1P
+n * E * E + E
+
+GrammarScratch> sentence 1000 eg[1@s[C[C[C[C[C[C[C[C[2P6[C[C[C[1@l[1@a[1@n[1@g[1P[1@S
+1) n
+2) ( n )
+3) n + n
+4) n + n
+5) n * n
+6) n * n
+7) ( ( n ) )
+8) n + ( n )
+9) ( n ) + n
+10) ( n ) + n
+11) ( n ) + n
+12) n + ( n )
+13) n + ( n )
+14) n * ( n )
+15) ( n ) * n
+16) ( n ) * n
+
+GrammarScratch> terminals (readGrammar eg)
+["n","+","*","(",")"]
+GrammarScratch> red[KadGrammer[K[Kar eg
+Grammar [("E",[Terminal "n"]),("E",[NonTerm "E",Terminal "+",NonTerm "E"]),("E",[NonTerm "E",Terminal "*",NonTerm "E"]),("E",[Terminal "(",NonTerm "E",Terminal ")"])]
+GrammarScratch> parseTrees 10 eg
+1) E        
+            
+2) E        
+   |        
+   n        
+            
+3)   E      
+     |      
+   .---.    
+   | | |    
+   E + E    
+            
+4)   E      
+     |      
+   .---.    
+   | | |    
+   E * E    
+            
+5)   E      
+     |      
+   .---.    
+   | | |    
+   ( E )    
+            
+6)   E      
+     |      
+   .---.    
+   | | |    
+   E + E    
+   |        
+   n        
+            
+7)      E   
+        |   
+     .-----.
+     |   | |
+     E   + E
+     |      
+   .---.    
+   | | |    
+   E + E    
+            
+8)      E   
+        |   
+     .-----.
+     |   | |
+     E   + E
+     |      
+   .---.    
+   | | |    
+   E * E    
+            
+9)      E   
+        |   
+     .-----.
+     |   | |
+     E   + E
+     |      
+   .---.    
+   | | |    
+   ( E )    
+            
+10)   E     
+      |     
+    .---.   
+    | | |   
+    E + E   
+        |   
+        n   
+            
+
+GrammarScratch> parseTrees 10 eg[K[K[K[K1 r[Keg
+1) E         
+             
+2) E         
+   |         
+   n         
+             
+3)   E       
+     |       
+   .---.     
+   | | |     
+   E + E     
+             
+4)   E       
+     |       
+   .---.     
+   | | |     
+   E * E     
+             
+5)   E       
+     |       
+   .---.     
+   | | |     
+   ( E )     
+             
+6)   E       
+     |       
+   .---.     
+   | | |     
+   E + E     
+   |         
+   n         
+             
+7)      E    
+        |    
+     .-----. 
+     |   | | 
+     E   + E 
+     |       
+   .---.     
+   | | |     
+   E + E     
+             
+8)      E    
+        |    
+     .-----. 
+     |   | | 
+     E   + E 
+     |       
+   .---.     
+   | | |     
+   E * E     
+             
+9)      E    
+        |    
+     .-----. 
+     |   | | 
+     E   + E 
+     |       
+   .---.     
+   | | |     
+   ( E )     
+             
+10)   E      
+      |      
+    .---.    
+    | | |    
+    E + E    
+        |    
+        n    
+             
+11)   E      
+      |      
+    .-----.  
+    | |   |  
+    E +   E  
+          |  
+        .---.
+        | | |
+        E + E
+             
+
+GrammarScratch> parseTrees 11 eg[1@l[1@a[1@n[1@g[1@T[1@r[1@e[1@e[1@ [1P[1@s[1@([1@ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C)
+ERROR - Type error in application
+*** Expression     : langTrees (parseTrees 11 eg)
+*** Term           : parseTrees 11 eg
+*** Type           : Pic
+*** Does not match : Int
+
+GrammarScratch> langTrees (parseTrees 11 eg)[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1@ [C[C[C[C[C[C[K
+1) E         
+   |         
+   n         
+             
+2)   E       
+     |       
+   .---.     
+   | | |     
+   ( E )     
+     |       
+     n       
+             
+3)   E       
+     |       
+   .---.     
+   | | |     
+   E + E     
+   |   |     
+   n   n     
+             
+4)   E       
+     |       
+   .---.     
+   | | |     
+   E + E     
+   |   |     
+   n   n     
+             
+5)   E       
+     |       
+   .---.     
+   | | |     
+   E * E     
+   |   |     
+   n   n     
+             
+6)   E       
+     |       
+   .---.     
+   | | |     
+   E * E     
+   |   |     
+   n   n     
+             
+7)     E     
+       |     
+   .-------. 
+   |   |   | 
+   (   E   ) 
+       |     
+     .---.   
+     | | |   
+     ( E )   
+       |     
+       n     
+             
+8)   E       
+     |       
+   .-----.   
+   | |   |   
+   E +   E   
+   |     |   
+   n   .---. 
+       | | | 
+       ( E ) 
+         |   
+         n   
+             
+9)      E    
+        |    
+     .-----. 
+     |   | | 
+     E   + E 
+     |     | 
+   .---.   n 
+   | | |     
+   ( E )     
+     |       
+     n       
+             
+10)      E   
+         |   
+      .-----.
+      |   | |
+      E   + E
+      |     |
+    .---.   n
+    | | |    
+    ( E )    
+      |      
+      n      
+             
+11)      E   
+         |   
+      .-----.
+      |   | |
+      E   + E
+      |     |
+    .---.   n
+    | | |    
+    ( E )    
+      |      
+      n      
+             
+
+GrammarScratch> langTree 86 eg
+     E   
+     |   
+  .-----.
+  |   | |
+  E   * E
+  |     |
+.---.   n
+| | |    
+E * E    
+|   |    
+n   n    
+
+GrammarScratch> langTree 86 eg[1P eg7 eg
+     E   
+     |   
+  .-----.
+  |   | |
+  E   * E
+  |     |
+.---.   n
+| | |    
+E * E    
+|   |    
+n   n    
+
+GrammarScratch> langTree 87 eg6[C[C[C[1P[1@9
+     E   
+     |   
+  .-----.
+  |   | |
+  E   * E
+  |     |
+.---.   n
+| | |    
+E * E    
+|   |    
+n   n    
+
+GrammarScratch> langTree 96 eg87[C[C[C[1P[1@9
+     E   
+     |   
+  .-----.
+  |   | |
+  E   * E
+  |     |
+.---.   n
+| | |    
+E * E    
+|   |    
+n   n    
+
+GrammarScratch> sentenceDerivations 18 eg
+1) E
+2) E  ==>  n
+3) E  ==>  E + E
+4) E  ==>  E * E
+5) E  ==>  ( E )
+6) E  ==>  E + E  ==>  n + E
+7) E  ==>  E + E  ==>  E + E + E
+8) E  ==>  E + E  ==>  E * E + E
+9) E  ==>  E + E  ==>  ( E ) + E
+10) E  ==>  E + E  ==>  E + n
+11) E  ==>  E + E  ==>  E + E + E
+12) E  ==>  E + E  ==>  E + E * E
+13) E  ==>  E + E  ==>  E + ( E )
+14) E  ==>  E * E  ==>  n * E
+15) E  ==>  E * E  ==>  E + E * E
+16) E  ==>  E * E  ==>  E * E * E
+17) E  ==>  E * E  ==>  ( E ) * E
+18) E  ==>  E * E  ==>  E * n
+
+GrammarScratch> sentenceDerivations 18 eg[1P[1P[1P[1P[1P[1P[1P[1P[1@l[1@a[1@n[1@g
+1) E  ==>  n
+2) E  ==>  ( E )  ==>  ( n )
+3) E  ==>  E + E  ==>  n + E  ==>  n + n
+4) E  ==>  E + E  ==>  E + n  ==>  n + n
+5) E  ==>  E * E  ==>  n * E  ==>  n * n
+6) E  ==>  E * E  ==>  E * n  ==>  n * n
+7) E  ==>  ( E )  ==>  ( ( E ) )  ==>  ( ( n ) )
+8) E  ==>  E + E  ==>  n + E  ==>  n + ( E )  ==>  n + ( n )
+9) E  ==>  E + E  ==>  ( E ) + E  ==>  ( n ) + E  ==>  ( n ) + n
+10) E  ==>  E + E  ==>  ( E ) + E  ==>  ( E ) + n  ==>  ( n ) + n
+11) E  ==>  E + E  ==>  E + n  ==>  ( E ) + n  ==>  ( n ) + n
+12) E  ==>  E + E  ==>  E + ( E )  ==>  n + ( E )  ==>  n + ( n )
+13) E  ==>  E + E  ==>  E + ( E )  ==>  E + ( n )  ==>  n + ( n )
+14) E  ==>  E * E  ==>  n * E  ==>  n * ( E )  ==>  n * ( n )
+15) E  ==>  E * E  ==>  ( E ) * E  ==>  ( n ) * E  ==>  ( n ) * n
+16) E  ==>  E * E  ==>  ( E ) * E  ==>  ( E ) * n  ==>  ( n ) * n
+17) E  ==>  E * E  ==>  E * n  ==>  ( E ) * n  ==>  ( n ) * n
+18) E  ==>  E * E  ==>  E * ( E )  ==>  n * ( E )  ==>  n * ( n )
+
+GrammarScratch> langDerivations 18 eg[1P[1P[1P[1P[1@t[1@r[1@e[1@e[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P eg1 eg
+1) E                                 
+                                     
+2) E   ==>   E                       
+             |                       
+             n                       
+                                     
+3) E   ==>     E                     
+               |                     
+             .---.                   
+             | | |                   
+             E + E                   
+                                     
+4) E   ==>     E                     
+               |                     
+             .---.                   
+             | | |                   
+             E * E                   
+                                     
+5) E   ==>     E                     
+               |                     
+             .---.                   
+             | | |                   
+             ( E )                   
+                                     
+6) E   ==>     E     ==>     E       
+               |             |       
+             .---.         .---.     
+             | | |         | | |     
+             E + E         E + E     
+                           |         
+                           n         
+                                     
+7) E   ==>     E     ==>        E    
+               |                |    
+             .---.           .-----. 
+             | | |           |   | | 
+             E + E           E   + E 
+                             |       
+                           .---.     
+                           | | |     
+                           E + E     
+                                     
+8) E   ==>     E     ==>        E    
+               |                |    
+             .---.           .-----. 
+             | | |           |   | | 
+             E + E           E   + E 
+                             |       
+                           .---.     
+                           | | |     
+                           E * E     
+                                     
+9) E   ==>     E     ==>        E    
+               |                |    
+             .---.           .-----. 
+             | | |           |   | | 
+             E + E           E   + E 
+                             |       
+                           .---.     
+                           | | |     
+                           ( E )     
+                                     
+10) E   ==>     E     ==>     E      
+                |             |      
+              .---.         .---.    
+              | | |         | | |    
+              E + E         E + E    
+                                |    
+                                n    
+                                     
+11) E   ==>     E     ==>     E      
+                |             |      
+              .---.         .-----.  
+              | | |         | |   |  
+              E + E         E +   E  
+                                  |  
+                                .---.
+                                | | |
+                                E + E
+                                     
+
+GrammarScratch> treeDerivations 11 eg[1@L[1@a[1@n[1@g
+1) E   ==>   E                                                           
+             |                                                           
+             n                                                           
+                                                                         
+2) E   ==>     E     ==>     E                                           
+               |             |                                           
+             .---.         .---.                                         
+             | | |         | | |                                         
+             ( E )         ( E )                                         
+                             |                                           
+                             n                                           
+                                                                         
+3) E   ==>     E     ==>     E     ==>     E                             
+               |             |             |                             
+             .---.         .---.         .---.                           
+             | | |         | | |         | | |                           
+             E + E         E + E         E + E                           
+                           |             |   |                           
+                           n             n   n                           
+                                                                         
+4) E   ==>     E     ==>     E     ==>     E                             
+               |             |             |                             
+             .---.         .---.         .---.                           
+             | | |         | | |         | | |                           
+             E + E         E + E         E + E                           
+                               |         |   |                           
+                               n         n   n                           
+                                                                         
+5) E   ==>     E     ==>     E     ==>     E                             
+               |             |             |                             
+             .---.         .---.         .---.                           
+             | | |         | | |         | | |                           
+             E * E         E * E         E * E                           
+                           |             |   |                           
+                           n             n   n                           
+                                                                         
+6) E   ==>     E     ==>     E     ==>     E                             
+               |             |             |                             
+             .---.         .---.         .---.                           
+             | | |         | | |         | | |                           
+             E * E         E * E         E * E                           
+                               |         |   |                           
+                               n         n   n                           
+                                                                         
+7) E   ==>     E     ==>       E       ==>       E                       
+               |               |                 |                       
+             .---.         .-------.         .-------.                   
+             | | |         |   |   |         |   |   |                   
+             ( E )         (   E   )         (   E   )                   
+                               |                 |                       
+                             .---.             .---.                     
+                             | | |             | | |                     
+                             ( E )             ( E )                     
+                                                 |                       
+                                                 n                       
+                                                                         
+8) E   ==>     E     ==>     E     ==>     E         ==>     E           
+               |             |             |                 |           
+             .---.         .---.         .-----.           .-----.       
+             | | |         | | |         | |   |           | |   |       
+             E + E         E + E         E +   E           E +   E       
+                           |             |     |           |     |       
+                           n             n   .---.         n   .---.     
+                                             | | |             | | |     
+                                             ( E )             ( E )     
+                                                                 |       
+                                                                 n       
+                                                                         
+9) E   ==>     E     ==>        E      ==>        E      ==>        E    
+               |                |                 |                 |    
+             .---.           .-----.           .-----.           .-----. 
+             | | |           |   | |           |   | |           |   | | 
+             E + E           E   + E           E   + E           E   + E 
+                             |                 |                 |     | 
+                           .---.             .---.             .---.   n 
+                           | | |             | | |             | | |     
+                           ( E )             ( E )             ( E )     
+                                               |                 |       
+                                               n                 n       
+                                                                         
+10) E   ==>     E     ==>        E      ==>        E      ==>        E   
+                |                |                 |                 |   
+              .---.           .-----.           .-----.           .-----.
+              | | |           |   | |           |   | |           |   | |
+              E + E           E   + E           E   + E           E   + E
+                              |                 |     |           |     |
+                            .---.             .---.   n         .---.   n
+                            | | |             | | |             | | |    
+                            ( E )             ( E )             ( E )    
+                                                                  |      
+                                                                  n      
+                                                                         
+11) E   ==>     E     ==>     E     ==>        E      ==>        E       
+                |             |                |                 |       
+              .---.         .---.           .-----.           .-----.    
+              | | |         | | |           |   | |           |   | |    
+              E + E         E + E           E   + E           E   + E    
+                                |           |     |           |     |    
+                                n         .---.   n         .---.   n    
+                                          | | |             | | |        
+                                          ( E )             ( E )        
+                                                              |          
+                                                              n          
+                                                                         
+
+GrammarScratch> treeLangDerivations 11 eg[1P eg[1P eg[1Peg[1P eg[C eg8 eg6 eg
+E   ==>     E     ==>        E      ==>        E      ==>        E   
+            |                |                 |                 |   
+          .---.           .-----.           .-----.           .-----.
+          | | |           |   | |           |   | |           |   | |
+          E * E           E   * E           E   * E           E   * E
+                          |                 |     |           |     |
+                        .---.             .---.   n         .---.   n
+                        | | |             | | |             | | |    
+                        E * E             E * E             E * E    
+                                                            |        
+                                                            n        
+                                                                     
+                                                                     
+                           ==>        E                              
+                                      |                              
+                                   .-----.                           
+                                   |   | |                           
+                                   E   * E                           
+                                   |     |                           
+                                 .---.   n                           
+                                 | | |                               
+                                 E * E                               
+                                 |   |                               
+                                 n   n                               
+
+GrammarScratch> treeLangDerivation 86 eg[1P eg7 eg
+E   ==>     E     ==>        E      ==>        E      ==>        E   
+            |                |                 |                 |   
+          .---.           .-----.           .-----.           .-----.
+          | | |           |   | |           |   | |           |   | |
+          E * E           E   * E           E   * E           E   * E
+                          |                 |     |           |     |
+                        .---.             .---.   n         .---.   n
+                        | | |             | | |             | | |    
+                        E * E             E * E             E * E    
+                                                                |    
+                                                                n    
+                                                                     
+                                                                     
+                           ==>        E                              
+                                      |                              
+                                   .-----.                           
+                                   |   | |                           
+                                   E   * E                           
+                                   |     |                           
+                                 .---.   n                           
+                                 | | |                               
+                                 E * E                               
+                                 |   |                               
+                                 n   n                               
+
+GrammarScratch> treeLangDerivation 87 eg[C[1P eg[1P eg9 eg6 eg
+E   ==>     E     ==>     E     ==>        E      ==>        E      ==> 
+            |             |                |                 |          
+          .---.         .---.           .-----.           .-----.       
+          | | |         | | |           |   | |           |   | |       
+          E * E         E * E           E   * E           E   * E       
+                            |           |     |           |     |       
+                            n         .---.   n         .---.   n       
+                                      | | |             | | |           
+                                      E * E             E * E           
+                                                        |               
+                                                        n               
+                                                                        
+                                                                        
+                                     E                                  
+                                     |                                  
+                                  .-----.                               
+                                  |   | |                               
+                                  E   * E                               
+                                  |     |                               
+                                .---.   n                               
+                                | | |                                   
+                                E * E                                   
+                                |   |                                   
+                                n   n                                   
+
+GrammarScratch> _[K[KGrammarScratch> [KGrammarScratch> _[K==[K[K==[K[K+[K[KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> [KGrammarScratch> ambigExamples 10 eg
+No ambiguity examples found
+
+GrammarScratch> ambigExamples 10 eg[K1[Kg[1P eg1 eg
+1) E + E + E            
+                        
+        E        E      
+        |        |      
+     .-----.   .-----.  
+     |   | |   | |   |  
+     E   + E   E +   E  
+     |               |  
+   .---.           .---.
+   | | |           | | |
+   E + E           E + E
+                        
+
+GrammarScratch> langSen[K[K[K[K[K[K[Ksentences 10 "a[KA -> n"
+1) A
+2) n
+
+GrammarScratch> sentences 10 "A -> n" ";" "a"[1P"A" "[1@A[1@ [C[C[C[C-">" "
+1) A
+2) n A
+3) 
+4) n n A
+5) n
+6) n n n A
+7) n n
+8) n n n n A
+9) n n n
+10) n n n n n A
+
+GrammarScratch> sentences 10 "A -> n A ; A -> "[1P"
+1) A
+2) n A
+3) 
+4) n n A
+5) n
+6) n n n A
+7) n n
+8) n n n n A
+9) n n n
+10) n n n n n A
+
+GrammarScratch> sentences 10 "A -> n A ; A ->"[C[1@A[1@ 
+1) A
+2) A n A
+3) 
+4) A n A n A
+5) n A
+6) A n A n A
+7) A n
+8) A n A n A n A
+9) n A n A
+10) A n A n A n A
+
+GrammarScratch> sentences 10 "A -> A n A ; A ->"[2P[C[C[C[C[C[C[C[C[C[C[C ""[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[2PambigExamples 11 eg[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csentences 10 "A -> n"[1@P[1@ [1@-[1@>[1@ [1@P[1@ [1@*[1@ [C[1@A[1@ [1@;[1@ [1@P[1@ [1@-[1@>[1@ [C[1@A[1@ [1@;[1@ 
+1) P
+2) P * A
+3) A
+4) P * A * A
+5) A * A
+6) P * n
+7) n
+8) P * A * A * A
+9) A * A * A
+10) P * n * A
+
+GrammarScratch> sentences 10 "P -> P * A ; P -> A ; A -> n"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@l[1@a[1@n[1@g[1P[1@S
+1) n
+2) n * n
+3) n * n
+4) n * n
+5) n * n * n
+6) n * n * n
+7) n * n * n
+8) n * n * n
+9) n * n * n
+10) n * n * n
+
+GrammarScratch> langSentences 10 "P -> P * A ; P -> A ; A -> n"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4Ps[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[11PA -> A n A ; A ->"[2P[C[C[C[C[C[C[C[C[C[C[C[2@A [C[C[C[C[C[C[C[C[C[C[CP -> P * A ; P -> A ; A -> n"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[4@langS[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[KlangSentences 10 "P -> P * A ; P -> A ; A -> n"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@T[1@r[1@e[1@e[C[C[C[C[C[C[C[C[C[C
+ERROR - Undefined variable "langTreeSentences"
+GrammarScratch> langTreeSentences 10 "P -> P * A ; P -> A ; A -> n"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1@P[1@a[1@r[1@s[1@e
+ERROR - Undefined variable "langParseSentences"
+GrammarScratch> langParseSentences 10 "P -> P * A ; P -> A ; A -> n"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1P[KlangSentences 10 "P -> P * A ; P -> A ; A -> n"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1P[1@s
+1) P
+2) P * A
+3) A
+4) P * A * A
+5) A * A
+6) P * n
+7) n
+8) P * A * A * A
+9) A * A * A
+10) P * n * A
+
+GrammarScratch> sentences 10 "P -> P * A ; P -> A ; A -> n"[1@E[1@ [1@-[1@>[1@ [1@E[1@ [1@+[1@ [1@p[1P[C[1@P[1@ [1@;[1@ [1@E[1@ [1@-[1@>[1@ [C[1@P[1@ [1@;[1@ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C ";" "A" "-">" "(" "E" ")"
+1) E
+2) E + P
+3) P
+4) E + P + P
+5) P + P
+6) E + P * A
+7) E + A
+8) P * A
+9) A
+10) E + P + P + P
+
+GrammarScratch> sentences 10 "E -> E + P ; E -> P ; P -> P * A ; P -> A ; A -> n ; A -> ( E )"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1@a[1@m[1@b[1@i[1@g[1@E[1@x[1@a[1@m[1@p[1@l[1@e[1@s[C[1@ [1@1[1@5[1@0[1@0
+No ambiguity examples found
+
+GrammarScratch> :r
+GrammarScratch> grammar unambig
+1) E -> E + P
+2) E -> P
+3) P -> P * A
+4) P -> A
+5) A -> n
+6) A -> ( E )
+
+GrammarScratch> :q
+[Leaving Hugs]
+]0;gomenas@quark: ~/Documents/cs320/lab2[01;32mgomenas@quark[00m:[01;34m~/Documents/cs320/lab2[00m$ exit
+exit
+
+Script done on 2019-04-10 14:56:25-0700

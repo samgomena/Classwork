@@ -1,0 +1,71 @@
+1.
+> For arrays, prepending is much slower than appending.
+
+For arrays:
+```
+time java IntSequenceTimer array 1000000 0 1000 0
+
+real	0m42.895s
+user	0m43.110s
+sys	    0m0.040s
+
+```
+
+For lists:
+```bash
+time java IntSequenceTimer list 1000000 0 1000 0
+
+real	0m4.351s
+user	0m4.492s
+sys	    0m0.212s
+```
+
+Clearly, prepending to lists is much more efficient as the results in the example above show thatit's about an order of magnitude faster.
+
+
+2.
+> For lists, prepending and appending are roughly the same speed.
+
+Prepending to a list:
+```bash
+time java IntSequenceTimer list 1000000 0 1000 0
+
+real	0m4.351s
+user	0m4.492s
+sys	    0m0.212s
+
+```
+
+Appending to a list:
+```bash
+time java IntSequenceTimer list 1000000 1000 0 0
+
+real	0m4.660s
+user	0m4.917s
+sys	    0m0.203s
+
+```
+
+
+3.
+> Prepending is much faster in the list implementation than in the array implementation.
+
+4.
+> Appending is roughly the same speed for both implementation.
+
+```bash
+time java IntSequenceTimer list 1000000 1000 0 0
+
+real	0m4.724s
+user	0m5.033s
+sys	    0m0.221s
+```
+
+```bash
+time java IntSequenceTimer array 1000000 1000 0 0
+
+real	0m3.453s
+user	0m3.586s
+sys	    0m0.179s
+```
+

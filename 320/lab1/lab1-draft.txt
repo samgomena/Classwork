@@ -1,0 +1,257 @@
+-----------------------------------------------------------------
+CS 320 Principles of Programming Languages            Spring 2019
+Lab 1
+-----------------------------------------------------------------
+Goals for this lab:
+
+* Gain some practical experience using a Haskell interpreter
+  (Hugs or GHCi).
+
+* Calculational programming in a functional language.
+
+* Exploring syntax and semantics for the Prop language: abstract
+  syntax trees, truth tables (denotational semantics), evaluation
+  by reduction (operational semantics).
+
+-----------------------------------------------------------------
+Outline:
+
+- Explain role of labs in overall class structure.
+
+- Goals for this particular lab.
+
+- A final version of these notes will be posted on D2L after
+  the last lab (with corrections and revisions gathered during
+  the four labs, as necessary).  Students encouraged to take
+  their own notes; specific suggestion coming up.
+
+- Getting started:  Linux Lab logins required.  Open up a
+  terminal window.
+
+    mkdir cs320
+    chmod 700 cs320
+    cd cs320
+
+  (You can use a different directory name if you wish!)
+
+- Copy some basic files across.
+
+    cat ~mpj/get-lab1
+    source ~mpj/get-lab1
+
+  (You can skip the first line, but it's a good practice to
+  read scripts like this before you run them, just in case :-)
+
+- Why start with functional languages?  (likely to be least
+  familiar; provide more time to develop skills and build
+  experience)
+
+- Be aware of the "Notes on Haskell" document on D2L; take
+  time to read through; don't expect to understand everything
+  first time; do expect to visit it multiple times (and to get
+  a little further every time you do).
+
+- In addition to details of Haskell, the notes also provide
+  practical details on how to set up your Haskell environment.
+
+- Beware "Internet Haskell" ... this is not an in-depth Haskell
+  course; almost everything you need to know about Haskell for
+  the purposes of this course will be in the "Notes on Haskell"
+  document or in the slides.  If you go looking for information
+  in other sources, you may be lead in to using more tools that
+  are more advanced, more complex, or otherwise unnecessary
+  for this class.
+
+- Consider "CS 457 Functional / Languages Programming" as a
+  future elective if you are interested in a deeper study of
+  this topic.
+
+- Start hugs:
+  - (Can use ghci if you prefer, but hugs is our default)
+  - Illustrate REPL
+  - Use arrow keys to access history
+  - Use $$ (or, in ghci, it) to access previous expression
+  - How to exit
+
+- Try to avoid clearing the screen in the window that you use
+  to run hugs.  Then, at the end, you can use "Select All"
+  followed by "Copy" (both in the "Edit" menu of the terminal
+  application), then open up an editor and use "Paste" to
+  keep a record of all the expressions that you ran during
+  the lab.
+
+-----------------------------------------------------------------
+- "Computing by Calculating"
+
+  - Basic arithmetic
+    - integer expressions and operators
+    - precedence for infix operators
+    - prefix operators max and min
+    - function application higher precedence than infix ops
+      max 6 3 + 2  vs  max 6 (3 + 2)
+    - role of parentheses in Haskell
+
+  - the Bool type: False, True, &&, ||, not, if
+
+  - the String type:
+    - "hello, world"
+    - length ..
+    - "hello, world" ++ "!!!!"
+    - "hello, world" ++ replicate 12 '!'
+    - reverse
+    - take
+
+  - lists:  square brackets
+    - []
+    - enumerations
+    - [1, False] -- all elements must have the same type
+    -   brief exploration of type error messages
+    - (:)
+    - arithmetic sequences
+    - ++, replicate, reverse, take, length, sum, product
+
+  - tuples:
+    - (1, 2), (1, False), (1, "hello, False)
+    - fst, snd
+
+  - Any other types that we might like to calculate with?
+
+-----------------------------------------------------------------
+- Calculating with Prop
+
+  - :l Prop
+
+  - Example: FALSE, AND TRUE FALSE ... is it a trap?
+
+  - Constructors: FALSE, TRUE, AND, OR, NOT, VAR
+    Prefix notation
+
+  - Make a mistake to prompt an error message for a syntactically
+    ill-formed expr (e.g., NOT with two args or AND VAR VAR
+    without variable names)
+
+  - picTree
+
+  - eval expr env
+
+  - eval without an environment; explore error message
+
+  - eval with partial environment; explore error message
+
+  - Generating a truth table
+
+  - Using files of definitions
+
+  - Peeking inside Prop.lhs; you are welcome to explore, not
+    expected to understand.
+
+  - .lhs (Literate Haskell Source files)
+
+  - Find definitions of Prop, vars, eval from class.
+
+  - Consider Prop a reusable library; probably don't want to
+    change code in that file (although no harm if you do ... you
+    can always make a fresh copy)
+
+  - hugs PropScratch
+
+  - :l PropScratch
+
+  - Aside: using an editor
+
+    - may like to use a separate window (use :r to reload
+      after changes)
+
+    - use hugs editor integration:
+
+      alias hugs="hugs -E\"vim +%d %s\"    # bash .profile
+      alias hugs 'hugs -E"vim +%d %s"'     # csh, .cshrc:
+
+      (see "Notes on Haskell")
+
+    - for ghci, set EDITOR variable.
+
+  - Using definitions from PropScratch
+
+  - Adding definitions to PropScratch
+    - a = VAR "A", etc...
+
+  - Review function reference in PropScratch.
+
+  - Demonstrate individual uses and show how functions can
+    be used in combinations with one another.  Note that the
+    full implementations are included in Prop.lhs (mostly)
+    and Pic.lhs.  (There are also short summaries for each of
+    these functions in PropScratch.lhs.)
+
+    - vars        :: Prop -> [String]
+    - listProps   :: [Prop] -> IO ()
+    - picTree     :: Prop -> Pic
+    - picTrees    :: [Prop] -> Pic
+    - truthTable  :: Prop -> Pic
+    - truthTables :: [Prop] -> Pic
+    - eval        :: Env -> Prop -> Bool
+    - reduce      :: Env -> Prop -> [Prop]
+    - normalize   :: Env -> Prop -> [Prop]
+    - normalForms :: Env -> Prop -> [Prop]
+    - props       :: [String] -> [Prop]
+
+-----------------------------------------------------------------
+- Lab exercise:
+
+  A four bit value can be represented by a set of four
+  propositional variables, A B C D, where A is the most
+  significant bit and D is the least significant bit.  For
+  example, the number 3 can be represented by the bit pattern
+  0011, which corresponds to having A=B=False and C=D=True, while
+  the number 10 (decimal) can be represented by the bit pattern
+  1010, which corresponds to having A=C=True and B=D=False.
+
+  Draw an abstract syntax tree for a circuit with four inputs A,
+  B, C, D, that will generate a True output precisely in those
+  situations where the input values correspond to a number that
+  is LESS THAN 10 (i.e., to a single decimal digit).  How can
+  you demonstrate that your circuit has the correct behavior?
+
+- [Use the last 10 minutes of the lab to present a solution.]
+
+-----------------------------------------------------------------
+- Use additional lab time to begin Homework 1:
+
+  - Encouraged to focus on Haskell-oriented parts of exercises
+    during lab time; is it ok to use the tools we've just be
+    demonstrating ... yes, that's what they are for!
+
+  - Ask for help if you get stuck --- that's why we're here!
+
+  - Reminders for how to get help out of labs:
+    - Ask during/before/after class
+    - Office hours (includes "by appointment")
+    - D2L posting (anonymous posting is supported)
+    - Slack (lighter weight but limited history) mpj=zipwith
+    - Individual email
+
+  - IMPORTANT: Review syllabus carefully for expectations for
+    homework solutions.
+    "A general expectation is that answers should include
+    appropriate explanation, justification, or commentary
+    to support your answers and show that you understand why
+    your answer is correct. The grading schemes for individual
+    assignments will typically include points specifically for
+    these items, so writing only the final answer to a question,
+    even if it is correct, may not earn full marks."
+
+    See syllabus for more details.
+
+  - Submissions due 11:59pm on day before next lecture Monday
+    if submitted via D2L or at the start of the lecture if
+    submitted on paper.
+
+  - Grading rubric will not be shared before the deadline.
+
+  - Be sure your submission is labeled with your name.
+
+  - Be sure to observe the policies for academic integrity that
+    are stated in the syllabus.
+
+-----------------------------------------------------------------

@@ -1,0 +1,52 @@
+--------------------------------------------------------------------------------
+program : stmts                                  -- Programs
+--------------------------------------------------------------------------------
+stmt    : ";"                                    -- Empty statement
+        | expr ";"                               -- Expression statement
+        | "{" stmts "}"                          -- Block of statements
+        | "while" "(" expr ")" stmt              -- While loop
+        | "if" "(" expr ")" stmt [ "else" stmt ] -- Conditional statement
+        | "print" expr ";"                       -- Print statement
+        | type Id { "," Id } ";"                 -- Variable declaration
+stmts   : /* empty */                            -- Empty list of statements
+        | stmts stmt                             -- Non-empty list of statements
+--------------------------------------------------------------------------------
+type    : "int"                                  -- The type of integer values
+        | "boolean"                              -- The type of Boolean values
+--------------------------------------------------------------------------------
+expr    : id "=" expr                            -- Assignment
+        | lor
+lor     : lor "||" land                          -- Logical or
+        | land
+land    : land "&&" bor                          -- Logical and
+        | bor
+bor     : bor "|" bxor                           -- Bitwise or
+        | bxor
+bxor    : bxor "^" band                          -- Bitwise xor
+        | band
+band    : band "&" eql                           -- Bitwise and
+        | eql
+eql     : eql "==" rel                           -- Equality test
+        | eql "!=" rel                           -- Not equal test
+        | rel
+rel     | rel "<" add                            -- Less than
+        | rel ">" add                            -- Greater than
+        | rel "<=" add                           -- Less than or equal
+        | rel ">=" add                           -- Greater than or equal
+        | add
+add     : add "+" mult                           -- Addition
+        | add "-" mult                           -- Subtraction
+        | mult
+mult    : mult "*" unary                         -- Multiplication
+        | unary
+unary   : "+" unary                              -- Unary plus
+        | "-" unary                              -- Unary minus
+        | "~" unary                              -- Bitwise negation
+        | "!" unary                              -- Logical negation
+        | primary
+primary : IntLit                                 -- Integer literal
+        | "true"                                 -- Boolean literal true
+        | "false"                                -- Boolean literal false
+        | Id                                     -- Variable reference
+        | "(" Expr ")"                           -- Parenthesised expression
+--------------------------------------------------------------------------------
