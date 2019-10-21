@@ -9,27 +9,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <div class="w-50 my-auto">
+    <div class="w-50 mx-auto">
         <form action="" >
-            <div class="mx-auto form-group">
+            <div class="form-group">
                 <header>HTML Form</header>
     
-                <label for="firstname">Firstname: </label>
-                <input class="form-control" name="firstname" id="firstname" type="text" placeholder="first name">
-        
-                <label for="lastname">Lastname: </label>
-                <input class="form-control" name="lastname" id="lastname" type="text" placeholder="last name">
+                <label for="firstname">Name: </label>
+                <input class="form-control" name="name" id="name" type="text" placeholder="Name">
         
                 <label for="email">Email: </label>
-                <input class="form-control" name="email" id="email" type="text" placeholder="email">
+                <input class="form-control" name="email" id="email" type="text" placeholder="Email">
                 
-                <div class="form-check">
-                    <input class="form-check-input" id="ug-standing" type="radio" name="standing">
-                    <label class="form-check-label" for="ug-standing"> Undergraduate Student</label>        
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" id="gr-standing" type="radio" name="standing">
-                    <label class="form-check-label" for="gr-standing">Graduate Student</label>
+                <div class="form-group">
+                    <label for="notes">Notes: </label>
+                    <textarea class="form-control" id="notes" rows="3" placeholder="Notes"></textarea>
                 </div>
             </div>
     
