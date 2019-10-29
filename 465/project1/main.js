@@ -1,5 +1,12 @@
 "use strict";
 
+const states = {
+    "default-state": {
+        gradients: {},
+        transitionSpeed: 10000,
+    },
+};
+
 function get_random_between(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -7,16 +14,7 @@ function get_random_between(min, max) {
 }
 
 ;;(async function fetchGradientData() {
-    // const gradient_data = await fetch("assets/gradients.json", 
-    // {
-    //     headers : { 
-    //         'Content-Type': 'application/json',
-    //         'Accept': 'application/json'
-    //     },
-    // }).then(data => data.json())
-    // .then(gradient_json => {
-    //     console.log(gradient_json);
-    // });
+
     const gradient_json = await fetch("assets/gradients.json", 
     {
         headers : { 
@@ -28,8 +26,23 @@ function get_random_between(min, max) {
     const gradient_data = await gradient_json.json();
 
     const num_states = get_random_between(2, 10);
-
-    console.log(gradient_data);
+    const default_state = [
+        // Grab random gradients from gradient array
+        gradient_data[
+            get_random_between(0, gradient_data.length - 1)
+        ].gradient,
+        gradient_data[
+            get_random_between(0, gradient_data.length - 1)
+        ].gradient,
+        gradient_data[
+            get_random_between(0, gradient_data.length - 1)
+        ].gradient,
+    ]
+    
+    // console.log(gradient_data);
+    console.log(
+        default_state
+    )
 
     const granimInstance = new Granim({
         element: '#canvas',
@@ -40,11 +53,12 @@ function get_random_between(min, max) {
         stateTransitionSpeed: 500,
         states : {
             "default-state": {
-                gradients: [
-                    ['#B3FFAB', '#12FFF7'],
-                    ['#ADD100', '#7B920A'],
-                    ['#1A2980', '#26D0CE']
-                ],
+                // gradients: [
+                //     ['#B3FFAB', '#12FFF7'],
+                //     ['#ADD100', '#7B920A'],
+                //     ['#1A2980', '#26D0CE']
+                // ],
+                gradients: default_state,
                 transitionSpeed: 10000
             },
             "violet-state": {
