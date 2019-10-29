@@ -4,9 +4,9 @@ This project uses some popular open source libraries and frameworks for developm
 
 Namely these are:
 * [granim.js](https://sarcadass.github.io/granim.js/index.html)
-* [UiGradients](https://github.com/ghosh/uiGradients)
+* [uiGradients](https://github.com/ghosh/uiGradients)
 * [Boostrap 4](https://getbootstrap.com)
-* [normalize css](https://necolas.github.io/normalize.css/)
+* [Normalize CSS](https://necolas.github.io/normalize.css/)
 
 Development
 
