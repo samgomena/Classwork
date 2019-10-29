@@ -16,4 +16,4 @@ Running a simple development server
 python -m http.server
 ```
 
-You can then view the site at `http://0.0.0.0:8000`
+You can then view the site at [`http://0.0.0.0:8000`](http://0.0.0.0:8000).
