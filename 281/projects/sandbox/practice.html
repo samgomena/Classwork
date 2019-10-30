@@ -1,0 +1,103 @@
+<!--<!doctype html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>1. CSS Selector Practice</title>
+<style>
+.alert {color: red;}
+</style>
+</head>
+<body>
+<h1>CSS Selector Practice, Ex. 1</h1>
+<h2 class="important">Hi again</h2>
+<p class="a">Random unattached paragraph</p>
+<div class="relevant">
+<p class="a">first</p>
+<p class="a">second</p>
+<p>third</p>
+<p>fourth</p>
+<p class="a">fifth</p>
+<p class="a">sixth</p>
+<p>seventh</p>
+</div>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+ var main = function () {
+     "use strict";
+     var $newParagraphElement = $("<p>"); // create a new p element
+     $newParagraphElement.text("This is paragraph ALPHA.");
+     $newParagraphElement.attr("style","color: red");
+     $(".relevant").append($newParagraphElement); 
+};
+
+$(document).ready(main);
+</script>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>URL Parameters</title>
+    <style>
+    form {
+        background: #99ccff;
+        border: #0000cc double 4px;
+        width: 50%;
+    }
+    
+    h2 {
+        color: #cc00ff;
+        font-family: sans-serif;
+    }
+    </style>
+</head>
+
+<body>
+    <span style="font-family: sans-serif; color: #0000ff; text-align: center"> 
+<h1>Query String Demo</h1>
+<p>The form data will be submitted <em>keyword=value</em> pairs appended to the URL.<br>
+<br>
+The field name (as specified in the HTML) is the keyword and the text entered by the user is the value.
+</p>
+</span>
+    <div align="center">
+        <h2>Bugs Be We Online Catalog Order form</h2> We would love to send you our newest online catalog. Please supply the following data:
+        <br />
+        <br />
+        <form action="view-URL-params.html" method="GET">
+            <br /> Your name:
+            <input type="text" name="name" size="30" maxsize="80">
+            <p>
+                What do you like to do with your bugs?
+            </p>
+            <p>
+                <input type="radio" name="rb" value="Pets"> Pets
+                <input type="radio" name="rb" value="Garden"> Garden
+            </p>
+            <p>
+                <select name="bugMenu">
+                    <option value="">Favorite Bug</option>
+                    <option value="Amaryllis Azure">Amaryllis Azure</option>
+                    <option value="Bagpipe Cicada">Bagpipe Cicada</option>
+                    <option value="Cactoblastis">Cactoblastis</option>
+                    <option value="Damselfly">Damselfly</option>
+                    <option value="Egyptian Beetle">Egyptian Beetle</option>
+                    <option value="Firefly">Firefly</option>
+                </select>
+            </p>
+            <p>
+                e-mail address:
+            </p>
+            <input type="text" name="email" size="30" maxsize=80>
+            <p>
+                <input type="submit" value="Request Catalog">
+            </p>
+            <br />
+        </form>
+    </div>
+</body>
+
+</html>
