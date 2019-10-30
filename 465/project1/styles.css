@@ -4,9 +4,9 @@
      url('assets/CircularStd-Black.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
   }  
   
-  html, body {
-      height: 100%;
-  }
+html, body {
+    height: 100%;
+}
   
 body {
     font-family: 'CircularStd-Black';
@@ -19,10 +19,6 @@ body {
     bottom: 0;
     left: 0;
 }
-
-/* .canvas-wrapper .cta-wrapper {
-    margin-top: 130px;
-} */
 
 .canvas-wrapper .content-wrapper a {
     position: relative;
