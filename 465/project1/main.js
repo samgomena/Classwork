@@ -48,7 +48,7 @@ function get_random_between(min, max) {
     const granimInstance = new Granim({
         element: '#canvas',
         name: 'interactive-gradient',
-        elToSetClassOn: '.canvas-wrapper',
+        elToSetClassOn: '#canvas-wrapper',
         direction: 'diagonal',
         isPausedWhenNotInView: true,
         stateTransitionSpeed: 500,
