@@ -59,4 +59,4 @@ function get_random_between(min, max) {
             },
         }
     });
-})()
+})();

@@ -33,44 +33,50 @@
 
 <body>
     <!-- Taken and modified from https://sarcadass.github.io/granim.js/examples.html -->
-    <div class="canvas-wrapper text-center">
+    <div class="canvas-wrapper h-100 d-flex">
         <canvas id="canvas" class="w-100 h-100 position-absolute"></canvas>
-        <div class="content-wrapper">
-            <a href="#default-state" id="default-state-cta">Default state</a>
+
+        <div class="container d-flex flex-column justify-content-center">
+            <section id="about" class="mb-4">
+                <h2>
+                    About
+                </h2>
+                <div>
+                    Hey, I'm Sam. I'm a student at Portland State University who is interested in full stack web development, human-ai interaction and embedded software development and testing.
+                </div>
+            </section>
+    
+            <section id="projects" class="mb-4">
+                <h2>
+                    Projects
+                </h2>
+                <div>
+                    Here are some of the projects I've been working on recently
+                </div>
+                <ul>
+                    <li>
+                        <a href="https://deepmarket.cs.pdx.edu">DeepMarket</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/samgomena/darkstrap.git">Darkstrap</a>
+                    </li>
+                    <li>
+                        <a href="https://avantitualatin.com">Building websites for my friends</a>
+                    </li>
+                </ul>
+                <div class="underbar"></div>
+            </section>
+    
+            <section id="contact" class="mb-4">
+                <h2>
+                    Contact
+                </h2>
+                <p><a href="mailto:samgomena@gmail.com">Get in touch.</a></p>
+            </section>
+            <!-- <a id="toggle-animation">Pause Animation</a> -->
         </div>
     </div>
 
-    <!-- <div class="container w-100 h-100">
-        <div class="justify-content-center align-items-center">
-                <p>
-                    <a href="/">Hey, I'm</a>
-                </p>
-                <p>
-                    <a href="/">Sam.</a>
-                </p>
-        </div>
-        <div>
-            <div>
-                <p>And unfortunately, I've been too busy with school, work, 
-                    and/or play to make this website any cooler than it already is. 
-                    Hopefully that will change soon. However, in the meantime you can check out my 
-                    <strong class="text-decoration-none"><a href="https://github.com/samgomena">github</a></strong> or 
-                    <strong class="text-decoration-none"><a href="https://www.linkedin.com/in/samgomena/">linked in</a></strong>
-                     profiles to see what I've been up to lately!</p>
-            </div>
-        </div>
-        <footer class="footer">
-            <div class="left">
-                <p><a href="mailto:samgomena@gmail.com">Contact.</a></p>
-		&nbsp;
-                <p><a href="https://docs.google.com/viewer?url=https://docs.google.com/document/d/1EgHZSA6ZI0UPeh7ewwpHWhCjqkCoac0JJbaDAB_j3Ss/export?format=pdf">Resume.</a></p>
-            </div>
-            <div class="right">
-              <p id="change_me" title="">Try a different theme?</p>
-            </div>
-        </footer>
-    </div> -->
-    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
