@@ -21,7 +21,8 @@ function get_random_between(min, max) {
 
 +(async function fetchGradientData() {
 
-    const gradient_json = await fetch("assets/gradients.json", 
+    // TODO: Leave this hardcoded for now I guess?
+    const gradient_json = await fetch(`${window.location.origin}/~gomenas/assets/gradients.json`, 
     {
         headers : { 
             'Content-Type': 'application/json',
