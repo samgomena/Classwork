@@ -1,37 +1,38 @@
 language: python
 
 script:
-  - cd 350
-  - chmod u+x assignment_four/build.sh
-  - ./build.sh
+  - echo "Hello, $USER!"
+  # - cd 350
+  # - chmod u+x assignment_four/build.sh
+  # - ./build.sh
 
-jobs:
-  include:
-    - stage: "Test Assignment Two"
-      script:
-        - cd 350/assignment_two
-        - chmod u+x build.sh
-        - ./build.sh
+# jobs:
+#   include:
+#     - stage: "Test Assignment Two"
+#       script:
+#         - cd 350/assignment_two
+#         - chmod u+x build.sh
+#         - ./build.sh
 
-      # Tests Python 3.6 and 3.7 on Ubuntu Xenial
-      python:
-        - 3.6
-        - 3.7
-      # 16.04
-      dist: xenial
-      sudo: true
+#       # Tests Python 3.6 and 3.7 on Ubuntu Xenial
+#       python:
+#         - 3.6
+#         - 3.7
+#       # 16.04
+#       dist: xenial
+#       sudo: true
 
-    - stage: "Test Assignment Four"
-      script:
-        - cd 350/assignment_four
-        - chmod u+x build.sh
-        - ./build.sh
+#     - stage: "Test Assignment Four"
+#       script:
+#         - cd 350/assignment_four
+#         - chmod u+x build.sh
+#         - ./build.sh
 
-      # Tests Python 3.6 and 3.7 on Ubuntu Xenial
-      python:
-      - 3.6
-      - 3.7
-      # 16.04
-      dist: xenial
-      sudo: true
+#       # Tests Python 3.6 and 3.7 on Ubuntu Xenial
+#       python:
+#       - 3.6
+#       - 3.7
+#       # 16.04
+#       dist: xenial
+#       sudo: true
 
