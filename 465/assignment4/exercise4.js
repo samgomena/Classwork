@@ -4,9 +4,12 @@ const height_el = document.getElementById("height");
 const width_el = document.getElementById("width");
 
 (() => {
-    
-})
+    height_el.innerText = window.innerHeight;
+    width_el.innerText = window.innerWidth;
 
-window.addEventListener("resize", event => {
-    console.log(event.clientX, event.clientY);
-})
+    window.addEventListener("resize", event => {
+        height_el.innerText = window.innerHeight;
+        width_el.innerText = window.innerWidth;
+    });
+})();
+
