@@ -13,3 +13,8 @@
 **/**/*.iml
 
 **/**/node_modules/
+
+**/**/dist/
+
+
+**/**/.cache/
