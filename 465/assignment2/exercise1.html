@@ -8,23 +8,18 @@
     <link rel="stylesheet" href="exercise1.css">
 </head>
 <body>
-    <form action="">
-        <header>HTML Form</header>
+    <form action="" id="contact-form">
+        
+        <input name="name" id="name" type="text" placeholder="Name">
 
-        <label for="firstname">Firstname: </label>
-        <input name="firstname" id="firstname" type="text" placeholder="first name"> <br>
+        <input name="email" id="email" type="text" placeholder="Email">
 
-        <label for="lastname">Lastname: </label>
-        <input name="lastname" id="lastname" type="text" placeholder="last name"> <br>
+        <textarea id="notes"></textarea>
 
-        <label for="email">Email: </label>
-        <input name="email" id="email" type="text" placeholder="email"> <br>
-
-        <input type="radio" name="standing"> Undergraduate Student <br>
-        <input type="radio" name="standing"> Graduate Student <br>
-
-        <button type="submit">Submit</button>
-        <button type="reset">Reset</button> <br>
+        <div>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </div>
     </form>
 </body>
 </html>

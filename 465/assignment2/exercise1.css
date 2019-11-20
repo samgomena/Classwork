@@ -1,5 +1,22 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
 body {
     background-color: #20bf55;
     background-image: linear-gradient(315deg, #20bf55 0%, #01baef 74%);
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#contact-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5%;
+    background: white;
 }
