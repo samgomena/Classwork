@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -19,4 +20,49 @@ body {
     flex-direction: column;
     padding: 5%;
     background: white;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+#contact-form > *{
+    margin-top: 1rem;
+    min-width: 100%;
+    padding: 5%;
+}
+
+#button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#button-container > button {
+    background-color: #123258;
+    color: white;
+    padding: 5%;
+
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid
+    transparent;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+#button-container > button:hover {
+    background-color: #70cf6d;
 }
