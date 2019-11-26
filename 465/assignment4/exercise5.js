@@ -9,7 +9,7 @@
     }
 
     const get_random_color = () => {
-        return `rgb(${rndm_bt(0, 255)}, ${rndm_bt(0, 255)}, ${rndm_bt(0, 255)})`;
+        return `#${rndm_bt(0, 255).toString(16)}${rndm_bt(0, 255).toString(16)}${rndm_bt(0, 255).toString(16)}`;
     }
 
     const color_btn = document.getElementById("random_color_btn");
