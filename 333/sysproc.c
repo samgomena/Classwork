@@ -199,12 +199,15 @@ sys_getprocs(void)
 int
 sys_getpriority(int pid)
 {
-  
+  return 0;
 }
 
 int
 sys_setpriority(int pid, int priority)
 {
-
+  if(priority > MAXPRIO)
+    return -1;
+    
+  return 0;
 }
 #endif // CS333_P4

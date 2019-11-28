@@ -209,7 +209,9 @@ userinit(void)
   release(&ptable.lock);
 #endif // CS333_P3
 #if defined(CS333_P4)
-  PromoteAtTicks = ticks + TICKS_TO_PROMOTE;
+  // acquire(&ptable.lock);
+  ptable.PromoteAtTime = ticks + TICKS_TO_PROMOTE;
+  // release(&ptable.lock);
 #endif
   p = allocproc();
 

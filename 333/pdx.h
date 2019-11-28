@@ -29,4 +29,10 @@
 #define DEFAULT_GID 1
 #endif // CS333_P2
 
+#if defined(CS333_P4)
+#define MAXPRIO 6
+#define DEFUALT_BUDGET 300
+#define TICKS_TO_PROMOTE 3000
+#endif // CS333_P4
+
 #endif  // PDX_INCLUDE

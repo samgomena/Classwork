@@ -63,16 +63,13 @@ struct proc {
 
 #if defined(CS333_P3)
   struct proc *next;
+  void print_proc_list(enum procstate);
 #endif // CS333_P3
 };
 
-#ifdef CS333_P2
-// int _getprocs(uint, struct uproc*);
-#endif // CS333_P2
-
-#if defined(CS333_P3)
-void print_proc_list(enum procstate);
-#endif
+#ifdef CS333_P4
+  uint priority;
+#endif // CS333_P4
 
 // Process memory is laid out contiguously, low addresses first:
 //   text
