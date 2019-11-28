@@ -280,7 +280,7 @@ consoleintr(int (*getc)(void))
     print_proc_list(SLEEPING);
   if(printzombie)
     print_proc_list(ZOMBIE);
-#endif
+#endif // CS333_P3
 }
 
 int
