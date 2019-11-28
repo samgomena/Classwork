@@ -1023,7 +1023,7 @@ procdumpP2(struct proc *p, char *state)
 // }
 
 int
-_getprocs(uint max, struct uproc *table)
+getprocs(uint max, struct uproc *table)
 {
   // Check again to make sure we're within max number of processes
   if(max > NPROC)

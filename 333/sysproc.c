@@ -189,7 +189,7 @@ sys_getprocs(void)
     return -1;
   }
 
-  numprocs = _getprocs(max, uprocs);
+  numprocs = getprocs(max, uprocs);
   return numprocs;
 }
 
@@ -197,17 +197,28 @@ sys_getprocs(void)
 
 #if defined(CS333_P4)
 int
-sys_getpriority(int pid)
+sys_getpriority(void)
 {
-  return 0;
+  int pid, priority;
+  if(argint(0, &pid) < 0)
+    return -1;
+  
+  return priority;
 }
 
 int
-sys_setpriority(int pid, int priority)
+sys_setpriority(void)
 {
+  int pid, priority;
+  if(argint(0, &pid) < 0)
+    return -1;
+
+  if(argint(0, &priority) < 0)
+    return -1;
+
   if(priority > MAXPRIO)
     return -1;
-    
+
   return 0;
 }
 #endif // CS333_P4

@@ -40,3 +40,6 @@ SYSCALL(setuid)
 SYSCALL(setgid)
 
 SYSCALL(getprocs)
+
+SYSCALL(getpriority)
+SYSCALL(setpriority)
