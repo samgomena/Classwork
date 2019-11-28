@@ -175,36 +175,36 @@ sys_setgid(void)
 int
 sys_getprocs(void)
 {
-  int max, procsret = 0;
-  struct uproc *uprocs;
-
+  int max, numprocs = 0;
+  struct uproc *uprocs = NULL;
+  
   if(argint(0, &max) < 0)
     return -1;
-
+  
+  // Don't return more processes than system allows
+  if(max > NPROC)
+    max = NPROC;
+  
   if(argptr(1, (void*)&uprocs, sizeof(struct uproc) * max) < 0) {
     return -1;
   }
 
-  if(getprocs(max))
-    return -1;
-  
-  // for(int i=0;i < max; i++) {
-  //   // if(ptable[i]->state)
-  //   // uprocs[i]->pid = ptable[i]->pid;
-  //   // uprocs[i]->uid = ptable[i]->uid;
-  //   // uprocs[i]->gid = ptable[i]->gid;
-  //   // uprocs[i]->ppid = ptable[i]->ppid;
-  //   // uprocs[i]->elapsed_ticks = ptable[i]->elapsed_ticks;
-  //   // uprocs[i]->CPU_total_ticks = ptable[i]->cpu_total_ticks;
-  //   // uprocs[i]->pid = ptable[i]->pid;
-  //   // uprocs[i]->size = ptable[i]->size;
-  //   // uprocs[i]->pid = ptable[i]->pid;
-  //   uprocs[i] = ptable[i];
-  //   procsret++;
-  // }
-
-  
-  cprintf("%d, %d, %d\n\n", max, sizeof(uprocs), sizeof(struct uproc) * max);
-  return procsret;
+  numprocs = _getprocs(max, uprocs);
+  return numprocs;
 }
+
 #endif // CS333_P2
+
+#if defined(CS333_P4)
+int
+sys_getpriority(int pid)
+{
+  
+}
+
+int
+sys_setpriority(int pid, int priority)
+{
+
+}
+#endif // CS333_P4

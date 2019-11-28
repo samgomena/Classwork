@@ -67,7 +67,7 @@ struct proc {
 };
 
 #ifdef CS333_P2
-int getprocs(int);
+// int _getprocs(uint, struct uproc*);
 #endif // CS333_P2
 
 #if defined(CS333_P3)

@@ -7,6 +7,10 @@
 #include "proc.h"
 #include "spinlock.h"
 
+#if defined(CS333_P2)
+#include "uproc.h"
+#endif
+
 static char *states[] = {
 [UNUSED]    "unused",
 [EMBRYO]    "embryo",
@@ -31,6 +35,10 @@ static struct {
 #if defined(CS333_P3)
   struct ptrs list[statecount];
 #endif // CS333_P3
+#if defined(CS333_P4)
+  struct ptrs ready[MAXPRIO+1];
+  uint PromoteAtTime;
+#endif // CS333_P4
 } ptable;
 
 #if defined(CS333_P3)
@@ -200,6 +208,9 @@ userinit(void)
   initFreeList();
   release(&ptable.lock);
 #endif // CS333_P3
+#if defined(CS333_P4)
+  PromoteAtTicks = ticks + TICKS_TO_PROMOTE;
+#endif
   p = allocproc();
 
   initproc = p;
@@ -982,32 +993,66 @@ procdumpP2(struct proc *p, char *state)
   else
     ppid = p->pid;
 
-  // #define HEADER "\nPID\tName         UID\tGID\tPPID\tElapsed\tCPU\tState\tSize\t PCs\n"
   cprintf("%d\t%s\t\t%d\t%d\t%d\t%d.%d\t%d.%d\t%s\t%d\t", p->pid, p->name, p->uid, p->gid, ppid, sec, mantissa, cpu_sec, cpu_mantissa, state, p->sz);
   return;
 }
 
-int
-getprocs(int max)
-{
-  int i = 0;
-  struct proc *p;
-  char *state;
+// int
+// _getprocs(uint max, struct uproc* table)
+// {
+//   int i = 0;
+//   struct proc *p;
+//   char *state;
   
+//   acquire(&ptable.lock);
+//   for(p = ptable.proc; i < max && p < &ptable.proc[NPROC]; p++) {
+//     if(p->state != UNUSED && p->state != EMBRYO) {
+//       // uprocs[i] = p;
+//       if(p->state >= 0 && p->state < NELEM(states) && states[p->state]) {
+//         state = states[p->state];
+
+//         cprintf("%s", state);
+//       }
+//     }
+//     i++;
+//   }
+//   release(&ptable.lock);
+//   return 0;
+// }
+
+int
+_getprocs(uint max, struct uproc *table)
+{
+  // Check again to make sure we're within max number of processes
+  if(max > NPROC)
+    max = NPROC;
+
   acquire(&ptable.lock);
+  struct proc *p;
+  int pc = 0, i = 0; // process counter
+
   for(p = ptable.proc; i < max && p < &ptable.proc[NPROC]; p++) {
     if(p->state != UNUSED && p->state != EMBRYO) {
-      // uprocs[i] = p;
-      if(p->state >= 0 && p->state < NELEM(states) && states[p->state]) {
-        state = states[p->state];
-
-        cprintf("%s", state);
-      }
+      table[pc].pid = p->pid;
+      table[pc].uid = p->uid;
+      table[pc].gid = p->gid;
+      if(p->parent)
+        table[pc].ppid = p->parent->pid;
+      else
+        table[pc].ppid = p->pid;
+#if defined(CS333_P4)
+      table[pc].priority = p->priority;
+#endif // CS333_P4
+      table[pc].elapsed_ticks = ticks - p->start_ticks;
+      table[pc].CPU_total_ticks = p->cpu_ticks_total;
+      table[pc].size = p->sz;
+      safestrcpy(table[pc].state, states[p->state], sizeof(table[pc].state));
+      safestrcpy(table[pc].name, p->name, sizeof(table[pc].name));
+      pc++;
     }
-    i++;
   }
   release(&ptable.lock);
-  return 0;
+  return pc;
 }
 
 #endif // CS333_P2
