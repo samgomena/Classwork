@@ -38,3 +38,18 @@ fn main() {
 
     println!("{}", expmod);
 }
+
+#[test]
+fn test_modexp_simple_x() {
+    assert_eq!(modexp(0, 20, 17), 0);
+}
+
+#[test]
+fn test_modexp_simple_y() {
+    assert_eq!(modexp(2, 0, 17), 1);
+}
+
+#[test]
+fn test_modexp_complex() {
+    assert_eq!(modexp(2, 20, 17), 16);
+}
