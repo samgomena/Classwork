@@ -1,0 +1,40 @@
+fn error() -> ! {
+    eprintln!("modexp: usage: modexp <x> <y> <m>");
+    std::process::exit(1);
+}
+
+fn modexp(x: u64, y: u64, m: u64) -> u64 {
+    if x == 0 {
+        return 0;
+    } else if y == 0 {
+        return 1;
+    }
+    let mut z = modexp(x, y / 2, m);
+    z = (z * z) % m;
+    if y % 2 == 1 {
+        z = (z * x) % m;
+    }
+    // Return z
+    z
+}
+
+fn main() {
+    let x: u64 = match std::env::args().nth(1) {
+        Some(x) => x.parse().expect("Expected x to be a number"),
+        _ => error(),
+    };
+
+    let y: u64 = match std::env::args().nth(2) {
+        Some(y) => y.parse().expect("Expected y to be a number"),
+        _ => error(),
+    };
+
+    let m: u64 = match std::env::args().nth(2) {
+        Some(m) => m.parse().expect("Expected m to be a number"),
+        _ => error(),
+    };
+
+    let expmod = modexp(x, y, m);
+
+    println!("{}", expmod);
+}
