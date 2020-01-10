@@ -1,5 +1,5 @@
 fn error() -> ! {
-    eprintln!("modexp: usage: modexp <x> <y> <m>");
+    eprintln!("modexp: usage: modexp <x> <y> <m>\n\tNote: <x>, <y>, and <m> must be positive integers less than 4,294,967,295");
     std::process::exit(1);
 }
 
@@ -14,7 +14,7 @@ fn modexp(x: u64, y: u64, m: u64) -> u64 {
     if y % 2 == 1 {
         z = (z * x) % m;
     }
-    // Return z
+    // Return z implicitly
     z
 }
 
@@ -33,6 +33,11 @@ fn main() {
         Some(m) => m.parse().expect("Expected m to be a number"),
         _ => error(),
     };
+
+    let max = u64::from(u32::max_value());
+    if x > max || y > max || m > max {
+        error();
+    }
 
     let expmod = modexp(x, y, m);
 
