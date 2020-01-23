@@ -14,34 +14,29 @@ fn lambda(p: u64, q: u64) -> u64 {
 /// works by generate-and-test, generating pairs of primes
 /// `p` `q` and testing that they satisfy `λ(pq) <= EXP` and
 /// that `λ(pq)` has no common factors with `EXP`.
-/// TODO:
 pub fn genkey() -> (u32, u32) {
     let mut p = rsa_prime();
     let mut q = rsa_prime();
-    let mut totient = lambda(u64::from(p), u64::from(q));
+    let mut totient = lambda(p as u64, q as u64);
 
     while totient <= EXP && gcd(EXP, totient) != 1 {
         p = rsa_prime();
         q = rsa_prime();
-        totient = lambda(u64::from(p), u64::from(q));
+        totient = lambda(p as u64, q as u64);
     }
     return (p, q);
 }
 
 /// Encrypt the plaintext `msg` using the RSA public `key`
 /// and return the ciphertext.
-/// TODO:
 pub fn encrypt(key: u64, msg: u32) -> u64 {
-    // (msg as u64).pow(EXP.try_into().unwrap()) % key
-    modexp(u64::from(msg), EXP, key)
+    modexp(msg as u64, EXP, key)
 }
 
 /// Decrypt the cipertext `msg` using the RSA private `key`
 /// and return the resulting plaintext.
-/// TODO:
 pub fn decrypt(key: (u32, u32), msg: u64) -> u32 {
     let d = modinverse(lambda(key.0 as u64, key.1 as u64), EXP);
-    // msg.pow(d.try_into().unwrap()).try_into().unwrap() % (key.0 as u64 * key.1 as u64)
     modexp(msg, d, u64::from(key.0) * u64::from(key.1)) as u32
 }
 
