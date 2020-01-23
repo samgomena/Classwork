@@ -37,13 +37,31 @@ pub fn encrypt(key: u64, msg: u32) -> u64 {
 /// and return the resulting plaintext.
 pub fn decrypt(key: (u32, u32), msg: u64) -> u32 {
     let d = modinverse(lambda(key.0 as u64, key.1 as u64), EXP);
-    modexp(msg, d, u64::from(key.0) * u64::from(key.1)) as u32
+    modexp(msg, d, key.0 as u64 * key.1 as u64)
+        .try_into()
+        .unwrap()
 }
 
 #[cfg(test)]
 mod tests {
+    use super::*;
     #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
+    fn test_encrypt() {
+        let p: u32 = 0xed23e6cd;
+        let q: u32 = 0xf050a04d;
+        let msg: u64 = 12345;
+
+        // let encrypted = encrypt((p, q), msg);
+        assert_eq!(
+            0x164e44b86776d497,
+            encrypt(p as u64 * q as u64, msg.try_into().unwrap())
+        )
+    }
+    #[test]
+    fn test_decrypt() {
+        let p: u32 = 0xed23e6cd;
+        let q: u32 = 0xf050a04d;
+        let encrypted_msg: u64 = 0x164e44b86776d497;
+        assert_eq!(12345, decrypt((p, q), encrypted_msg))
     }
 }
