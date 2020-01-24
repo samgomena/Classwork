@@ -4,6 +4,8 @@ use toy_rsa_lib::{gcd, lcm, modexp, modinverse, rsa_prime};
 /// Fixed RSA encryption exponent.
 pub const EXP: u64 = 65_537;
 
+/// Compute Carmichael's totient function.
+/// λ(pq) = lcm(p − 1, q − 1)
 fn lambda(p: u64, q: u64) -> u64 {
     lcm(p - 1, q - 1)
 }
