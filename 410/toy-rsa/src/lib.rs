@@ -33,13 +33,15 @@ pub fn encrypt(key: u64, msg: u32) -> u64 {
     modexp(msg as u64, EXP, key)
 }
 
-/// Decrypt the cipertext `msg` using the RSA private `key`
+/// Decrypt the ciphertext `msg` using the RSA private `key`
 /// and return the resulting plaintext.
 pub fn decrypt(key: (u32, u32), msg: u64) -> u32 {
+    println!("{} {} {}", key.0, key.1, lambda(key.0 as u64, key.1 as u64));
+    let pub_key = key.0 as u64 * key.1 as u64;
     let d = modinverse(lambda(key.0 as u64, key.1 as u64), EXP);
-    modexp(msg, d, key.0 as u64 * key.1 as u64)
-        .try_into()
-        .unwrap()
+    let whatever = modexp(msg, d, pub_key);
+    println!("{} {}", d, whatever);
+    whatever.try_into().unwrap()
 }
 
 #[cfg(test)]
@@ -49,12 +51,12 @@ mod tests {
     fn test_encrypt() {
         let p: u32 = 0xed23e6cd;
         let q: u32 = 0xf050a04d;
+        let key: u64 = 0xed23e6cd * 0xf050a04d;
         let msg: u64 = 12345;
 
-        // let encrypted = encrypt((p, q), msg);
         assert_eq!(
             0x164e44b86776d497,
-            encrypt(p as u64 * q as u64, msg.try_into().unwrap())
+            encrypt(key, msg as u32) // encrypt(p as u64 * q as u64, msg.try_into().unwrap())
         )
     }
     #[test]
@@ -62,6 +64,13 @@ mod tests {
         let p: u32 = 0xed23e6cd;
         let q: u32 = 0xf050a04d;
         let encrypted_msg: u64 = 0x164e44b86776d497;
-        assert_eq!(12345, decrypt((p, q), encrypted_msg))
+        // println!("{}", decrypt((p, q), encrypted_msg));
+        assert_eq!(12345, decrypt((p, q), encrypted_msg));
+    }
+
+    #[test]
+    fn test_genkey() {
+        println!("{:?}", genkey());
+        println!("{:?}", genkey());
     }
 }
