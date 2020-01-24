@@ -36,27 +36,33 @@ pub fn encrypt(key: u64, msg: u32) -> u64 {
 /// Decrypt the ciphertext `msg` using the RSA private `key`
 /// and return the resulting plaintext.
 pub fn decrypt(key: (u32, u32), msg: u64) -> u32 {
-    println!("{} {} {}", key.0, key.1, lambda(key.0 as u64, key.1 as u64));
-    let pub_key = key.0 as u64 * key.1 as u64;
-    let d = modinverse(lambda(key.0 as u64, key.1 as u64), EXP);
-    let whatever = modexp(msg, d, pub_key);
-    println!("{} {}", d, whatever);
-    whatever.try_into().unwrap()
+    let p = key.0 as u64;
+    let q = key.1 as u64;
+    // let pub_key = p * q;
+    let d = modinverse(EXP, lambda(p, q));
+    modexp(msg, d, p * q).try_into().unwrap()
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_lambda() {
+        // From https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29#Example
+        let (p, q): (u64, u64) = (61, 53);
+        assert_eq!(780, lambda(p, q));
+    }
     #[test]
     fn test_encrypt() {
-        let p: u32 = 0xed23e6cd;
-        let q: u32 = 0xf050a04d;
+        // let p: u32 = 0xed23e6cd;
+        // let q: u32 = 0xf050a04d;
         let key: u64 = 0xed23e6cd * 0xf050a04d;
         let msg: u64 = 12345;
 
         assert_eq!(
             0x164e44b86776d497,
-            encrypt(key, msg as u32) // encrypt(p as u64 * q as u64, msg.try_into().unwrap())
+            encrypt(key, msg.try_into().unwrap()) // encrypt(p as u64 * q as u64, msg.try_into().unwrap())
         )
     }
     #[test]
@@ -64,7 +70,7 @@ mod tests {
         let p: u32 = 0xed23e6cd;
         let q: u32 = 0xf050a04d;
         let encrypted_msg: u64 = 0x164e44b86776d497;
-        // println!("{}", decrypt((p, q), encrypted_msg));
+        println!("{}", decrypt((p, q), encrypted_msg));
         assert_eq!(12345, decrypt((p, q), encrypted_msg));
     }
 
@@ -72,5 +78,16 @@ mod tests {
     fn test_genkey() {
         println!("{:?}", genkey());
         println!("{:?}", genkey());
+    }
+
+    #[test]
+    fn test_encrypt_decrypt() {
+        let (p, q) = genkey();
+        let key: u64 = p as u64 * q as u64;
+        let msg: u64 = 54321;
+        assert_eq!(
+            msg,
+            decrypt((p, q), encrypt(key, msg.try_into().unwrap())) as u64
+        )
     }
 }
