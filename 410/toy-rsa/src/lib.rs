@@ -1,4 +1,4 @@
-use std::convert::{TryFrom, TryInto};
+use std::convert::TryInto;
 use toy_rsa_lib::{gcd, lcm, modexp, modinverse, rsa_prime};
 
 /// Fixed RSA encryption exponent.
@@ -24,7 +24,7 @@ pub fn genkey() -> (u32, u32) {
         q = rsa_prime();
         totient = lambda(p as u64, q as u64);
     }
-    return (p, q);
+    (p, q)
 }
 
 /// Encrypt the plaintext `msg` using the RSA public `key`
@@ -55,29 +55,27 @@ mod tests {
     }
     #[test]
     fn test_encrypt() {
-        // let p: u32 = 0xed23e6cd;
-        // let q: u32 = 0xf050a04d;
-        let key: u64 = 0xed23e6cd * 0xf050a04d;
-        let msg: u64 = 12345;
+        let p: u64 = 0xed23e6cd;
+        let q: u64 = 0xf050a04d;
+        let msg: u32 = 12345;
 
-        assert_eq!(
-            0x164e44b86776d497,
-            encrypt(key, msg.try_into().unwrap()) // encrypt(p as u64 * q as u64, msg.try_into().unwrap())
-        )
+        assert_eq!(0x164e44b86776d497, encrypt(p * q, msg))
     }
     #[test]
     fn test_decrypt() {
         let p: u32 = 0xed23e6cd;
         let q: u32 = 0xf050a04d;
         let encrypted_msg: u64 = 0x164e44b86776d497;
-        println!("{}", decrypt((p, q), encrypted_msg));
         assert_eq!(12345, decrypt((p, q), encrypted_msg));
     }
 
     #[test]
     fn test_genkey() {
-        println!("{:?}", genkey());
-        println!("{:?}", genkey());
+        let (p, q) = genkey();
+        let p = p as u64;
+        let q = q as u64;
+        assert!(lambda(p, q) > EXP);
+        assert!(gcd(EXP, lambda(p, q)) == 1)
     }
 
     #[test]
