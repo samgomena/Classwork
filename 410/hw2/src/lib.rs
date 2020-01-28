@@ -40,7 +40,6 @@ pub fn encrypt(key: u64, msg: u32) -> u64 {
 pub fn decrypt(key: (u32, u32), msg: u64) -> u32 {
     let p = key.0 as u64;
     let q = key.1 as u64;
-    // let pub_key = p * q;
     let d = modinverse(EXP, lambda(p, q));
     modexp(msg, d, p * q).try_into().unwrap()
 }
