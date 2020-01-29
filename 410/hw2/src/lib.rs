@@ -84,9 +84,6 @@ mod tests {
         let (p, q) = genkey();
         let key: u64 = p as u64 * q as u64;
         let msg: u32 = rand::random();
-        assert_eq!(
-            msg,
-            decrypt((p, q), encrypt(key, msg.try_into().unwrap()))
-        )
+        assert_eq!(msg, decrypt((p, q), encrypt(key, msg.try_into().unwrap())))
     }
 }
