@@ -83,10 +83,10 @@ mod tests {
     fn test_encrypt_decrypt() {
         let (p, q) = genkey();
         let key: u64 = p as u64 * q as u64;
-        let msg: u64 = 54321;
+        let msg: u32 = rand::random();
         assert_eq!(
             msg,
-            decrypt((p, q), encrypt(key, msg.try_into().unwrap())) as u64
+            decrypt((p, q), encrypt(key, msg.try_into().unwrap()))
         )
     }
 }

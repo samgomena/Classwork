@@ -198,6 +198,7 @@ dependencies = [
 name = "toy-rsa"
 version = "0.1.0"
 dependencies = [
+ "rand 0.5.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "toy_rsa_lib 0.1.0 (git+http://github.com/pdx-cs-rust/toy-rsa-lib)",
 ]
 
