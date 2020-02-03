@@ -41,7 +41,6 @@ impl<'a> KWIndex<'a> {
             .map(|s| s.trim_matches(|c: char| c.is_ascii_punctuation())) // Remove leading/trailing punctuation
             .filter(|s| s.chars().all(|c| !c.is_ascii_punctuation())) // Remove words with punctuation in them
             .collect();
-        // println!("{:?}\n\n", result);
         self.0.extend(result);
         self
     }
@@ -83,18 +82,24 @@ mod tests {
 
     #[test]
     fn test_len() {
-        let num_entries: u32 = rand::random();
         assert_eq!(KWIndex::new().len(), 0);
         assert_eq!(KWIndex::new().extend_from_text("TEST").len(), 1);
     }
+
     #[test]
-    fn test_all() {
-        let index = KWIndex::new()
-            // .extend_from_text("It ain't over untïl it ain't, over.")
-            .extend_from_text("Hello world.");
+    fn test_extend_matches() {
+        let index = KWIndex::new().extend_from_text("It ain't over untïl it ain't, over.");
         index.print();
-        println!("{}", index.count_matches("world"));
-        assert_eq!(2, index.len());
-        assert_eq!(1, index.count_matches("world"));
+        assert_eq!(5, index.len());
+        assert_eq!(1, index.count_matches("it"));
+        assert_eq!(0, index.count_matches("ain't"));
+    }
+    #[test]
+    fn test_count_matches() {
+        let index = KWIndex::new()
+            .extend_from_text("Hello world.")
+            .extend_from_text("Hello world.");
+        assert_eq!(4, index.len());
+        assert_eq!(2, index.count_matches("world"));
     }
 }
