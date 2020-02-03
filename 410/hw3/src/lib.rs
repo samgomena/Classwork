@@ -36,36 +36,13 @@ impl<'a> KWIndex<'a> {
     /// assert_eq!(1, index.count_matches("world"));
     /// ```
     pub fn extend_from_text(mut self, target: &'a str) -> Self {
-        // let result: Vec<&str> = target
-        //     .split_whitespace()
-        //     .collect::<Vec<_>>()
-        //     // .collect()
-        //     // .map(|c| c.chars())
-        //     .trim_matches(char::is_ascii_punctuation);
-        // println!("{:?}", result);
-        let result = target.split_whitespace();
-        // .collect::<&str>()
-        // .chars()
-        // .map(|c| c as char) // Convert all to chars
-        // .flat_map(|c| c.chars())
-        // .map(|s| s.chars().trim_matches(char::is_ascii_punctuation))
-        println!("{:?}\n\n", result);
-        // self.0.extend(
-        println!(
-            "{:?}",
-            target
-                .split_whitespace()
-                .flat_map(|c| c.chars())
-                .filter(|c| c.is_alphabetic())
-        );
-        // );
-
-        // self.0.extend(target.split_whitespace().filter());
-
-        // let matches = thing1
-        //     .split_whitespace()
-        //     .flat_map(|c1| thing2.split_whitespace().filter(move |&c2| c1 == c2))
-        //     .count();
+        let result: Vec<&str> = target
+            .split_whitespace() // Split on whitespace
+            .map(|s| s.trim_matches(|c: char| c.is_ascii_punctuation())) // Remove leading/trailing punctuation
+            .filter(|s| s.chars().all(|c| !c.is_ascii_punctuation())) // Remove words with punctuation in them
+            .collect();
+        // println!("{:?}\n\n", result);
+        self.0.extend(result);
         self
     }
 
@@ -101,21 +78,23 @@ mod tests {
     #[test]
     fn test_is_empty() {
         assert!(KWIndex::new().is_empty());
-        // assert!(!KWIndex::new().extend_from_text("TEST").is_empty());
+        assert!(!KWIndex::new().extend_from_text("TEST").is_empty());
     }
 
     #[test]
     fn test_len() {
         let num_entries: u32 = rand::random();
         assert_eq!(KWIndex::new().len(), 0);
-        // assert_eq!(KWIndex::new().extend_from_text("TEST").len(), 1);
+        assert_eq!(KWIndex::new().extend_from_text("TEST").len(), 1);
     }
     #[test]
     fn test_all() {
-        let index = KWIndex::new().extend_from_text("Hello world.");
+        let index = KWIndex::new()
+            // .extend_from_text("It ain't over untïl it ain't, over.")
+            .extend_from_text("Hello world.");
         index.print();
-        println!("{}", index.count_matches("world."))
-        // assert_eq!(2, index.len());
-        // assert_eq!(1, index.count_matches("world"));
+        println!("{}", index.count_matches("world"));
+        assert_eq!(2, index.len());
+        assert_eq!(1, index.count_matches("world"));
     }
 }
