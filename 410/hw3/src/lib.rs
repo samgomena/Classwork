@@ -36,12 +36,13 @@ impl<'a> KWIndex<'a> {
     /// assert_eq!(1, index.count_matches("world"));
     /// ```
     pub fn extend_from_text(mut self, target: &'a str) -> Self {
-        let result: Vec<&str> = target
-            .split_whitespace() // Split on whitespace
-            .map(|s| s.trim_matches(|c: char| c.is_ascii_punctuation())) // Remove leading/trailing punctuation
-            .filter(|s| s.chars().all(|c| !c.is_ascii_punctuation())) // Remove words with punctuation in them
-            .collect();
-        self.0.extend(result);
+        self.0.extend(
+            target
+                .split_whitespace() // Split on whitespace
+                .map(|s| s.trim_matches(|c: char| c.is_ascii_punctuation())) // Remove leading/trailing punctuation
+                .filter(|s| s.chars().all(|c| !c.is_ascii_punctuation())) // Remove words with punctuation in them
+                .collect::<Vec<&str>>(), // Specify type with turbofish
+        );
         self
     }
 
