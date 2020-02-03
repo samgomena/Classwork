@@ -103,4 +103,15 @@ mod tests {
         assert_eq!(4, index.len());
         assert_eq!(2, index.count_matches("world"));
     }
+
+    #[test]
+    fn test_rand() {
+        let index = KWIndex::new()
+            .extend_from_text("(text in parentheses)")
+            .extend_from_text("[text in brackets]")
+            .extend_from_text("text with we|rd punctuation");
+
+        index.print();
+        assert_eq!(3, index.count_matches("text"));
+    }
 }
