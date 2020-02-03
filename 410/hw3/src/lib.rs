@@ -87,7 +87,7 @@ mod tests {
     }
 
     #[test]
-    fn test_extend_matches() {
+    fn test_extend_from_text() {
         let index = KWIndex::new().extend_from_text("It ain't over untïl it ain't, over.");
         index.print();
         assert_eq!(5, index.len());
