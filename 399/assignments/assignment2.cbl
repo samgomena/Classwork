@@ -1,99 +1,135 @@
       ******************************************************************
-      * Author: gomenas@pdx.edu
-      * Date: 4/26/21
-      * Purpose:
-      * Tectonics: cobc
+      * AUTHOR: gomenas@pdx.edu
+      * DATE: 4/26/21
+      * PURPOSE:
+      * TECTONICS: cobc
       ******************************************************************
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. BY-DEPARTMENT.
+       PROGRAM-ID. ASSIGNMENT2.
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
-           SELECT CR-FILE-UNSORTED ASSIGN TO "TEST-FILE.txt"
+           SELECT COURSES-UNSORTED ASSIGN TO "COURSES.TXT"
                ORGANIZATION IS LINE SEQUENTIAL.
-           SELECT CR-FILE-SORTED ASSIGN TO "COURSES-SORTED.txt"
+
+           SELECT COURSES-SORTED ASSIGN TO "COURSES-SORTED.TXT"
                ORGANIZATION IS LINE SEQUENTIAL.
-           SELECT SORT-FILE ASSIGN TO "WORK.tmp".
+           
+           SELECT SORT-FILE ASSIGN TO "WORK.TMP".
        DATA DIVISION.
        FILE SECTION.
-       FD  CR-FILE-UNSORTED.
-       01  UNSORTED-RECORD                 PIC X(206).
-       FD  CR-FILE-SORTED.
-       01  CLASS-REGISTRATION-RECORD.
-           03  DEPT                        PIC X(6).
-           03  COURSE-PREFIX               PIC 9.
-           03  FILLER                      PIC X(130).
-           03  SCH                         PIC X(3).
-           03  FILLER                      PIC X(50).
-       SD  SORT-FILE.
-       01  SORT-RECORD.
-           03  DEPT-KEY                    PIC X(6).
-           03  FILLER                      PIC X(200).
-       WORKING-STORAGE SECTION.
-       77  SCH-COMP                        PIC 9(3).
-       77  COURSE-TUITION                  PIC 9(5)V99 VALUE IS ZERO.
-       77  COLLEGE-TOTAL                   PIC 9(9)V99 VALUE IS ZERO.
-       77  DEPARTMENT-TOTAL                PIC 9(9)V99 VALUE IS ZERO.
-       77  FILE-STATUS                     PIC X(5)    VALUE IS "FULL".
-           88  END-OF-FILE                 VALUE "EMPTY".
-       77  LAST-DEPT                       PIC X(6).
+           FD COURSES-UNSORTED.
+        *>    206 IS LINE LENGTH OF ROW IN COURSES.TXT
+       01 UNSORTED-RECORD PIC X(206).
+       FD COURSES-SORTED.
+       01 CLASS-REGISTRATION-RECORD.
+           03 DEPT PIC X(6).
+           03 COURSE-PREFIX PIC 9.
+           03 FILLER PIC X(98).
+           03 INSTR-EMAIL PIC X(16).
+           03 FILLER PIC X(16).
+           03 SCH PIC X(3).
+           03 FILLER PIC X(65).
+       SD SORT-FILE.
+       01 SORTED-RECORD.
+           03 FILLER PIC X(105).
+           03 INSTRUCTOR-EMAIL PIC X(16).
+           03 FILLER PIC X(83).
 
-       01  OUTPUT-LINE.
-           03  ACADEMIC-UNIT               PIC X(25).
-           03  FILLER                      PIC X(4).
-           03  MONEY                       PIC $$$,$$$,$$9.99.
+       WORKING-STORAGE SECTION.
+       77  SCH-COMP PIC 9(3).
+       77  COURSE-TUITION PIC 9(5)V99 VALUE IS ZERO.
+       77  COLLEGE-TOTAL PIC 9(9)V99 VALUE IS ZERO.
+       77  INSTRUCTOR-TOTAL PIC 9(5)V99 VALUE IS ZERO.
+       77  INSTRUCTOR-SCH-TOTAL PIC 9(5)V99 VALUE IS ZERO.
+       77  SCH-TOTAL PIC 9(5)V99 VALUE IS ZERO.
+       77  FILE-STAUS PIC 9 VALUE IS 0.
+            88 END-OF-FILE VALUE IS 1.
+       77  LAST-INSTR PIC X(16).
+
+       01 OUTPUT-LINE.
+           03 INSTRUCTOR-IDENT PIC X(25).
+           03 FILLER PIC X(4).
+           03 SCH-DISPLAY PIC ZZZ,ZZ9.
+           03 FILLER PIC X(4).
+           03 TUITION-TOTAL PIC $$$,$$$,$$9.99.
+       
+       01 PRE-OUTPUT.
+           03 HEADING-1 PIC X(25) VALUE IS "INSTRUCTOR".
+           03 FILLER PIC X(4).
+           03 HEADING-2 PIC X(10) VALUE IS "TOTAL SCH".
+           03 FILLER PIC X(4).
+           03 HEADING-3 PIC X(14) VALUE IS "TUITION TOTAL".
+       
+       01 PRE-OUTPUT-FOOTER.
+           03 HEADING-1 PIC X(25) VALUE IS "-----------".
+           03 FILLER PIC X(4).
+           03 HEADING-2 PIC X(10) VALUE IS "---------".
+           03 FILLER PIC X(4).
+           03 HEADING-3 PIC X(14) VALUE IS "-------------".
 
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
-       010-MAIN.
-           PERFORM 020-INITIALIZE.
-           PERFORM 030-PROCESS-FILE.
-           PERFORM 040-TIDY-UP.
+           PERFORM INITIALIZE-IT.
+           DISPLAY "==================================================="
+               "===============".
+           DISPLAY PRE-OUTPUT.
+           DISPLAY PRE-OUTPUT-FOOTER.
+           PERFORM PROCESS-FILE.
+           PERFORM CLEAN-UP.
            STOP RUN.
 
-       020-INITIALIZE.
-           SORT SORT-FILE ON ASCENDING KEY DEPT-KEY
-               USING CR-FILE-UNSORTED
-               GIVING CR-FILE-SORTED.
-           OPEN INPUT CR-FILE-SORTED.
+       INITIALIZE-IT.
+           SORT SORT-FILE ON ASCENDING KEY INSTRUCTOR-EMAIL
+               USING COURSES-UNSORTED
+               GIVING COURSES-SORTED.
+           OPEN INPUT COURSES-SORTED.
+           READ COURSES-SORTED.
 
-       030-PROCESS-FILE.
-           READ CR-FILE-SORTED, AT END MOVE "EMPTY" TO FILE-STATUS.
-           MOVE DEPT TO LAST-DEPT.
-           PERFORM 035-PROCESS-RECORDS UNTIL END-OF-FILE.
-           PERFORM 039-FINAL-DISPLAY.
-
-       035-PROCESS-RECORDS.
+       PROCESS-FILE.
+           READ COURSES-SORTED AT END MOVE 1 TO FILE-STAUS.
+           MOVE INSTR-EMAIL TO LAST-INSTR.
+           PERFORM PROCESS-RECORDS UNTIL END-OF-FILE.
+           PERFORM FINAL-DISPLAY.
+               
+       PROCESS-RECORDS.
            MOVE SCH TO SCH-COMP.
            IF COURSE-PREFIX IS LESS THAN 5
                MULTIPLY SCH-COMP BY 238.85 GIVING COURSE-TUITION
            ELSE
                MULTIPLY SCH-COMP BY 496.50 GIVING COURSE-TUITION.
-           DISPLAY DEPT, "   ",
-               COURSE-PREFIX, "   ", SCH, "   ", COURSE-TUITION.
+
+           ADD SCH-COMP TO SCH-TOTAL.
+           ADD SCH-COMP TO INSTRUCTOR-SCH-TOTAL.
            ADD COURSE-TUITION TO COLLEGE-TOTAL.
-           ADD COURSE-TUITION TO DEPARTMENT-TOTAL.
+           ADD COURSE-TUITION TO INSTRUCTOR-TOTAL.
 
-           READ CR-FILE-SORTED,
-               AT END MOVE "EMPTY" TO FILE-STATUS
-               PERFORM 038-DETAIL-DISPLAY.
+           READ COURSES-SORTED AT END MOVE 1 TO FILE-STAUS
+               PERFORM DETAILED-DISPLAY.
 
-           IF DEPT NOT EQUAL LAST-DEPT
-               PERFORM 038-DETAIL-DISPLAY.
+           IF INSTR-EMAIL NOT EQUAL LAST-INSTR
+               PERFORM DETAILED-DISPLAY.
 
-       038-DETAIL-DISPLAY.
-           MOVE LAST-DEPT TO ACADEMIC-UNIT
-           MOVE DEPARTMENT-TOTAL TO MONEY.
+       DETAILED-DISPLAY.
+           MOVE SCH-TOTAL TO SCH-DISPLAY.
+           MOVE LAST-INSTR TO INSTRUCTOR-IDENT.
+           MOVE INSTRUCTOR-TOTAL TO TUITION-TOTAL.
            DISPLAY OUTPUT-LINE.
 
-           MOVE DEPT TO LAST-DEPT.
-           MOVE ZERO TO DEPARTMENT-TOTAL.
+           MOVE INSTR-EMAIL TO LAST-INSTR.
+           MOVE ZERO TO INSTRUCTOR-TOTAL.
+           MOVE ZERO TO SCH-TOTAL.
 
-       039-FINAL-DISPLAY.
-           MOVE "COLLEGE OF ENGINEERING" TO ACADEMIC-UNIT
-           MOVE COLLEGE-TOTAL TO MONEY.
+       FINAL-DISPLAY.
+           MOVE "COLLEGE OF ENGINEERING" TO INSTRUCTOR-IDENT.
+           MOVE INSTRUCTOR-SCH-TOTAL TO SCH-DISPLAY.
+           MOVE COLLEGE-TOTAL TO TUITION-TOTAL.
+
+           DISPLAY " ".
            DISPLAY OUTPUT-LINE.
+           DISPLAY "==================================================="
+               "===============".
 
-       040-TIDY-UP.
-           CLOSE CR-FILE-SORTED.
-       END PROGRAM BY-DEPARTMENT.
+       CLEAN-UP.
+           CLOSE COURSES-SORTED.
+       END PROGRAM ASSIGNMENT2.
