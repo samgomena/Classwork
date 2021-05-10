@@ -1,4 +1,7 @@
-## CS 399 - Spring 2020
-## Cobol and Legacy Systems
+# CS 399 - Cobol and Legacy Systems
+
+## Spring 2021
+
 ### Warren Harrison
-### Portland State University 
+
+### Portland State University
