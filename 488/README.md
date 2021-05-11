@@ -5,3 +5,5 @@
 ### David Maier
 
 ### Portland State University
+
+This course was project based.

@@ -1,0 +1,78 @@
+      ******************************************************************
+      * Author: Sam Gomena
+      * Date: 5/10/2021
+      * Purpose: Assignment 3
+      * Tectonics: cobc
+      ******************************************************************
+
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. ASSIGNMENT-3.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT COURSES-FILE ASSIGN TO "COURSES-ALL.TXT"
+           ORGANIZATION IS LINE SEQUENTIAL.
+           SELECT REPORT-FILE ASSIGN TO "REPORT-ALL.TXT".
+       DATA DIVISION.
+       FILE SECTION.
+       FD COURSES-FILE.
+       01 COURSES-RECORD.
+           03 DEPARTMENT    PIC X(4).
+           03 FILLER        PIC X(17).
+           03 TITLE         PIC X(32).
+           03 FILLER        PIC X(93).
+           03 ENROLLMENT    PIC X(3).
+       FD REPORT-FILE
+           REPORT IS COURSES-REPORT.
+       WORKING-STORAGE SECTION.
+       77 FILE-STATUS       PIC 99 VALUE 0.
+           88 EndOfFile     VALUE 1.
+       REPORT SECTION.
+       RD COURSES-REPORT
+           CONTROLS ARE DEPARTMENT
+           PAGE LIMIT IS 57 LINES
+           FIRST DETAIL 5
+           LAST DETAIL 52.
+       01 TYPE IS REPORT HEADING.
+           02 FIRST-LINE LINE PLUS 1.
+               05 COLUMN 30 PIC X(30)  VALUE "DEPARTMENT ENROLLMENT".
+           02 SECOND-LINE LINE PLUS 1.
+               05 COLUMN 30 PIC X(30)  VALUE "=====================".
+       01 DEPARTMENT-HEADING TYPE IS CONTROL HEADING DEPARTMENT.
+           02 FIRST-LINE LINE PLUS 1.
+               05 COLUMN 4 PIC X(10)  VALUE "DEPARTMENT".
+               05 COLUMN 20 PIC X(12) VALUE "COURSE TITLE".
+               05 COLUMN 55 PIC X(10) VALUE "ENROLLMENT".
+       01 REPORT-LINE TYPE IS DETAIL LINE PLUS 1.
+               05 COLUMN 4 PIC X(4)  SOURCE DEPARTMENT.
+               05 COLUMN 20 PIC X(33) SOURCE TITLE.
+               05 COLUMN 55 PIC ZZZZ9 SOURCE ENROLLMENT.
+       01 DEPARTMENT-SUMMARY TYPE IS CONTROL FOOTING DEPARTMENT
+               NEXT GROUP PLUS 2.
+           02 LINE PLUS 1.
+               05 COLUMN 4 PIC X(4)  SOURCE DEPARTMENT.
+               05 COLUMN 10 PIC X(20) VALUE "DEPARTMENT:".
+               05 COLUMN 75 PIC ZZZZ9 SUM ENROLLMENT.
+       01 REPORT-SUMMARY TYPE IS REPORT FOOTING
+               NEXT GROUP PLUS 1.
+           02 LINE PLUS 1.
+               05 COLUMN 4 PIC X(25) VALUE "TOTAL ENROLLMENT:".
+               05 COLUMN 75 PIC ZZZZ9 SUM ENROLLMENT.
+       PROCEDURE DIVISION.
+       MAIN-PROCEDURE.
+            OPEN INPUT COURSES-FILE.
+            OPEN OUTPUT REPORT-FILE.
+            INITIATE COURSES-REPORT.
+            READ COURSES-FILE AT END MOVE 1 TO FILE-STATUS.
+            PERFORM GENERATE-REPORT UNTIL EndOfFile.
+            TERMINATE COURSES-REPORT.
+            CLOSE COURSES-FILE.
+            CLOSE REPORT-FILE.
+            STOP RUN.
+
+       GENERATE-REPORT.
+           GENERATE REPORT-LINE.
+           READ COURSES-FILE AT END MOVE 1 TO FILE-STATUS.
+
+           
+       END PROGRAM ASSIGNMENT-3.
