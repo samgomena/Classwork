@@ -24,7 +24,8 @@ declare -a FILES
 FILES=( listings.csv.gz calendar.csv.gz reviews.csv.gz )
 
 # Put all of the data in a data folder
-# pushd data || exit
+mkdir -p data
+pushd data || exit
 
 len="${#CITIES[@]}"
 for (( i=0; i<len; i++ )); do
@@ -40,7 +41,7 @@ for (( i=0; i<len; i++ )); do
         wget "$data_url/data/$file"
         gzip -d "$file"
     done
-    echo "$data_url/visualisations/neighbourhoods.csv"
+    wget "$data_url/visualisations/neighbourhoods.csv"
     popd || exit
 done
 
