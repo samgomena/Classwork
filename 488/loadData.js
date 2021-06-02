@@ -135,8 +135,9 @@ async function run() {
             );
 
             if (step === totalSteps) {
-              console.log("Done processing data; press CTRL-C to exit");
-              // TODO: Unsure if this works; taking too long to test rn
+              console.log(
+                "Done processing data; press CTRL-C if it doesn't exit automatically"
+              );
               await client.close();
             }
             step++;
