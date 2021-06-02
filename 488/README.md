@@ -45,5 +45,5 @@ node loadData.js
 **Important Notes**:
 
 - Not surprisingly, this should be done _after_ the data has been downloaded.
-- The program doesn't automatically exit due to incompatibilities between promise and callback based async code being used. You'll have to `CTRL-C` when you want to exit.
-  - Consequently, it only works in POSIX environments because of the way it captures `SIGINT` calls to close the connection to the database.
+- The program doesn't always automatically exit due to incompatibilities between promise and callback based async code being used. You'll have to `CTRL-C` when you want to exit.
+  - Consequently, it only works in `POSIX` environments because of the way it captures `SIGINT` calls to close the connection to the database.
