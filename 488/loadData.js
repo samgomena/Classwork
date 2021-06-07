@@ -98,18 +98,23 @@ async function run() {
               case "listings":
                 data = results.data.map((result) => ({
                   ...omit(result, omittedFromListings),
+                  host_since: new Date(result.host_since),
+                  first_review: new Date(result.first_review),
+                  last_review: new Date(result.last_review),
                   city,
                 }));
                 break;
               case "calendar":
                 data = results.data.map((result) => ({
                   ...omit(result, omittedFromCalendar),
+                  date: new Date(result.date),
                   city,
                 }));
                 break;
               case "reviews":
                 data = results.data.map((result) => ({
                   ...omit(result, omittedFromReviews),
+                  date: new Date(result.date),
                   city,
                 }));
                 break;
