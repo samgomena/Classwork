@@ -1,0 +1,44 @@
+pipeline = [
+  {
+    $match: {
+      city: "portland",
+    },
+  },
+  {
+    $lookup: {
+      from: "calendar",
+      localField: "id",
+      foreignField: "listing_id",
+      as: "dates",
+    },
+  },
+  {
+    $unwind: "$dates",
+  },
+  {
+    $match: {
+      "dates.available": "t",
+      "dates.city": "portland",
+      "dates.date": {
+        $gte: ISODate("2021-03-20"),
+        $lte: ISODate("2021-03-22"),
+      },
+    },
+  },
+  {
+    $sort: { review_scores_rating: -1 },
+  },
+  {
+    $project: {
+      name: 1,
+      neighborhood: 1,
+      room_type: 1,
+      accommodates: 1,
+      property_type: 1,
+      amenities: 1,
+      price: 1,
+    },
+  },
+];
+
+db.listings.aggregate(pipeline).pretty();

@@ -1,0 +1,20 @@
+pipeline = [
+  {
+    $match: {
+      date: {
+        $gte: ISODate("2021-03-01"),
+        $lte: ISODate("2021-03-31"),
+      },
+    },
+  },
+  {
+    $group: {
+      _id: "$city",
+      numReviews: {
+        $sum: 1,
+      },
+    },
+  },
+];
+
+db.reviews.aggregate(pipeline).pretty();

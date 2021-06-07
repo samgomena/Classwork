@@ -1,0 +1,82 @@
+pipeline = [
+  {
+    $project: {
+      neighbourhood: 1,
+    },
+  },
+  {
+    $lookup: {
+      from: "listings",
+      localField: "neighbourhood",
+      foreignField: "neighbourhood_cleansed",
+      as: "neighbourhoodMatch",
+    },
+  },
+  {
+    $unwind: "$neighbourhoodMatch",
+  },
+  {
+    $project: {
+      neighbourhood: 1,
+      neighbourhoodMatch: {
+        id: 1,
+      },
+    },
+  },
+  {
+    $lookup: {
+      from: "calendar",
+      localField: "neighbourhoodMatch.id",
+      foreignField: "listing_id",
+      as: "availability",
+    },
+  },
+  {
+    $project: {
+      neighbourhood: 1,
+      neighbourhoodMatch: 1,
+      availability: {
+        date: 1,
+      },
+    },
+  },
+  {
+    $addFields: {
+      numListings: {
+        $size: {
+          $filter: {
+            input: "$availability",
+            as: "day",
+            cond: {
+              $and: [
+                {
+                  $gte: ["$$day.date", ISODate("2021-04-01")],
+                },
+                {
+                  $lte: ["$$day.date", ISODate("2021-05-01")],
+                },
+              ],
+            },
+          },
+        },
+      },
+    },
+  },
+  {
+    $group: {
+      _id: "$neighbourhood",
+      totalListings: {
+        $sum: "$numListings",
+      },
+    },
+  },
+  {
+    $match: {
+      totalListings: {
+        $eq: 0,
+      },
+    },
+  },
+];
+
+db.neighbourhoods.aggregate(pipeline).pretty();

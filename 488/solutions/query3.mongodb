@@ -1,0 +1,42 @@
+pipeline = [
+    {
+        $match: {
+            city: "salem",
+            room_type: "Entire home/apt"
+        }
+    },
+    {
+        $lookup: {
+            from: "calendar",
+            localField: "id",
+            foreignField: "listing_id",
+            as: "availableDates"
+        }
+    },
+    {
+        $unwind: "$availableDates"
+    },
+    {
+        $match: {
+            "availableDates.available": "t",
+            "availableDates.date": {
+                $gte: ISODate("2021-03-01"),
+                $lte: ISODate("2021-03-31")
+            }
+        }
+    },
+    {
+        // Ascending
+        $sort: { "avilableDates.date": 1 }
+    },
+    {
+        $project: {
+            _id: 1,
+            name: 1,
+            "availableDates.date": 1,
+            minimum_nights: 1
+        }
+    }
+]
+
+db.listings.aggregate(pipeline).pretty()
