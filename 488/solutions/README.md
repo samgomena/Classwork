@@ -362,7 +362,9 @@ Query execution time: `1188ms`
 
 Not Implemented
 
-Additional notes:
+---
+
+## Additional notes
 
 - Execution times were calculated on a 14 core Intel Xeon @ 2.20GHz with 30Gb of memory
   - The indexes listed above were used
