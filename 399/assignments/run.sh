@@ -1,3 +1,5 @@
 #! /bin/bash
 
-cobc -x -o bin/assignment5 -std=default -Wall -debug assignment5.cbl && ./bin/assignment5
+an="$1"
+
+cobc -x -o bin/assignment"$an" -std=default -Wall -debug assignment"$an".cbl && ./bin/assignment"$an"
