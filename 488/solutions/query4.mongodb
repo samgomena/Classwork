@@ -1,41 +1,41 @@
 pipeline = [
-    {
-        $match: {
-            city: "portland",
-            room_type: "Entire home/apt"
-        }
+  {
+    $match: {
+      city: "portland",
+      room_type: "Entire home/apt",
     },
-    {
-        $lookup: {
-            from: "calendar",
-            localField: "id",
-            foreignField: "listing_id",
-            as: "availableDates"
-        }
+  },
+  {
+    $lookup: {
+      from: "calendar",
+      localField: "id",
+      foreignField: "listing_id",
+      as: "availableDates",
     },
-    {
-        $unwind: "$availableDates"
+  },
+  {
+    $unwind: "$availableDates",
+  },
+  {
+    $match: {
+      "availableDates.date": {
+        $gte: ISODate("2021-03-01"),
+        $lte: ISODate("2021-08-31"),
+      },
     },
-    {
-        $match: {
-            "availableDates.date": {
-                $gte: ISODate("2021-03-01"),
-                $lte: ISODate("2021-08-31")
-            }
-        }
+  },
+  {
+    $group: {
+      _id: {
+        month: {
+          $month: "$availableDates.date",
+        },
+      },
+      days: {
+        $sum: 1,
+      },
     },
-    {
-        $group: {
-            _id: {
-                month: {
-                    $month: "$availableDates.date"
-                }
-            },
-            days: {
-                $sum: 1
-            }
-        }
-    }
-]
+  },
+];
 
-db.listings.aggregate(pipeline).pretty()
+db.listings.aggregate(pipeline).pretty();

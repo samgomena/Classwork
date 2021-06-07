@@ -66,6 +66,8 @@ pipeline = [
 db.listings.aggregate(pipeline).pretty();
 ```
 
+Query execution time: `1979ms`
+
 ## Query 2
 
 > What neighborhoods in any of the cities have no listings for a given month?
@@ -158,6 +160,8 @@ pipeline = [
 
 db.neighbourhoods.aggregate(pipeline).pretty();
 ```
+
+Query execution time: `49515ms`
 
 ## Query 3
 
@@ -257,6 +261,8 @@ if __name__ == "__main__":
     run()
 ```
 
+Query execution time: `1167ms`
+
 Note: This requires importing the `pymongo` package. This can be done with the following command:
 
 ```sh
@@ -315,6 +321,8 @@ pipeline = [
 db.listings.aggregate(pipeline).pretty();
 ```
 
+Query execution time: `1886ms`
+
 ## Query 5
 
 > For each city, how many reviews are received for December of each year?
@@ -346,6 +354,15 @@ pipeline = [
 db.reviews.aggregate(pipeline).pretty();
 ```
 
+Query execution time: `1188ms`
+
 ## Query 6
 
 > Are there any listings that a reviewer has reviewed more than once that is also available in the same month as they posted a review previously? Also include any other listings by the same host in the same city. Display the listings name, url, description, host’s name, reviewer name, whether previously booked, month and minimum and maximum nights allowed.
+
+Not Implemented
+
+Additional notes:
+
+- Execution times were calculated on a 14 core Intel Xeon @ 2.20GHz with 30Gb of memory
+  - The indexes listed above were used
